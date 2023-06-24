@@ -1,0 +1,50 @@
+.select__container {
+  position: relative;
+  width: 33%;
+  margin: 0.63rem;
+}
+
+.select_for_input_button {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 0.47rem;
+  height: 2.76rem;
+  padding: 0 1rem 0 1rem;
+  background: #000000;
+  border: 1px solid white;
+  font-weight: bold;
+  cursor: pointer;
+  align-items: center;
+}
+
+.dropdown__input__content {
+  position: absolute;
+  width: 100%;
+  background: #000000;
+  border: 1px solid white;
+  border-top: 1px solid #000000;
+  z-index: 2;
+  padding: 0.8rem;
+  border-bottom-left-radius: 0.47rem;
+  border-bottom-right-radius: 0.47rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.active {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  border-bottom: 1px solid #000000;
+}
+
+.select__input {
+  height: 2.76rem;
+  width: 40%;
+  padding: 0 0 0 1rem;
+  margin: 0.63rem;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  border-radius: 0.47rem;
+}

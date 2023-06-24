@@ -1,19 +1,15 @@
-import { useRoutes, Outlet, BrowserRouter } from 'react-router-dom';
-import Main from './Pages/Main/Main';
-import './styles/App.css';
+import { useRoutes, Outlet, BrowserRouter } from "react-router-dom";
+import Main from "./Pages/Main/Main";
+import "./styles/App.css";
 
 function Router(props) {
   return useRoutes(props.rootRoute);
 }
 
 function App() {
-  const routes = [
-    { index: true, element: <Main /> },
-  ];
-  const links = routes.filter(route => route.hasOwnProperty('label'));
-  const rootRoute = [
-    { path: '/', element: render(links), children: routes }
-  ];
+  const routes = [{ index: true, element: <Main /> }];
+  const links = routes.filter((route) => route.hasOwnProperty("label"));
+  const rootRoute = [{ path: "/", element: render(links), children: routes }];
 
   function render(links) {
     return (
@@ -25,7 +21,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Router rootRoute={ rootRoute } />
+      <Router rootRoute={rootRoute} />
     </BrowserRouter>
   );
 }

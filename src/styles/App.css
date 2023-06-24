@@ -68,6 +68,10 @@ body {
   display: block;
 }
 
+.page__filter {
+  display: flex;
+}
+
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: 3.125vw;
@@ -76,6 +80,16 @@ body {
   .page .catalog__painting {
     width: 100%;
     padding-bottom: 68.4%;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3019607843);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
   }
 }
 @media (max-width: 1023px) and (min-width: 768px) {
@@ -87,6 +101,16 @@ body {
     width: 47%;
     padding-bottom: 34.4%;
   }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3019607843);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
 }
 @media (max-width: 1365px) and (min-width: 1024px) {
   .page {
@@ -97,6 +121,16 @@ body {
     width: 31.14%;
     padding-bottom: 24%;
   }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3019607843);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
+  }
 }
 @media (min-width: 1366px) {
   .page {
@@ -106,5 +140,15 @@ body {
   .page .catalog__painting {
     width: 31.5%;
     padding-bottom: 24%;
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.3019607843);
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar {
+    width: 11px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 10px;
   }
 }/*# sourceMappingURL=App.css.map */
