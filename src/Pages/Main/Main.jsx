@@ -19,8 +19,24 @@ function Main() {
 
   const [selectedLocationId, setSelectedLocationId] = useState(0);
 
+  const [page, setPage] = useState(1);
+
+  const [dateValue, setDateValue] = useState({ from: 0, to: 0 });
+
   useEffect(() => {
-    getTestPaintings().then((data) => setPaintings(data));
+    getPaintings().then((data) => setPaintings(data));
+    getAuthors().then((data) => setAuthors(data));
+    getLocations().then((data) => setLocations(data));
+    console.log(
+      selectedAuthorID,
+      selectedLocationId,
+      paintingName,
+      dateValue,
+      page
+    );
+  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue, page]);
+
+  useEffect(() => {
     getAuthors().then((data) => setAuthors(data));
     getLocations().then((data) => setLocations(data));
   }, []);
@@ -32,21 +48,17 @@ function Main() {
   };
 
   const getPaintings = async function () {
-    const response = await fetch(
-      host +
-        "/paintings?id=" +
-        selectedAuthorID +
-        "&anyObjectField=locationId&locationId=" +
-        selectedLocationId +
-        "&anyObjectField=name&name=" +
-        paintingName +
-        "&created_gte=" +
-        1500 +
-        "&created_lte=" +
-        1900 +
-        "_limit=" +
-        12
-    );
+    var url = `${host}/paintings?_page=${page}&_limit=12${
+      selectedAuthorID ? `&authorId=${selectedAuthorID}` : ""
+    }${
+      selectedLocationId
+        ? `&anyObjectField=locationId&locationId=${selectedLocationId}`
+        : ""
+    }${paintingName ? `&anyObjectField=name&name=${paintingName}` : ""}${
+      dateValue.from ? `&created_gte=${dateValue.from}` : ""
+    }${dateValue.to ? `&created_lte=${dateValue.to}` : ""}`;
+    const response = await fetch(url);
+    console.log(url);
     const data = await response.json();
     return data;
   };
@@ -69,8 +81,6 @@ function Main() {
     setShowInputs(true);
   };
 
-  const [dateValue, setDateValue] = useState({ from: 0, to: 0 });
-
   return (
     <div className="page">
       <img src={logo} className="page__logo" alt="Framework Team Logo"></img>
@@ -80,17 +90,16 @@ function Main() {
           placeholder="Name"
           onChange={(event) => setPaintingName(event.target.value)}
         />
-        {paintingName}
         <Select2
           value={selectedAuthorID}
-          selectedName={"name"}
+          selectedName="name"
           setValue={setSelectedAuthorId}
           defaultValue="Author"
           options={authors}
         />
         <Select2
           value={selectedLocationId}
-          selectedName={"location"}
+          selectedName="location"
           setValue={setSelectedLocationId}
           defaultValue="Location"
           options={locations}

@@ -6,7 +6,6 @@ import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const SelectForInput = ({ value, setValue }) => {
   const [isActive, setIsActive] = useState(false);
-  console.log(isActive);
 
   return (
     <div className="select__container">
