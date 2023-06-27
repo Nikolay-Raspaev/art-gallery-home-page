@@ -35,7 +35,6 @@
 .active {
   border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
-  border-bottom: 1px solid #000000;
 }
 
 .select__input {

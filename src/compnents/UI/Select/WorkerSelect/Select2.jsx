@@ -20,9 +20,9 @@ const Select2 = ({
     <div className="dropdown">
       <div
         className={`dropdown-btn ${isActive ? "active" : ""} ${
-          isThemeLight && isActive ? "dropdown__btn__light" : ""
+          isThemeLight && isActive ? "active__light" : ""
         }
-        ${!isThemeLight && isActive ? "dropdown__btn__dark" : ""}
+        ${!isThemeLight && isActive ? "active__dark" : ""}
         ${isThemeLight ? "dropdown__btn__light" : "dropdown__btn__dark"}`}
         onClick={(e) => setIsActive(!isActive)}
       >
