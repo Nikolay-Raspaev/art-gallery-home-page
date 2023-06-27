@@ -169,7 +169,7 @@ svg {
 }
 
 .pagination {
-  margin: 40px 1.09% 40px 1.09%;
+  padding: 40px 1.09% 40px 1.09%;
   display: flex;
   .double__left {
     border-bottom-left-radius: 7px;
@@ -179,11 +179,20 @@ svg {
     border-bottom-right-radius: 7px;
     border-top-right-radius: 7px;
   }
-  button.pagination__page:disabled {
+  button.pagination__page.pagination__page_light:disabled {
+    background-color: $dark-color;
+    color: $white-color;
+  }
+  button.pagination__page.pagination__page_dark:disabled {
     background-color: $white-color;
     color: $dark-color;
   }
-  button:hover:not([disabled]) {
+  button.pagination__page_light:hover:not([disabled]) {
+    background-color: $button-pages-light-collor;
+    color: $dark-color;
+    cursor: pointer;
+  }
+  button.pagination__page_dark:hover:not([disabled]) {
     background-color: $button-page-dark-collor;
     color: $white-color;
     cursor: pointer;
@@ -217,6 +226,11 @@ svg {
   cursor: pointer;
 }
 
-.pagination__angel:disabled {
+.pagination__angel.pagination__page_dark:disabled {
   color: $gray-color;
+}
+
+.pagination__angel.pagination__page_light:disabled {
+  color: $button-pages-light-collor;
+  border: 1px solid $button-pages-light-collor;
 }
