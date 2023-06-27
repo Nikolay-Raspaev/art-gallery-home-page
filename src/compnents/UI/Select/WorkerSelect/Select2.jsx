@@ -4,7 +4,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-regular-svg-icons";
 import { faXmark, faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-const Select2 = ({ options, defaultValue, selectedName, value, setValue }) => {
+const Select2 = ({
+  isThemeLight,
+  options,
+  defaultValue,
+  selectedName,
+  value,
+  setValue,
+}) => {
   const [isActive, setIsActive] = useState(false);
 
   const [selected, setSelected] = useState("");
@@ -12,7 +19,11 @@ const Select2 = ({ options, defaultValue, selectedName, value, setValue }) => {
   return (
     <div className="dropdown">
       <div
-        className={`dropdown-btn ${isActive ? "active" : ""}`}
+        className={`dropdown-btn ${isActive ? "active" : ""} ${
+          isThemeLight && isActive ? "dropdown__btn__light" : ""
+        }
+        ${!isThemeLight && isActive ? "dropdown__btn__dark" : ""}
+        ${isThemeLight ? "dropdown__btn__light" : "dropdown__btn__dark"}`}
         onClick={(e) => setIsActive(!isActive)}
       >
         <div className="dropdown-btn__container">
@@ -22,7 +33,11 @@ const Select2 = ({ options, defaultValue, selectedName, value, setValue }) => {
           {value ? (
             <FontAwesomeIcon
               icon={faXmark}
-              className="dropdown-close"
+              className={
+                isThemeLight
+                  ? "dropdown__close__light"
+                  : "dropdown__close__dark"
+              }
               onClick={(e) => {
                 setSelected("");
                 setValue(0);
@@ -32,15 +47,32 @@ const Select2 = ({ options, defaultValue, selectedName, value, setValue }) => {
             ""
           )}
 
-          <FontAwesomeIcon icon={faCaretDown} className="dropdown__open" />
+          <FontAwesomeIcon
+            icon={faCaretDown}
+            className={
+              isThemeLight
+                ? "dropdown__open dropdown__open__light"
+                : "dropdown__open dropdown__open__dark"
+            }
+          />
         </div>
       </div>
       {isActive && (
-        <div className="dropdown-content">
+        <div
+          className={
+            isThemeLight
+              ? "dropdown-content dropdown__content__light"
+              : "dropdown-content dropdown__content__dark"
+          }
+        >
           {options.map((option) => (
             <div
               key={option.id}
-              className="dropdown-item"
+              className={
+                isThemeLight
+                  ? "dropdown-item item__light"
+                  : "dropdown-item item__dark"
+              }
               onClick={(e) => {
                 setValue(option.id);
                 setSelected(option[selectedName]);

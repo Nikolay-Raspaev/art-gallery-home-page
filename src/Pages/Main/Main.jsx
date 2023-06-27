@@ -154,11 +154,13 @@ function Main() {
       </div>
       <div className="page__filter">
         <Input
+          isThemeLight={isThemeLight}
           value={paintingName}
           placeholder="Name"
           onChange={(event) => setPaintingName(event.target.value)}
         />
         <Select2
+          isThemeLight={isThemeLight}
           value={selectedAuthorID}
           selectedName="name"
           setValue={setSelectedAuthorId}
@@ -166,13 +168,18 @@ function Main() {
           options={authors}
         />
         <Select2
+          isThemeLight={isThemeLight}
           value={selectedLocationId}
           selectedName="location"
           setValue={setSelectedLocationId}
           defaultValue="Location"
           options={locations}
         />
-        <SelectForInput value={dateValue} setValue={setDateValue} />
+        <SelectForInput
+          isThemeLight={isThemeLight}
+          value={dateValue}
+          setValue={setDateValue}
+        />
       </div>
       <div className="page__catalog">
         {paintings?.map((painting, index) => (
