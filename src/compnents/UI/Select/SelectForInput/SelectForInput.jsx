@@ -20,6 +20,7 @@ const SelectForInput = ({ value, setValue }) => {
         <div className="dropdown__input__content">
           <input
             className="select__input"
+            placeholder="from"
             type="number"
             value={value.from}
             onChange={(event) =>
@@ -29,9 +30,12 @@ const SelectForInput = ({ value, setValue }) => {
           —
           <input
             className="select__input"
+            placeholder="before"
             type="number"
-            value={value.to}
-            onChange={(event) => setValue({ ...value, to: event.target.value })}
+            value={value.before}
+            onChange={(event) =>
+              setValue({ ...value, before: event.target.value })
+            }
           />
         </div>
       ) : (

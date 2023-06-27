@@ -1,28 +1,61 @@
+//scrollbar
+$scrollbar-color: rgba(123, 123, 123);
+//all
+$dark-color: rgb(0, 0, 0);
+$white-color: rgb(255, 255, 255);
+//dark-theme
+$gray-color: rgba(255, 255, 255, 0.3);
+$button-page-dark-collor: rgba(70, 70, 70);
+$dark-gray-color: rgba(12, 12, 12);
+//light-theme
+$white-gray-color: rgba(0, 0, 0, 0.3);
+$button-pages-light-collor: rgba(237, 237, 237);
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  background-color: #000000;
-  color: #ffffff;
+// body {
+//   background-color: $dark-color;
+//   color: $white-color;
+// }
+.page__active_light {
+  background-color: $white-color;
+  color: $dark-color;
 }
-
+.page__active_dark {
+  background-color: $dark-color;
+  color: $white-color;
+}
 .page {
   max-width: 100%;
   padding-top: 35px;
   padding-left: calc(100vw / 32);
   padding-right: calc(100vw / 32);
   margin: 0 auto;
-  .page__logo {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 24px;
-    margin-left: 0.63rem;
+  .page__svg {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .page__svg__logo {
+      width: 64px;
+      height: 64px;
+      margin-bottom: 24px;
+      margin-left: 1.09%;
+    }
+    .page__svg__switch {
+      margin-right: 1.09%;
+      svg {
+        cursor: pointer;
+      }
+    }
   }
 }
-
+svg {
+  cursor: pointer;
+}
 .page__catalog {
   display: flex;
   flex-wrap: wrap;
@@ -51,8 +84,8 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  color: #000000;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: $dark-color;
   padding: 0.3rem 0.1rem 0.3rem 0.9rem;
   .painting__name {
     font-size: 1.3rem;
@@ -71,6 +104,17 @@ body {
   display: flex;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-color;
+  border-radius: 10px;
+}
+::-webkit-scrollbar {
+  width: 11px;
+}
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: calc(100vw / 32);
@@ -79,16 +123,6 @@ body {
       width: 100%;
       padding-bottom: 68.4%;
     }
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #ffffff4d;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
   }
 }
 
@@ -101,16 +135,6 @@ body {
       padding-bottom: 34.4%;
     }
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: #ffffff4d;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
-  }
 }
 
 @media (max-width: 1365px) and (min-width: 1024px) {
@@ -121,16 +145,6 @@ body {
       width: 31.14%;
       padding-bottom: 24%;
     }
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: #ffffff4d;
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
   }
 }
 
@@ -143,14 +157,66 @@ body {
       padding-bottom: 24%;
     }
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: #ffffff4d;
-    border-radius: 10px;
+}
+
+.page__active_light {
+  background-color: $white-color;
+  color: $dark-color;
+}
+.page__active_dark {
+  background-color: $dark-color;
+  color: $white-color;
+}
+
+.pagination {
+  margin: 40px 1.09% 40px 1.09%;
+  display: flex;
+  .double__left {
+    border-bottom-left-radius: 7px;
+    border-top-left-radius: 7px;
   }
-  ::-webkit-scrollbar {
-    width: 11px;
+  .double__right {
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
   }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
+  button.pagination__page:disabled {
+    background-color: $white-color;
+    color: $dark-color;
   }
+  button:hover:not([disabled]) {
+    background-color: $button-page-dark-collor;
+    color: $white-color;
+    cursor: pointer;
+  }
+}
+
+.pagination__page_light {
+  background-color: $white-color;
+  color: $dark-color;
+  border: 1px solid $dark-color;
+}
+.pagination__page_dark {
+  background-color: $dark-color;
+  color: $white-color;
+  border: 1px solid $white-color;
+}
+
+.pagination__page {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.pagination__angel {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.pagination__angel:hover:not([disabled]) {
+  background-color: $button-page-dark-collor;
+  color: $white-color;
+  cursor: pointer;
+}
+
+.pagination__angel:disabled {
+  color: $gray-color;
 }

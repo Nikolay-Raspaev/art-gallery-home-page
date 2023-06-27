@@ -4,9 +4,14 @@
   box-sizing: border-box;
 }
 
-body {
-  background-color: #000000;
-  color: #ffffff;
+.page__active_light {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.page__active_dark {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .page {
@@ -16,11 +21,26 @@ body {
   padding-right: 3.125vw;
   margin: 0 auto;
 }
-.page .page__logo {
+.page .page__svg {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page .page__svg .page__svg__logo {
   width: 64px;
   height: 64px;
   margin-bottom: 24px;
-  margin-left: 0.63rem;
+  margin-left: 1.09%;
+}
+.page .page__svg .page__svg__switch {
+  margin-right: 1.09%;
+}
+.page .page__svg .page__svg__switch svg {
+  cursor: pointer;
+}
+
+svg {
+  cursor: pointer;
 }
 
 .page__catalog {
@@ -52,8 +72,8 @@ body {
   bottom: 0;
   left: 0;
   width: 100%;
-  background-color: rgba(255, 255, 255, 0.7);
-  color: #000000;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: rgb(0, 0, 0);
   padding: 0.3rem 0.1rem 0.3rem 0.9rem;
 }
 .catalog__painting_overlay .painting__name {
@@ -72,6 +92,19 @@ body {
   display: flex;
 }
 
+::-webkit-scrollbar-thumb {
+  background-color: rgb(123, 123, 123);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: 3.125vw;
@@ -80,16 +113,6 @@ body {
   .page .catalog__painting {
     width: 100%;
     padding-bottom: 68.4%;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3019607843);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
   }
 }
 @media (max-width: 1023px) and (min-width: 768px) {
@@ -101,16 +124,6 @@ body {
     width: 47.8%;
     padding-bottom: 34.4%;
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3019607843);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
-  }
 }
 @media (max-width: 1365px) and (min-width: 1024px) {
   .page {
@@ -120,16 +133,6 @@ body {
   .page .catalog__painting {
     width: 31.14%;
     padding-bottom: 24%;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3019607843);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
   }
 }
 @media (min-width: 1366px) {
@@ -141,14 +144,67 @@ body {
     width: 31.15%;
     padding-bottom: 24%;
   }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(255, 255, 255, 0.3019607843);
-    border-radius: 10px;
-  }
-  ::-webkit-scrollbar {
-    width: 11px;
-  }
-  ::-webkit-scrollbar-track {
-    border-radius: 10px;
-  }
+}
+.page__active_light {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.page__active_dark {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+}
+
+.pagination {
+  margin: 40px 1.09% 40px 1.09%;
+  display: flex;
+}
+.pagination .double__left {
+  border-bottom-left-radius: 7px;
+  border-top-left-radius: 7px;
+}
+.pagination .double__right {
+  border-bottom-right-radius: 7px;
+  border-top-right-radius: 7px;
+}
+.pagination button.pagination__page:disabled {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+.pagination button:hover:not([disabled]) {
+  background-color: rgb(70, 70, 70);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.pagination__page_light {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  border: 1px solid rgb(0, 0, 0);
+}
+
+.pagination__page_dark {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
+  border: 1px solid rgb(255, 255, 255);
+}
+
+.pagination__page {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.pagination__angel {
+  min-height: 40px;
+  min-width: 40px;
+}
+
+.pagination__angel:hover:not([disabled]) {
+  background-color: rgb(70, 70, 70);
+  color: rgb(255, 255, 255);
+  cursor: pointer;
+}
+
+.pagination__angel:disabled {
+  color: rgba(255, 255, 255, 0.3);
 }/*# sourceMappingURL=App.css.map */
