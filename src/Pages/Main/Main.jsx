@@ -26,18 +26,18 @@ function Main() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const perPage = 12;
+  const perPage = 5;
 
   const [totalCount, setTotalCount] = useState(0);
 
-  const [dateValue, setDateValue] = useState({ from: 0, before: 0 });
+  const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
   const [pages, setPages] = useState([]);
 
   const maxPage = Math.ceil(totalCount / perPage);
 
   useEffect(() => {
-    createPages(pages, maxPage, currentPage);
+    createPages(pages, Math.ceil(totalCount / perPage), currentPage);
     console.log(pages);
   }, [totalCount]);
 
@@ -45,13 +45,6 @@ function Main() {
     getPaintings();
     getAuthors().then((data) => setAuthors(data));
     getLocations().then((data) => setLocations(data));
-    console.log(
-      selectedAuthorID,
-      selectedLocationId,
-      paintingName,
-      dateValue,
-      currentPage
-    );
   }, [
     selectedAuthorID,
     selectedLocationId,
@@ -80,7 +73,6 @@ function Main() {
     // params.append("created_lte", dateValue.before);
     // var url2 = `${host}/paintings?${params}`;
     const response = await fetch(url);
-    console.log(url);
     setPaintings(await response.json());
     setTotalCount(await response.headers.get("x-total-count"));
   };
@@ -123,7 +115,6 @@ function Main() {
     setIsThemeLight(!isThemeLight);
   };
 
-  console.log(isThemeLight);
   return (
     <div
       className={
