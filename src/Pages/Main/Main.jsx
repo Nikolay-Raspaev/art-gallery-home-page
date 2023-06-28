@@ -39,7 +39,7 @@ function Main() {
   useEffect(() => {
     createPages(pages, Math.ceil(totalCount / perPage), currentPage);
     console.log(pages);
-  }, [totalCount]);
+  }, [totalCount, currentPage]);
 
   useEffect(() => {
     getPaintings();
@@ -78,6 +78,7 @@ function Main() {
   };
 
   const createPages = (pages, pagesCount, currentPage) => {
+    setPages([]);
     if (pagesCount > 3) {
       if (currentPage > 2) {
         for (let i = currentPage - 1; i <= currentPage + 1; i++) {
