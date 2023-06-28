@@ -7,6 +7,7 @@ import SelectForInput from "../../compnents/UI/Select/SelectForInput/SelectForIn
 import Input from "../../compnents/UI/Input/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import useTheme from "../../hooks/useTheme";
 //import Pagination from "../../compnents/UI/Pagination/Pagination";
 
 function Main() {
@@ -38,7 +39,6 @@ function Main() {
 
   useEffect(() => {
     createPages(pages, Math.ceil(totalCount / perPage), currentPage);
-    console.log(pages);
   }, [totalCount, currentPage]);
 
   useEffect(() => {
@@ -112,6 +112,17 @@ function Main() {
 
   const [isThemeLight, setIsThemeLight] = useState(true);
 
+  const { isLight, setIsLight } = useTheme();
+
+  function saveThemeToLocalStorage(isLight) {
+    localStorage.setItem("isLight", isLight);
+  }
+
+  function handleThemeChange(newTheme) {
+    setIsLight(newTheme);
+    saveThemeToLocalStorage(newTheme);
+  }
+
   const funcsetIsThemeDark = () => {
     setIsThemeLight(!isThemeLight);
   };
@@ -122,6 +133,8 @@ function Main() {
         isThemeLight ? "page page__active_light" : "page page__active_dark"
       }
     >
+      <div className={`layaout ${isLight ? "light" : "dark"}`}></div>
+      <button onClick={() => handleThemeChange(!isLight)}>Changr theme</button>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
         {isThemeLight ? (
