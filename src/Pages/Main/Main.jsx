@@ -7,7 +7,6 @@ import SelectForInput from "../../compnents/UI/Select/SelectForInput/SelectForIn
 import Input from "../../compnents/UI/Input/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-import useTheme from "../../hooks/useTheme";
 //import Pagination from "../../compnents/UI/Pagination/Pagination";
 
 function Main() {
@@ -27,7 +26,7 @@ function Main() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const perPage = 5;
+  const perPage = 12;
 
   const [totalCount, setTotalCount] = useState(0);
 
@@ -110,22 +109,25 @@ function Main() {
     return data;
   };
 
-  const [isThemeLight, setIsThemeLight] = useState(true);
-
-  const { isLight, setIsLight } = useTheme();
+  const [isThemeLight, setIsThemeLight] = useState();
 
   function saveThemeToLocalStorage(isLight) {
     localStorage.setItem("isLight", isLight);
   }
 
   function handleThemeChange(newTheme) {
-    setIsLight(newTheme);
+    setIsThemeLight(newTheme);
     saveThemeToLocalStorage(newTheme);
   }
 
-  const funcsetIsThemeDark = () => {
-    setIsThemeLight(!isThemeLight);
-  };
+  function loadThemeFromLocalStorage() {
+    const storedIsLight = localStorage.getItem("isLight");
+    setIsThemeLight(storedIsLight === "true");
+  }
+
+  useEffect(() => {
+    loadThemeFromLocalStorage();
+  }, []);
 
   return (
     <div
@@ -133,8 +135,6 @@ function Main() {
         isThemeLight ? "page page__active_light" : "page page__active_dark"
       }
     >
-      <div className={`layaout ${isLight ? "light" : "dark"}`}></div>
-      <button onClick={() => handleThemeChange(!isLight)}>Changr theme</button>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
         {isThemeLight ? (
@@ -142,18 +142,14 @@ function Main() {
             src={sun_black}
             className="page__svg__switch"
             alt="Switch Theme"
-            onClick={(e) => {
-              funcsetIsThemeDark();
-            }}
+            onClick={() => handleThemeChange(!isThemeLight)}
           />
         ) : (
           <img
             src={sun_white}
             className="page__svg__switch"
             alt="Switch Theme"
-            onClick={(e) => {
-              funcsetIsThemeDark();
-            }}
+            onClick={() => handleThemeChange(!isThemeLight)}
           />
         )}
       </div>
