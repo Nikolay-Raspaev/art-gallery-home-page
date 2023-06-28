@@ -49,30 +49,26 @@ const Select2 = ({
 
           <FontAwesomeIcon
             icon={faCaretDown}
-            className={
-              isThemeLight
-                ? "dropdown__open dropdown__open__light"
-                : "dropdown__open dropdown__open__dark"
-            }
+            className={`dropdown__open ${
+              isThemeLight ? "dropdown__open__light" : "dropdown__open__dark"
+            }`}
           />
         </div>
       </div>
       {isActive && (
         <div
-          className={
+          className={`dropdown-content ${
             isThemeLight
-              ? "dropdown-content dropdown__content__light"
-              : "dropdown-content dropdown__content__dark"
-          }
+              ? "dropdown__content__light"
+              : "dropdown__content__dark"
+          }`}
         >
           {options.map((option) => (
             <div
               key={option.id}
-              className={
-                isThemeLight
-                  ? "dropdown-item item__light"
-                  : "dropdown-item item__dark"
-              }
+              className={`dropdown-item ${
+                isThemeLight ? "item__light" : "item__dark"
+              }`}
               onClick={(e) => {
                 setValue(option.id);
                 setSelected(option[selectedName]);

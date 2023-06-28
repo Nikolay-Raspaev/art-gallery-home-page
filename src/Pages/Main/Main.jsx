@@ -211,11 +211,9 @@ function Main() {
       </div>
       <div className="pagination">
         <button
-          className={
-            isThemeLight
-              ? "pagination__angel double__left pagination__page_light"
-              : "pagination__angel double__left pagination__page_dark"
-          }
+          className={`pagination__angel double__left ${
+            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+          }`}
           disabled={1 === currentPage}
           onClick={(e) => {
             setCurrentPage(1);
@@ -224,11 +222,9 @@ function Main() {
           <FontAwesomeIcon icon={faAnglesRight} rotation={180} />
         </button>
         <button
-          className={
-            isThemeLight
-              ? "pagination__angel pagination__page_light"
-              : "pagination__angel pagination__page_dark"
-          }
+          className={`pagination__angel ${
+            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+          }`}
           disabled={1 === currentPage}
           onClick={(e) => {
             setCurrentPage(currentPage - 1);
@@ -238,11 +234,9 @@ function Main() {
         </button>
         {pages?.map((page, index) => (
           <button
-            className={
-              isThemeLight
-                ? "pagination__page pagination__page_light"
-                : "pagination__page pagination__page_dark"
-            }
+            className={`pagination__page ${
+              isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+            }`}
             disabled={page === currentPage}
             key={page}
             onClick={(e) => {
@@ -253,11 +247,9 @@ function Main() {
           </button>
         ))}
         <button
-          className={
-            isThemeLight
-              ? "pagination__angel pagination__page_light"
-              : "pagination__angel pagination__page_dark"
-          }
+          className={`pagination__angel ${
+            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+          }`}
           disabled={maxPage === currentPage}
           onClick={(e) => {
             setCurrentPage(currentPage + 1);
@@ -266,11 +258,9 @@ function Main() {
           <FontAwesomeIcon icon={faAngleRight} />
         </button>
         <button
-          className={
-            isThemeLight
-              ? "pagination__angel double__right pagination__page_light"
-              : "pagination__angel double__right pagination__page_dark"
-          }
+          className={`pagination__angel double__right ${
+            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+          }`}
           disabled={maxPage === currentPage}
           onClick={(e) => {
             setCurrentPage(maxPage);
