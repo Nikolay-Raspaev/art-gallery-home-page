@@ -35,6 +35,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   padding-left: calc(100vw / 32);
   padding-right: calc(100vw / 32);
   margin: 0 auto;
+  min-height: 100vh;
   .page__svg {
     display: flex;
     align-items: center;

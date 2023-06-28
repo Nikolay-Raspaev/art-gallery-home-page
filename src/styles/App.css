@@ -20,6 +20,7 @@
   padding-left: 3.125vw;
   padding-right: 3.125vw;
   margin: 0 auto;
+  min-height: 100vh;
 }
 .page .page__svg {
   display: flex;
