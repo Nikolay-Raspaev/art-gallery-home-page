@@ -27,7 +27,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   margin: 1.09%;
 }
 
-.dropdown .dropdown-btn {
+.dropdown .dropdown_btn {
   display: flex;
   justify-content: space-between;
   border-radius: 0.47rem;
@@ -75,7 +75,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   border-top: 1px solid $dark-color;
 }
 
-.dropdown .dropdown-content {
+.dropdown .dropdown_content {
   position: absolute;
   max-height: 22.5rem;
   width: 100%;
@@ -101,7 +101,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   }
 }
 
-.dropdown .dropdown-content .dropdown-item {
+.dropdown .dropdown_content .dropdown_item {
   display: flex;
   justify-content: space-between;
   padding: 0.7rem;
@@ -115,7 +115,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   }
 }
 
-.dropdown .dropdown-content .item__light:hover {
+.dropdown .dropdown_content .item__light:hover {
   background: rgb(0, 0, 0);
   color: #ffffff;
   .dropdown-item__pointer {
@@ -124,7 +124,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   }
 }
 
-.dropdown .dropdown-content .item__dark:hover {
+.dropdown .dropdown_content .item__dark:hover {
   background: rgb(255, 255, 255);
   color: #000000;
   .dropdown-item__pointer {
@@ -133,7 +133,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   }
 }
 
-.dropdown-btn__container {
+.dropdown_btn__container {
   width: 100%;
   white-space: nowrap;
   overflow: hidden;

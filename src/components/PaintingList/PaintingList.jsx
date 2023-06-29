@@ -1,20 +1,21 @@
 import React from "react";
+import s from "./PaintingList.module.scss";
 
 const PaintingList = (props) => {
   return (
-    <div className="page__catalog">
+    <div className={s.page__catalog}>
       {props.paintings?.map((painting, index) => (
-        <div className="catalog__painting" key={painting.id}>
+        <div className={s.catalog__painting} key={painting.id}>
           <img
             src={props.host + painting.imageUrl}
             alt={painting.name}
-            className="catalog__painting__img"
+            className={s.catalog__painting__img}
           />
-          <div className="catalog__painting_overlay">
-            <p className="painting__name">
+          <div className={s.catalog__painting_overlay}>
+            <p className={s.painting__name}>
               <b>{painting.name}</b>
             </p>
-            <div className="painting__field">
+            <div className={s.painting__field}>
               <p>
                 <b>Author:</b> {painting.author}
               </p>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import "./SelectForInput.css";
-import "../Select/Select.css";
+import s from "./SelectForInput.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
@@ -8,35 +7,37 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className="select__container">
+    <div className={s.select__container}>
       <div
-        className={`select_for_input_button ${isActive ? "input_active" : ""}
+        className={`${s.select_for_input_button} ${
+          isActive ? s.input_active : ""
+        }
               ${
                 isThemeLight
-                  ? "select_for_input_button__light"
-                  : "select_for_input_button__dark"
+                  ? s.select_for_input_button__light
+                  : s.select_for_input_button__dark
               }`}
         onClick={(e) => setIsActive(!isActive)}
       >
-        <div className="btn__text">Created</div>
+        <div className={s.btn__text}>Created</div>
         <FontAwesomeIcon
           icon={faCaretDown}
-          className={`dropdown__open ${
-            isThemeLight ? "dropdown__open__light" : "dropdown__open__dark"
+          className={`${s.dropdown__open} ${
+            isThemeLight ? s.dropdown__open__light : s.dropdown__open__dark
           }`}
         />
       </div>
       {isActive ? (
         <div
-          className={`dropdown__input__content ${
+          className={`${s.dropdown__input__content} ${
             isThemeLight
-              ? "dropdown__input__content__light"
-              : "dropdown__input__content__dark"
+              ? s.dropdown__input__content__light
+              : s.dropdown__input__content__dark
           }`}
         >
           <input
-            className={`select__input ${
-              isThemeLight ? "select__input__light" : "select__input__dark"
+            className={`${s.select__input} ${
+              isThemeLight ? s.select__input__light : s.select__input__dark
             }`}
             placeholder="from"
             type="number"
@@ -47,8 +48,8 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
           />
           —
           <input
-            className={`select__input ${
-              isThemeLight ? "select__input__light" : "select__input__dark"
+            className={`${s.select__input} ${
+              isThemeLight ? s.select__input__light : s.select__input__dark
             }`}
             placeholder="before"
             type="number"

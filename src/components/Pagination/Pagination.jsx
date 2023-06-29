@@ -1,6 +1,7 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
+import s from "./Pagination.module.scss";
 
 const Pagination = ({
   isThemeLight,
@@ -10,10 +11,10 @@ const Pagination = ({
   maxPage,
 }) => {
   return (
-    <div className="pagination">
+    <div className={s.pagination}>
       <button
-        className={`pagination__angel double__left ${
-          isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+        className={`${s.pagination__angel} ${s.double__left} ${
+          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
         }`}
         disabled={1 === currentPage}
         onClick={(e) => {
@@ -23,8 +24,8 @@ const Pagination = ({
         <FontAwesomeIcon icon={faAnglesRight} rotation={180} />
       </button>
       <button
-        className={`pagination__angel ${
-          isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+        className={`${s.pagination__angel} ${
+          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
         }`}
         disabled={1 === currentPage}
         onClick={(e) => {
@@ -35,8 +36,8 @@ const Pagination = ({
       </button>
       {pages?.map((page, index) => (
         <button
-          className={`pagination__page ${
-            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+          className={`${s.pagination__page} ${
+            isThemeLight ? s.pagination__page_light : s.pagination__page_dark
           }`}
           disabled={page === currentPage}
           key={page}
@@ -48,8 +49,8 @@ const Pagination = ({
         </button>
       ))}
       <button
-        className={`pagination__angel ${
-          isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+        className={`${s.pagination__angel} ${
+          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
         }`}
         disabled={maxPage === currentPage}
         onClick={(e) => {
@@ -59,8 +60,8 @@ const Pagination = ({
         <FontAwesomeIcon icon={faAngleRight} />
       </button>
       <button
-        className={`pagination__angel double__right ${
-          isThemeLight ? "pagination__page_light" : "pagination__page_dark"
+        className={`${s.pagination__angel} ${s.double__right} ${
+          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
         }`}
         disabled={maxPage === currentPage}
         onClick={(e) => {

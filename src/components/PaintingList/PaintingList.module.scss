@@ -1,0 +1,94 @@
+//scrollbar
+$scrollbar-color: rgba(123, 123, 123);
+//all
+$dark-color: rgb(0, 0, 0);
+$white-color: rgb(255, 255, 255);
+//dark-theme
+$gray-color: rgba(255, 255, 255, 0.3);
+$button-page-dark-collor: rgba(70, 70, 70);
+$dark-gray-color: rgba(12, 12, 12);
+//light-theme
+$white-gray-color: rgba(0, 0, 0, 0.3);
+$button-pages-light-collor: rgba(237, 237, 237);
+
+.page__catalog {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.catalog__painting {
+  display: inline-block;
+  overflow: hidden;
+  border-radius: 1.25rem;
+  position: relative;
+  width: 100%;
+  padding-bottom: 68.4%;
+  margin: 1.09%;
+}
+
+.catalog__painting__img {
+  pointer-events: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+}
+
+.catalog__painting_overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.75);
+  color: $dark-color;
+  padding: 0.3rem 0.1rem 0.3rem 0.9rem;
+  .painting__name {
+    font-size: 1.3rem;
+  }
+}
+
+.painting__field {
+  display: none;
+}
+
+.catalog__painting:hover .painting__field {
+  display: block;
+}
+
+.catalog__painting:hover .painting__field {
+  display: block;
+}
+
+@media (max-width: 319px) {
+  .catalog__painting {
+    width: 100%;
+    padding-bottom: 68.4%;
+  }
+}
+
+@media (max-width: 767px) and (min-width: 320px) {
+  .catalog__painting {
+    width: 100%;
+    padding-bottom: 68.4%;
+  }
+}
+@media (max-width: 1023px) and (min-width: 768px) {
+  .catalog__painting {
+    width: 47.8%;
+    padding-bottom: 34.4%;
+  }
+}
+
+@media (max-width: 1365px) and (min-width: 1024px) {
+  .catalog__painting {
+    width: 31.14%;
+    padding-bottom: 24%;
+  }
+}
+
+@media (min-width: 1366px) {
+  .catalog__painting {
+    width: 31.15%;
+    padding-bottom: 24%;
+  }
+}

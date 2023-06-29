@@ -1,3 +1,16 @@
+//scrollbar
+$scrollbar-color: rgba(123, 123, 123);
+//all
+$dark-color: rgb(0, 0, 0);
+$white-color: rgb(255, 255, 255);
+//dark-theme
+$gray-color: rgba(255, 255, 255, 0.3);
+$button-page-dark-collor: rgba(70, 70, 70);
+$dark-gray-color: rgba(12, 12, 12);
+//light-theme
+$dark-gray-color: rgba(0, 0, 0, 0.3);
+$button-pages-light-collor: rgba(237, 237, 237);
+
 .select__container {
   position: relative;
   min-width: 22.82%;
@@ -108,4 +121,17 @@
   .select__input {
     width: 80%;
   }
+}
+
+.dropdown__open {
+  width: 14px;
+  height: 22px;
+  padding-bottom: 0.3rem;
+}
+
+.dropdown__open__light {
+  color: $dark-gray-color;
+}
+.dropdown__open__dark {
+  color: $gray-color;
 }

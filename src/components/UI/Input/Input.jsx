@@ -1,11 +1,11 @@
 import React from "react";
-import "./Input.css";
+import s from "./Input.module.scss";
 
 const Input = (props) => {
   const { isThemeLight, ...rest } = props;
   return (
     <input
-      className={isThemeLight ? "input__name light" : "input__name dark"}
+      className={`${s.input__name} ${isThemeLight ? s.light : s.dark}`}
       {...rest}
     />
   );
