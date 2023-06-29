@@ -10,10 +10,7 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
   return (
     <div className="select__container">
       <div
-        className={`select_for_input_button ${isActive ? "active" : ""} ${
-          isThemeLight && isActive ? "active__light" : ""
-        }
-              ${!isThemeLight && isActive ? "active__dark" : ""}
+        className={`select_for_input_button ${isActive ? "input_active" : ""}
               ${
                 isThemeLight
                   ? "select_for_input_button__light"
@@ -21,7 +18,7 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
               }`}
         onClick={(e) => setIsActive(!isActive)}
       >
-        Created
+        <div className="btn__text">Created</div>
         <FontAwesomeIcon
           icon={faCaretDown}
           className={`dropdown__open ${
