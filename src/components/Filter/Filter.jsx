@@ -6,7 +6,7 @@ import s from "./Filter.module.scss";
 
 const Filter = (props) => {
   return (
-    <div className={s.page__filter}>
+    <div className={s.filter}>
       <Input
         isThemeLight={props.isThemeLight}
         value={props.paintingName}

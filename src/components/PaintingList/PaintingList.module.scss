@@ -11,7 +11,7 @@ $dark-gray-color: rgba(12, 12, 12);
 $white-gray-color: rgba(0, 0, 0, 0.3);
 $button-pages-light-collor: rgba(237, 237, 237);
 
-.page__catalog {
+.catalog {
   display: flex;
   flex-wrap: wrap;
 }
@@ -34,7 +34,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   object-fit: fill;
 }
 
-.catalog__painting_overlay {
+.catalog__painting__overlay {
   position: absolute;
   bottom: 0;
   left: 0;

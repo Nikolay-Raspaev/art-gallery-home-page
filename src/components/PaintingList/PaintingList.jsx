@@ -3,7 +3,7 @@ import s from "./PaintingList.module.scss";
 
 const PaintingList = (props) => {
   return (
-    <div className={s.page__catalog}>
+    <div className={s.catalog}>
       {props.paintings?.map((painting, index) => (
         <div className={s.catalog__painting} key={painting.id}>
           <img
@@ -11,7 +11,7 @@ const PaintingList = (props) => {
             alt={painting.name}
             className={s.catalog__painting__img}
           />
-          <div className={s.catalog__painting_overlay}>
+          <div className={s.catalog__painting__overlay}>
             <p className={s.painting__name}>
               <b>{painting.name}</b>
             </p>

@@ -14,7 +14,7 @@ const Pagination = ({
     <div className={s.pagination}>
       <button
         className={`${s.pagination__angel} ${s.double__left} ${
-          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === currentPage}
         onClick={(e) => {
@@ -25,7 +25,7 @@ const Pagination = ({
       </button>
       <button
         className={`${s.pagination__angel} ${
-          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === currentPage}
         onClick={(e) => {
@@ -37,7 +37,7 @@ const Pagination = ({
       {pages?.map((page, index) => (
         <button
           className={`${s.pagination__page} ${
-            isThemeLight ? s.pagination__page_light : s.pagination__page_dark
+            isThemeLight ? s.pagination__page__light : s.pagination__page__dark
           }`}
           disabled={page === currentPage}
           key={page}
@@ -50,7 +50,7 @@ const Pagination = ({
       ))}
       <button
         className={`${s.pagination__angel} ${
-          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={maxPage === currentPage}
         onClick={(e) => {
@@ -61,7 +61,7 @@ const Pagination = ({
       </button>
       <button
         className={`${s.pagination__angel} ${s.double__right} ${
-          isThemeLight ? s.pagination__page_light : s.pagination__page_dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={maxPage === currentPage}
         onClick={(e) => {
