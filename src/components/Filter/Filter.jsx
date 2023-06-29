@@ -2,10 +2,11 @@ import React from "react";
 import Input from "../UI/Input/Input";
 import SelectForInput from "../UI/Selects/SelectForInput/SelectForInput";
 import Select from "../UI/Selects/Select/Select";
+import s from "./Filter.module.scss";
 
 const Filter = (props) => {
   return (
-    <div className="page__filter">
+    <div className={s.page__filter}>
       <Input
         isThemeLight={props.isThemeLight}
         value={props.paintingName}

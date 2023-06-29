@@ -144,11 +144,7 @@ function Main() {
   }, []);
 
   return (
-    <div
-      className={
-        isThemeLight ? "page page__active_light" : "page page__active_dark"
-      }
-    >
+    <div className={isThemeLight ? "page page__light" : "page page__dark"}>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
         {isThemeLight ? (

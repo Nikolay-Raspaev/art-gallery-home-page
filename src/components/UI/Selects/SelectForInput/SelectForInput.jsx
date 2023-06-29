@@ -7,37 +7,33 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
   const [isActive, setIsActive] = useState(false);
 
   return (
-    <div className={s.select__container}>
+    <div className={s.container}>
       <div
-        className={`${s.select_for_input_button} ${
-          isActive ? s.input_active : ""
+        className={`${s.activation__button} ${
+          isActive ? s.button__is__activated : ""
         }
               ${
                 isThemeLight
-                  ? s.select_for_input_button__light
-                  : s.select_for_input_button__dark
+                  ? s.activation__button__light
+                  : s.activation__button__dark
               }`}
         onClick={(e) => setIsActive(!isActive)}
       >
-        <div className={s.btn__text}>Created</div>
+        <div className={s.button__text}>Created</div>
         <FontAwesomeIcon
           icon={faCaretDown}
-          className={`${s.dropdown__open} ${
-            isThemeLight ? s.dropdown__open__light : s.dropdown__open__dark
-          }`}
+          className={`${s.open} ${isThemeLight ? s.open__light : s.open__dark}`}
         />
       </div>
       {isActive ? (
         <div
-          className={`${s.dropdown__input__content} ${
-            isThemeLight
-              ? s.dropdown__input__content__light
-              : s.dropdown__input__content__dark
+          className={`${s.content} ${
+            isThemeLight ? s.content__light : s.content__dark
           }`}
         >
           <input
-            className={`${s.select__input} ${
-              isThemeLight ? s.select__input__light : s.select__input__dark
+            className={`${s.input} ${
+              isThemeLight ? s.input__light : s.input__dark
             }`}
             placeholder="from"
             type="number"
@@ -48,8 +44,8 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
           />
           —
           <input
-            className={`${s.select__input} ${
-              isThemeLight ? s.select__input__light : s.select__input__dark
+            className={`${s.input} ${
+              isThemeLight ? s.input__light : s.input__dark
             }`}
             placeholder="before"
             type="number"

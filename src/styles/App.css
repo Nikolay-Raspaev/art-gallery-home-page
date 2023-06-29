@@ -4,12 +4,12 @@
   box-sizing: border-box;
 }
 
-.page__active_light {
+.page__light {
   background-color: rgb(255, 255, 255);
   color: rgb(0, 0, 0);
 }
 
-.page__active_dark {
+.page__dark {
   background-color: rgb(0, 0, 0);
   color: rgb(255, 255, 255);
 }
@@ -44,55 +44,6 @@ svg {
   cursor: pointer;
 }
 
-.page__catalog {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-.catalog__painting {
-  display: inline-block;
-  overflow: hidden;
-  border-radius: 1.25rem;
-  position: relative;
-  width: 100%;
-  padding-bottom: 68.4%;
-  margin: 1.09%;
-}
-
-.catalog__painting__img {
-  pointer-events: none;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -o-object-fit: fill;
-     object-fit: fill;
-}
-
-.catalog__painting_overlay {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  background-color: rgba(255, 255, 255, 0.75);
-  color: rgb(0, 0, 0);
-  padding: 0.3rem 0.1rem 0.3rem 0.9rem;
-}
-.catalog__painting_overlay .painting__name {
-  font-size: 1.3rem;
-}
-
-.painting__field {
-  display: none;
-}
-
-.catalog__painting:hover .painting__field {
-  display: block;
-}
-
-.page__filter {
-  display: flex;
-}
-
 ::-webkit-scrollbar-thumb {
   background-color: rgb(123, 123, 123);
   border-radius: 10px;
@@ -111,27 +62,11 @@ svg {
     padding-left: 3.125vw;
     padding-right: 3.125vw;
   }
-  .page .catalog__painting {
-    width: 100%;
-    padding-bottom: 68.4%;
-  }
-  .page .page__filter {
-    display: flex;
-    flex-direction: column;
-  }
 }
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: 3.125vw;
     padding-right: 3.125vw;
-  }
-  .page .catalog__painting {
-    width: 100%;
-    padding-bottom: 68.4%;
-  }
-  .page .page__filter {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 1023px) and (min-width: 768px) {
@@ -139,19 +74,11 @@ svg {
     padding-left: 2.8571428571vw;
     padding-right: 2.8571428571vw;
   }
-  .page .catalog__painting {
-    width: 47.8%;
-    padding-bottom: 34.4%;
-  }
 }
 @media (max-width: 1365px) and (min-width: 1024px) {
   .page {
     padding-left: 3.125vw;
     padding-right: 3.125vw;
-  }
-  .page .catalog__painting {
-    width: 31.14%;
-    padding-bottom: 24%;
   }
 }
 @media (min-width: 1366px) {
@@ -159,85 +86,4 @@ svg {
     padding-left: 8.3333333333vw;
     padding-right: 8.3333333333vw;
   }
-  .page .catalog__painting {
-    width: 31.15%;
-    padding-bottom: 24%;
-  }
 }
-.page__active_light {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
-
-.page__active_dark {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
-
-.pagination {
-  padding: 40px 1.09% 40px 1.09%;
-  display: flex;
-}
-.pagination .double__left {
-  border-bottom-left-radius: 7px;
-  border-top-left-radius: 7px;
-}
-.pagination .double__right {
-  border-bottom-right-radius: 7px;
-  border-top-right-radius: 7px;
-}
-.pagination button.pagination__page.pagination__page_light:disabled {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-}
-.pagination button.pagination__page.pagination__page_dark:disabled {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-}
-.pagination .pagination__page_light:hover:not([disabled]) {
-  background-color: rgb(237, 237, 237);
-  color: rgb(0, 0, 0);
-  cursor: pointer;
-}
-.pagination button.pagination__page_dark:hover:not([disabled]) {
-  background-color: rgb(70, 70, 70);
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-
-.pagination__page_light {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
-  border: 1px solid rgb(0, 0, 0);
-}
-
-.pagination__page_dark {
-  background-color: rgb(0, 0, 0);
-  color: rgb(255, 255, 255);
-  border: 1px solid rgb(255, 255, 255);
-}
-
-.pagination__page {
-  min-height: 40px;
-  min-width: 40px;
-}
-
-.pagination__angel {
-  min-height: 40px;
-  min-width: 40px;
-}
-
-.pagination__angel:hover:not([disabled]) {
-  background-color: rgb(70, 70, 70);
-  color: rgb(255, 255, 255);
-  cursor: pointer;
-}
-
-.pagination__angel.pagination__page_dark:disabled {
-  color: rgba(255, 255, 255, 0.3);
-}
-
-.pagination__angel.pagination__page_light:disabled {
-  color: rgb(237, 237, 237);
-  border: 1px solid rgb(237, 237, 237);
-}/*# sourceMappingURL=App.css.map */
