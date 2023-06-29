@@ -139,3 +139,9 @@ $button-pages-light-collor: rgba(237, 237, 237);
   overflow: hidden;
   text-overflow: ellipsis;
 }
+
+span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

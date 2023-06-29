@@ -116,6 +116,21 @@ svg {
   border-radius: 10px;
 }
 
+@media (max-width: 319px) {
+  .page {
+    padding-left: calc(100vw / 32);
+    padding-right: calc(100vw / 32);
+    .catalog__painting {
+      width: 100%;
+      padding-bottom: 68.4%;
+    }
+    .page__filter {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: calc(100vw / 32);
@@ -123,6 +138,10 @@ svg {
     .catalog__painting {
       width: 100%;
       padding-bottom: 68.4%;
+    }
+    .page__filter {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 }

@@ -106,6 +106,20 @@ svg {
   border-radius: 10px;
 }
 
+@media (max-width: 319px) {
+  .page {
+    padding-left: 3.125vw;
+    padding-right: 3.125vw;
+  }
+  .page .catalog__painting {
+    width: 100%;
+    padding-bottom: 68.4%;
+  }
+  .page .page__filter {
+    display: flex;
+    flex-direction: column;
+  }
+}
 @media (max-width: 767px) and (min-width: 320px) {
   .page {
     padding-left: 3.125vw;
@@ -114,6 +128,10 @@ svg {
   .page .catalog__painting {
     width: 100%;
     padding-bottom: 68.4%;
+  }
+  .page .page__filter {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 1023px) and (min-width: 768px) {

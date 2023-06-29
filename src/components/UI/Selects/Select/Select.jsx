@@ -75,7 +75,7 @@ const Select2 = ({
                 setIsActive(false);
               }}
             >
-              {option[selectedName]}
+              <span>{option[selectedName]}</span>
               <FontAwesomeIcon
                 icon={faHandPointer}
                 className="dropdown-item__pointer"
