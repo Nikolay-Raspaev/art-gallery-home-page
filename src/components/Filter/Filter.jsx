@@ -1,9 +1,7 @@
 import React from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Input from "../UI/Input/Input";
-import SelectForInput from "../UI/Select/SelectForInput/SelectForInput";
-import Select2 from "../UI/Select/WorkerSelect/Select2";
+import SelectForInput from "../UI/Selects/SelectForInput/SelectForInput";
+import Select from "../UI/Selects/Select/Select";
 
 const Filter = (props) => {
   return (
@@ -14,7 +12,7 @@ const Filter = (props) => {
         placeholder="Name"
         onChange={(event) => props.setPaintingName(event.target.value)}
       />
-      <Select2
+      <Select
         isThemeLight={props.isThemeLight}
         value={props.selectedAuthorID}
         selectedName="name"
@@ -22,7 +20,7 @@ const Filter = (props) => {
         defaultValue="Author"
         options={props.authors}
       />
-      <Select2
+      <Select
         isThemeLight={props.isThemeLight}
         value={props.selectedLocationId}
         selectedName="location"

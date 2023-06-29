@@ -2,15 +2,9 @@ import React, { useState, useEffect } from "react";
 import logo from "../../svg/logo.svg";
 import sun_white from "../../svg/sun-white.svg";
 import sun_black from "../../svg/sun-black.svg";
-import Select2 from "../../components/UI/Select/WorkerSelect/Select2";
-import SelectForInput from "../../components/UI/Select/SelectForInput/SelectForInput";
-import Input from "../../components/UI/Input/Input";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import PaintingList from "../../components/PaintingList/PaintingList";
 import Pagination from "../../components/Pagination/Pagination";
 import Filter from "../../components/Filter/Filter";
-//import Pagination from "../../components/UI/Pagination/Pagination";
 
 function Main() {
   const host = "https://test-front.framework.team";
@@ -43,7 +37,7 @@ function Main() {
 
   useEffect(() => {
     createPages(maxPage, currentPage);
-  }, [totalCount, currentPage]);
+  }, [maxPage, currentPage]);
 
   useEffect(() => {
     getPaintings();
@@ -56,7 +50,6 @@ function Main() {
 
   useEffect(() => {
     setNewPaintings(createNewPaintings(paintings, authors, locations));
-    console.log(newPaintings);
   }, [paintings]);
 
   useEffect(() => {
@@ -106,7 +99,7 @@ function Main() {
       const location = locations.find(
         (location) => location.id === painting.locationId
       );
-      if (location.location && author.name) {
+      if (location && author) {
         return {
           location: location.location,
           author: author.name,

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./SelectForInput.css";
-import "../WorkerSelect/Select2.css";
+import "../Select/Select.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 

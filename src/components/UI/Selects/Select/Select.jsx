@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Select2.css";
+import "./Select.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-regular-svg-icons";
 import { faXmark, faCaretDown } from "@fortawesome/free-solid-svg-icons";
