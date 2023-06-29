@@ -5,6 +5,7 @@ import sun_black from "../../svg/sun-black.svg";
 import PaintingList from "../../components/PaintingList/PaintingList";
 import Pagination from "../../components/Pagination/Pagination";
 import Filter from "../../components/Filter/Filter";
+import { useLocation } from "react-router-dom";
 
 function Main() {
   const host = "https://test-front.framework.team";
@@ -25,7 +26,7 @@ function Main() {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const perPage = 12;
+  const [perPage, setPerPage] = useState(12);
 
   const [totalCount, setTotalCount] = useState(0);
 
@@ -34,6 +35,31 @@ function Main() {
   const [pages, setPages] = useState([]);
 
   const maxPage = Math.ceil(totalCount / perPage);
+
+  const location = useLocation();
+  const setParam = () => {
+    const searchParams = new URLSearchParams(location.search);
+    const _page = searchParams.get("_page");
+    setCurrentPage(_page);
+    console.log(currentPage);
+    setPerPage(searchParams.get("_limit"));
+    const authorId = searchParams.get("authorId");
+    if (authorId) setSelectedAuthorId(authorId);
+
+    const locationId = searchParams.get("locationId");
+    if (locationId) setSelectedLocationId(locationId);
+
+    const name = searchParams.get("name");
+    if (name) setPaintingName(name);
+
+    const created_gte = searchParams.get("created_gte");
+    if (created_gte) setDateValue({ ...dateValue, from: created_gte });
+
+    const created_lte = searchParams.get("created_lte");
+    if (created_lte) setDateValue({ ...dateValue, before: created_lte });
+
+    console.log(searchParams.toString());
+  };
 
   useEffect(() => {
     createPages(maxPage, currentPage);
@@ -46,6 +72,7 @@ function Main() {
   useEffect(() => {
     getAuthors().then((data) => setAuthors(data));
     getLocations().then((data) => setLocations(data));
+    setParam();
   }, []);
 
   useEffect(() => {
@@ -58,7 +85,7 @@ function Main() {
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   const getPaintings = async function () {
-    var url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
+    var url = `/paintings?_page=${currentPage}&_limit=${perPage}${
       selectedAuthorID ? `&authorId=${selectedAuthorID}` : ""
     }${
       selectedLocationId
@@ -67,9 +94,11 @@ function Main() {
     }${paintingName ? `&anyObjectField=name&name=${paintingName}` : ""}${
       dateValue.from ? `&created_gte=${dateValue.from}` : ""
     }${dateValue.before ? `&created_lte=${dateValue.before}` : ""}`;
-    const response = await fetch(url);
+    const response = await fetch(`${host}${url}`);
     setPaintings(await response.json());
     setTotalCount(await response.headers.get("x-total-count"));
+
+    window.history.pushState({}, "", `/art-gallery-home-page${url.toString()}`);
   };
 
   const createPages = (pagesCount, currentPage) => {

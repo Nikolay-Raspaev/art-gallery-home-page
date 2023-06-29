@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import s from "./Select.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-regular-svg-icons";
@@ -15,6 +15,15 @@ const Select = ({
   const [isActive, setIsActive] = useState(false);
 
   const [selected, setSelected] = useState("");
+
+  useEffect(() => {
+    const option = options.find((option) => option.id === parseInt(value));
+    if (option) {
+      setSelected(option[selectedName]);
+    }
+  }, [options]);
+
+  //console.log(findOption(options));
 
   return (
     <div className={s.dropdown}>
