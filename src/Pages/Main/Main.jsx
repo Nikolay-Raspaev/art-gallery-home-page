@@ -41,7 +41,6 @@ function Main() {
 
   const maxPage = Math.ceil(totalCount / perPage);
 
-  //console.log(paintings);
   useEffect(() => {
     createPages(maxPage, currentPage);
   }, [totalCount, currentPage]);
@@ -60,10 +59,10 @@ function Main() {
     console.log(newPaintings);
   }, [paintings]);
 
-  // useEffect(() => {
-  //   getPaintings();
-  //   setCurrentPage(1);
-  // }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
+  useEffect(() => {
+    getPaintings();
+    setCurrentPage(1);
+  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   const getPaintings = async function () {
     var url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
