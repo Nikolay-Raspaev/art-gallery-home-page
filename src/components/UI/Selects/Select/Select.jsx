@@ -19,24 +19,22 @@ const Select = ({
   return (
     <div className={s.dropdown}>
       <div
-        className={`${s.dropdown_btn} ${isActive ? s.active : ""} ${
-          isThemeLight && isActive ? s.active__light : ""
+        className={`${s.dropdown__button} ${isActive ? s.button__active : ""} ${
+          isThemeLight && isActive ? s.button__active__light : ""
         }
-        ${!isThemeLight && isActive ? s.active__dark : ""}
-        ${isThemeLight ? s.dropdown__btn__light : s.dropdown__btn__dark}`}
+        ${!isThemeLight && isActive ? s.button__active__dark : ""}
+        ${isThemeLight ? s.button__light : s.button__dark}`}
         onClick={(e) => setIsActive(!isActive)}
       >
-        <div className={s.dropdown_btn__container}>
+        <div className={s.button__text}>
           {selected ? selected : defaultValue}
         </div>
-        <div className={s.icon}>
+        <div className={s.button__icon}>
           {value ? (
             <FontAwesomeIcon
               icon={faXmark}
               className={
-                isThemeLight
-                  ? s.dropdown__close__light
-                  : s.dropdown__close__dark
+                isThemeLight ? s.button__close__light : s.button__close__dark
               }
               onClick={(e) => {
                 setSelected("");
@@ -49,24 +47,22 @@ const Select = ({
 
           <FontAwesomeIcon
             icon={faCaretDown}
-            className={`${s.dropdown__open} ${
-              isThemeLight ? s.dropdown__open__light : s.dropdown__open__dark
+            className={`${s.button__open} ${
+              isThemeLight ? s.button__open__light : s.button__open__dark
             }`}
           />
         </div>
       </div>
       {isActive && (
         <div
-          className={`${s.dropdown_content} ${
-            isThemeLight
-              ? s.dropdown__content__light
-              : s.dropdown__content__dark
+          className={`${s.content} ${
+            isThemeLight ? s.content__light : s.content__dark
           }`}
         >
           {options.map((option) => (
             <div
               key={option.id}
-              className={`${s.dropdown_item} ${
+              className={`${s.item} ${
                 isThemeLight ? s.item__light : s.item__dark
               }`}
               onClick={(e) => {
@@ -78,7 +74,7 @@ const Select = ({
               <span>{option[selectedName]}</span>
               <FontAwesomeIcon
                 icon={faHandPointer}
-                className={s.dropdown_item__pointer}
+                className={s.item__pointer}
               />
             </div>
           ))}
