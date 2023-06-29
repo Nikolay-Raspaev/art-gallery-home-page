@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import logo from "../../svg/logo.svg";
 import sun_white from "../../svg/sun-white.svg";
 import sun_black from "../../svg/sun-black.svg";
-import Select2 from "../../compnents/UI/Select/WorkerSelect/Select2";
-import SelectForInput from "../../compnents/UI/Select/SelectForInput/SelectForInput";
-import Input from "../../compnents/UI/Input/Input";
+import Select2 from "../../components/UI/Select/WorkerSelect/Select2";
+import SelectForInput from "../../components/UI/Select/SelectForInput/SelectForInput";
+import Input from "../../components/UI/Input/Input";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
-//import Pagination from "../../compnents/UI/Pagination/Pagination";
+import PaintingList from "../../components/PaintingList/PaintingList";
+import Pagination from "../../components/Pagination/Pagination";
+import Filter from "../../components/Filter/Filter";
+//import Pagination from "../../components/UI/Pagination/Pagination";
 
 function Main() {
   const host = "https://test-front.framework.team";
@@ -15,6 +18,8 @@ function Main() {
   const [paintingName, setPaintingName] = useState("");
 
   const [paintings, setPaintings] = useState([]);
+
+  const [newPaintings, setNewPaintings] = useState([]);
 
   const [authors, setAuthors] = useState([]);
 
@@ -36,21 +41,29 @@ function Main() {
 
   const maxPage = Math.ceil(totalCount / perPage);
 
+  //console.log(paintings);
   useEffect(() => {
-    createPages(pages, Math.ceil(totalCount / perPage), currentPage);
+    createPages(maxPage, currentPage);
   }, [totalCount, currentPage]);
 
   useEffect(() => {
     getPaintings();
+  }, [currentPage]);
+
+  useEffect(() => {
     getAuthors().then((data) => setAuthors(data));
     getLocations().then((data) => setLocations(data));
-  }, [
-    selectedAuthorID,
-    selectedLocationId,
-    paintingName,
-    dateValue,
-    currentPage,
-  ]);
+  }, []);
+
+  useEffect(() => {
+    setNewPaintings(createNewPaintings(paintings, authors, locations));
+    console.log(newPaintings);
+  }, [paintings]);
+
+  // useEffect(() => {
+  //   getPaintings();
+  //   setCurrentPage(1);
+  // }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   const getPaintings = async function () {
     var url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
@@ -62,21 +75,12 @@ function Main() {
     }${paintingName ? `&anyObjectField=name&name=${paintingName}` : ""}${
       dateValue.from ? `&created_gte=${dateValue.from}` : ""
     }${dateValue.before ? `&created_lte=${dateValue.before}` : ""}`;
-    // const params = new URLSearchParams();
-    // params.append("_page", currentPage);
-    // params.append("_limit", perPage);
-    // params.append("authorId", selectedAuthorID);
-    // params.append("anyObjectField=locationId&locationId", selectedLocationId);
-    // params.append("anyObjectField=name&name", paintingName);
-    // params.append("created_gte", dateValue.from);
-    // params.append("created_lte", dateValue.before);
-    // var url2 = `${host}/paintings?${params}`;
     const response = await fetch(url);
     setPaintings(await response.json());
     setTotalCount(await response.headers.get("x-total-count"));
   };
 
-  const createPages = (pages, pagesCount, currentPage) => {
+  const createPages = (pagesCount, currentPage) => {
     setPages([]);
     if (pagesCount > 3) {
       if (currentPage > 2) {
@@ -95,6 +99,24 @@ function Main() {
         setPages((prevArray) => [...prevArray, i]);
       }
     }
+  };
+
+  const createNewPaintings = (paintings, authors, locations) => {
+    return paintings?.map((painting) => {
+      const author = authors.find((author) => author.id === painting.authorId);
+      const location = locations.find(
+        (location) => location.id === painting.locationId
+      );
+      if (location.location && author.name) {
+        return {
+          location: location.location,
+          author: author.name,
+
+          ...painting,
+        };
+      }
+      return painting;
+    });
   };
 
   const getAuthors = async function () {
@@ -153,122 +175,27 @@ function Main() {
           />
         )}
       </div>
-      <div className="page__filter">
-        <Input
-          isThemeLight={isThemeLight}
-          value={paintingName}
-          placeholder="Name"
-          onChange={(event) => setPaintingName(event.target.value)}
-        />
-        <Select2
-          isThemeLight={isThemeLight}
-          value={selectedAuthorID}
-          selectedName="name"
-          setValue={setSelectedAuthorId}
-          defaultValue="Author"
-          options={authors}
-        />
-        <Select2
-          isThemeLight={isThemeLight}
-          value={selectedLocationId}
-          selectedName="location"
-          setValue={setSelectedLocationId}
-          defaultValue="Location"
-          options={locations}
-        />
-        <SelectForInput
-          isThemeLight={isThemeLight}
-          value={dateValue}
-          setValue={setDateValue}
-        />
-      </div>
-      <div className="page__catalog">
-        {paintings?.map((painting, index) => (
-          <div className="catalog__painting" key={painting.id}>
-            <img
-              src={host + painting.imageUrl}
-              alt={painting.name}
-              className="catalog__painting__img"
-            />
-            <div className="catalog__painting_overlay">
-              <p className="painting__name">
-                <b>{painting.name}</b>
-              </p>
-              <div className="painting__field">
-                <p>
-                  <b>Author:</b> {painting.authorId}
-                </p>
-                <p>
-                  <b>Created:</b> {painting.created}
-                </p>
-                <p>
-                  <b>Location:</b> {painting.locationId}
-                </p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-      <div className="pagination">
-        <button
-          className={`pagination__angel double__left ${
-            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
-          }`}
-          disabled={1 === currentPage}
-          onClick={(e) => {
-            setCurrentPage(1);
-          }}
-        >
-          <FontAwesomeIcon icon={faAnglesRight} rotation={180} />
-        </button>
-        <button
-          className={`pagination__angel ${
-            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
-          }`}
-          disabled={1 === currentPage}
-          onClick={(e) => {
-            setCurrentPage(currentPage - 1);
-          }}
-        >
-          <FontAwesomeIcon icon={faAngleRight} rotation={180} />
-        </button>
-        {pages?.map((page, index) => (
-          <button
-            className={`pagination__page ${
-              isThemeLight ? "pagination__page_light" : "pagination__page_dark"
-            }`}
-            disabled={page === currentPage}
-            key={page}
-            onClick={(e) => {
-              setCurrentPage(page);
-            }}
-          >
-            {page}
-          </button>
-        ))}
-        <button
-          className={`pagination__angel ${
-            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
-          }`}
-          disabled={maxPage === currentPage}
-          onClick={(e) => {
-            setCurrentPage(currentPage + 1);
-          }}
-        >
-          <FontAwesomeIcon icon={faAngleRight} />
-        </button>
-        <button
-          className={`pagination__angel double__right ${
-            isThemeLight ? "pagination__page_light" : "pagination__page_dark"
-          }`}
-          disabled={maxPage === currentPage}
-          onClick={(e) => {
-            setCurrentPage(maxPage);
-          }}
-        >
-          <FontAwesomeIcon icon={faAnglesRight} />
-        </button>
-      </div>
+      <Filter
+        isThemeLight={isThemeLight}
+        paintingName={paintingName}
+        setPaintingName={setPaintingName}
+        selectedAuthorID={selectedAuthorID}
+        setSelectedAuthorId={setSelectedAuthorId}
+        authors={authors}
+        selectedLocationId={selectedLocationId}
+        setSelectedLocationId={setSelectedLocationId}
+        locations={locations}
+        dateValue={dateValue}
+        setDateValue={setDateValue}
+      />
+      <PaintingList paintings={newPaintings} host={host} />
+      <Pagination
+        isThemeLight={isThemeLight}
+        currentPage={currentPage}
+        maxPage={maxPage}
+        setCurrentPage={setCurrentPage}
+        pages={pages}
+      />
     </div>
   );
 }
