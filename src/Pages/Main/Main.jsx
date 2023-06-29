@@ -72,7 +72,9 @@ function Main() {
   useEffect(() => {
     getAuthors().then((data) => setAuthors(data));
     getLocations().then((data) => setLocations(data));
-    setParam();
+    setTimeout(function () {
+      setParam();
+    }, 100);
   }, []);
 
   useEffect(() => {
