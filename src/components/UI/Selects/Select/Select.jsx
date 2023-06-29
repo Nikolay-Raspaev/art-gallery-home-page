@@ -23,8 +23,6 @@ const Select = ({
     }
   }, [options]);
 
-  //console.log(findOption(options));
-
   return (
     <div className={s.dropdown}>
       <div

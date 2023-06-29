@@ -1,5 +1,5 @@
 import Main from "./Pages/Main/Main";
-import { useRoutes, Outlet, BrowserRouter } from "react-router-dom";
+import { useRoutes, BrowserRouter } from "react-router-dom";
 import "./styles/App.css";
 
 function Router(props) {
