@@ -39,10 +39,12 @@ function Main() {
   const location = useLocation();
   const setParam = () => {
     const searchParams = new URLSearchParams(location.search);
-    const _page = searchParams.get("_page");
-    setCurrentPage(_page);
-    console.log(currentPage);
-    setPerPage(searchParams.get("_limit"));
+    const page = searchParams.get("_page");
+    if (page) setCurrentPage(page);
+
+    const limit = searchParams.get("_limit");
+    if (limit) setPerPage(limit);
+
     const authorId = searchParams.get("authorId");
     if (authorId) setSelectedAuthorId(authorId);
 

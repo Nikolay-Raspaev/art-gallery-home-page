@@ -8,8 +8,8 @@ function Router(props) {
 
 function App() {
   const routes = [
-    { index: true, element: <Main /> },
     { path: "art-gallery-home-page/paintings", element: <Main /> },
+    { path: "art-gallery-home-page", element: <Main /> },
   ];
   const rootRoute = [{ path: "/", children: routes }];
   return (
