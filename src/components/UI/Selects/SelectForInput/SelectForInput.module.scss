@@ -1,15 +1,11 @@
-//scrollbar
-$scrollbar-color: rgba(123, 123, 123);
-//all
 $dark-color: rgb(0, 0, 0);
 $white-color: rgb(255, 255, 255);
 //dark-theme
 $gray-color: rgba(255, 255, 255, 0.3);
-$button-page-dark-collor: rgba(70, 70, 70);
-$dark-gray-color: rgba(12, 12, 12);
+$dark-dark-gray-color: rgba(12, 12, 12);
 //light-theme
 $dark-gray-color: rgba(0, 0, 0, 0.3);
-$button-pages-light-collor: rgba(237, 237, 237);
+$input-light: rgb(239, 239, 239);
 
 .container {
   position: relative;
@@ -18,13 +14,13 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .activation__button__light {
-  background: #ffffff;
-  border: 1px solid rgb(0, 0, 0);
+  background: $white-color;
+  border: 1px solid $dark-color;
 }
 
 .activation__button__dark {
-  background: #000000;
-  border: 1px solid white;
+  background: $dark-dark-gray-color;
+  border: 1px solid $white-color;
 }
 
 .activation__button {
@@ -40,15 +36,15 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .content__light {
-  background: #ffffff;
-  border: 1px solid rgb(0, 0, 0);
-  border-top: 1px solid #ffffff;
+  background: $white-color;
+  border: 1px solid $dark-color;
+  border-top: 1px solid $white-color;
 }
 
 .content__dark {
-  background: #000000;
-  border: 1px solid white;
-  border-top: 1px solid #000000;
+  background: $dark-dark-gray-color;
+  border: 1px solid $white-color;
+  border-top: none;
 }
 
 .content {
@@ -64,13 +60,13 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .input__light {
-  background-color: rgba(239, 239, 239, 1);
-  color: rgb(0, 0, 0);
+  background-color: $input-light;
+  color: $dark-color;
 }
 
 .input__dark {
-  background-color: rgb(255, 255, 255);
-  color: rgb(0, 0, 0);
+  background-color: $white-color;
+  color: $dark-color;
 }
 
 .input {

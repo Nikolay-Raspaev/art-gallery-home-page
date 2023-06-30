@@ -1,15 +1,10 @@
-//scrollbar
-$scrollbar-color: rgba(123, 123, 123);
-//all
 $dark-color: rgb(0, 0, 0);
 $white-color: rgb(255, 255, 255);
 //dark-theme
 $gray-color: rgba(255, 255, 255, 0.3);
-$button-page-dark-collor: rgba(70, 70, 70);
-$dark-gray-color: rgba(12, 12, 12);
+$dark-dark-gray-color: rgba(12, 12, 12);
 //light-theme
 $dark-gray-color: rgba(0, 0, 0, 0.3);
-$button-pages-light-collor: rgba(237, 237, 237);
 
 .button__light {
   background-color: $white-color;
@@ -17,7 +12,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .button__dark {
-  background-color: $dark-color;
+  background-color: $dark-dark-gray-color;
   border: 1px solid $white-color;
 }
 
@@ -70,7 +65,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .content__dark {
-  background-color: $dark-color;
+  background-color: $dark-dark-gray-color;
   border: 1px solid $white-color;
   border-top: 1px solid $dark-color;
 }
@@ -90,7 +85,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
   border-bottom: 1px solid $dark-gray-color;
 }
 
-.button__activee__dark {
+.button__active__dark {
   border-bottom: 1px solid $gray-color;
 }
 
@@ -116,20 +111,20 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .dropdown .content .item__light:hover {
-  background: rgb(0, 0, 0);
-  color: #ffffff;
+  background: $dark-color;
+  color: $white-color;
   .item__pointer {
     visibility: visible;
-    color: #ffffff;
+    color: $white-color;
   }
 }
 
 .dropdown .content .item__dark:hover {
-  background: rgb(255, 255, 255);
-  color: #000000;
+  background: $white-color;
+  color: $dark-color;
   .item__pointer {
     visibility: visible;
-    color: #000000;
+    color: $dark-color;
   }
 }
 
