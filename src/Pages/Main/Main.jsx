@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect, useMemo} from "react";
 import logo from "../../svg/logo.svg";
 import sun_white from "../../svg/sun-white.svg";
 import sun_black from "../../svg/sun-black.svg";
@@ -12,8 +12,6 @@ function Main() {
   const [paintingName, setPaintingName] = useState("");
 
   const [paintings, setPaintings] = useState([]);
-
-  const [newPaintings, setNewPaintings] = useState([]);
 
   const [authors, setAuthors] = useState([]);
 
@@ -31,17 +29,13 @@ function Main() {
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
-  const [pages, setPages] = useState([]);
-
-  const maxPage = Math.ceil(totalCount / perPage);
-
-  useEffect(() => {
-    createPages(maxPage, currentPage);
-  }, [maxPage, currentPage]);
+  const countPages = useMemo(() =>{
+    return Math.ceil(totalCount / perPage);
+  }, [totalCount, perPage])
 
   useEffect(() => {
-    getPaintings();
-  }, [currentPage]);
+    setCurrentPage(1);
+  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   useEffect(() => {
     getAuthors().then((data) => setAuthors(data));
@@ -49,16 +43,11 @@ function Main() {
   }, []);
 
   useEffect(() => {
-    setNewPaintings(createNewPaintings(paintings, authors, locations));
-  }, [paintings]);
-
-  useEffect(() => {
     getPaintings();
-    setCurrentPage(1);
-  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
+  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue, currentPage]);
 
   const getPaintings = async function () {
-    var url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
+    let url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
       selectedAuthorID ? `&authorId=${selectedAuthorID}` : ""
     }${
       selectedLocationId
@@ -72,32 +61,10 @@ function Main() {
     setTotalCount(await response.headers.get("x-total-count"));
   };
 
-  const createPages = (pagesCount, currentPage) => {
-    setPages([]);
-    if (pagesCount > 3) {
-      if (currentPage > 2) {
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          setPages((prevArray) => [...prevArray, i]);
-          if (i === pagesCount) break;
-        }
-      } else {
-        for (let i = 1; i <= 3; i++) {
-          setPages((prevArray) => [...prevArray, i]);
-          if (i === pagesCount) break;
-        }
-      }
-    } else {
-      for (let i = 1; i <= pagesCount; i++) {
-        setPages((prevArray) => [...prevArray, i]);
-      }
-    }
-  };
-
-  const createNewPaintings = (paintings, authors, locations) => {
+  const newPaintings = useMemo(() => {
     return paintings?.map((painting) => {
       const author = authors.find((author) => author.id === painting.authorId);
-      const location = locations.find(
-        (location) => location.id === painting.locationId
+      const location = locations.find((location) => location.id === painting.locationId
       );
       if (location && author) {
         return {
@@ -109,7 +76,30 @@ function Main() {
       }
       return painting;
     });
-  };
+  }, [paintings, authors, locations])
+
+  const pages = useMemo(() => {
+    const pageArray =[];
+    if (countPages > 3) {
+      if (currentPage > 2) {
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
+          pageArray.push(i);
+          if (i === countPages) break;
+        }
+      } else {
+        for (let i = 1; i <= 3; i++) {
+          pageArray.push(i);
+          if (i === countPages) break;
+        }
+      }
+    } else {
+      for (let i = 1; i <= countPages; i++) {
+        pageArray.push(i);
+      }
+    }
+    return pageArray;
+  }, [countPages, currentPage]
+)
 
   const getAuthors = async function () {
     const response = await fetch(host + "/authors");
@@ -180,7 +170,7 @@ function Main() {
       <Pagination
         isThemeLight={isThemeLight}
         currentPage={currentPage}
-        maxPage={maxPage}
+        countPages={countPages}
         setCurrentPage={setCurrentPage}
         pages={pages}
       />

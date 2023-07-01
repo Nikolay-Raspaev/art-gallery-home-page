@@ -8,7 +8,7 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
   pages,
-  maxPage,
+  countPages,
 }) => {
   return (
     <div className={s.pagination}>
@@ -52,7 +52,7 @@ const Pagination = ({
         className={`${s.pagination__angel} ${
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={maxPage === currentPage}
+        disabled={countPages === currentPage}
         onClick={(e) => {
           setCurrentPage(currentPage + 1);
         }}
@@ -63,9 +63,9 @@ const Pagination = ({
         className={`${s.pagination__angel} ${s.double__right} ${
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={maxPage === currentPage}
+        disabled={countPages === currentPage}
         onClick={(e) => {
-          setCurrentPage(maxPage);
+          setCurrentPage(countPages);
         }}
       >
         <FontAwesomeIcon icon={faAnglesRight} />
