@@ -1,12 +1,16 @@
-import React, {useState, useEffect, useMemo} from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import logo from "../../svg/logo.svg";
 import sun_white from "../../svg/sun-white.svg";
 import sun_black from "../../svg/sun-black.svg";
-import PaintingList from "../../components/PaintingList/PaintingList";
-import Pagination from "../../components/Pagination/Pagination";
-import Filter from "../../components/Filter/Filter";
+import PaintingList from "./components/PaintingList/PaintingList";
+import Pagination from "./components/Pagination/Pagination";
+import Filter from "./components/Filter/Filter";
+import {
+  useCreatePaginationPages,
+  useReplaceFieldsIdInPaintings,
+} from "./hooks/useMain";
 
-function Main() {
+const Main = () => {
   const host = "https://test-front.framework.team";
 
   const [paintingName, setPaintingName] = useState("");
@@ -29,9 +33,9 @@ function Main() {
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
-  const countPages = useMemo(() =>{
+  const countPages = useMemo(() => {
     return Math.ceil(totalCount / perPage);
-  }, [totalCount, perPage])
+  }, [totalCount, perPage]);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -44,9 +48,15 @@ function Main() {
 
   useEffect(() => {
     getPaintings();
-  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue, currentPage]);
+  }, [
+    selectedAuthorID,
+    selectedLocationId,
+    paintingName,
+    dateValue,
+    currentPage,
+  ]);
 
-  const getPaintings = async function () {
+  const getPaintings = async () => {
     let url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
       selectedAuthorID ? `&authorId=${selectedAuthorID}` : ""
     }${
@@ -58,56 +68,24 @@ function Main() {
     }${dateValue.before ? `&created_lte=${dateValue.before}` : ""}`;
     const response = await fetch(url);
     setPaintings(await response.json());
-    setTotalCount(await response.headers.get("x-total-count"));
+    setTotalCount(response.headers.get("x-total-count"));
   };
 
-  const newPaintings = useMemo(() => {
-    return paintings?.map((painting) => {
-      const author = authors.find((author) => author.id === painting.authorId);
-      const location = locations.find((location) => location.id === painting.locationId
-      );
-      if (location && author) {
-        return {
-          location: location.location,
-          author: author.name,
+  const newPaintings = useReplaceFieldsIdInPaintings(
+    paintings,
+    authors,
+    locations
+  );
 
-          ...painting,
-        };
-      }
-      return painting;
-    });
-  }, [paintings, authors, locations])
+  const paginationPages = useCreatePaginationPages(countPages, currentPage);
 
-  const pages = useMemo(() => {
-    const pageArray =[];
-    if (countPages > 3) {
-      if (currentPage > 2) {
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) {
-          pageArray.push(i);
-          if (i === countPages) break;
-        }
-      } else {
-        for (let i = 1; i <= 3; i++) {
-          pageArray.push(i);
-          if (i === countPages) break;
-        }
-      }
-    } else {
-      for (let i = 1; i <= countPages; i++) {
-        pageArray.push(i);
-      }
-    }
-    return pageArray;
-  }, [countPages, currentPage]
-)
-
-  const getAuthors = async function () {
+  const getAuthors = async () => {
     const response = await fetch(host + "/authors");
     const data = await response.json();
     return data;
   };
 
-  const getLocations = async function () {
+  const getLocations = async () => {
     const response = await fetch(host + "/locations");
     const data = await response.json();
     return data;
@@ -115,19 +93,19 @@ function Main() {
 
   const [isThemeLight, setIsThemeLight] = useState();
 
-  function saveThemeToLocalStorage(isLight) {
+  const saveThemeToLocalStorage = (isLight) => {
     localStorage.setItem("isLight", isLight);
-  }
+  };
 
-  function handleThemeChange(newTheme) {
+  const handleThemeChange = (newTheme) => {
     setIsThemeLight(newTheme);
     saveThemeToLocalStorage(newTheme);
-  }
+  };
 
-  function loadThemeFromLocalStorage() {
+  const loadThemeFromLocalStorage = () => {
     const storedIsLight = localStorage.getItem("isLight");
     setIsThemeLight(storedIsLight === "true");
-  }
+  };
 
   useEffect(() => {
     loadThemeFromLocalStorage();
@@ -172,10 +150,10 @@ function Main() {
         currentPage={currentPage}
         countPages={countPages}
         setCurrentPage={setCurrentPage}
-        pages={pages}
+        paginationPages={paginationPages}
       />
     </div>
   );
-}
+};
 
 export default Main;

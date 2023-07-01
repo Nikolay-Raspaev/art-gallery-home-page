@@ -1,8 +1,8 @@
 import Main from "./Pages/Main/Main";
 import "./styles/App.css";
 
-function App() {
+const App = () => {
   return <Main />;
-}
+};
 
 export default App;
