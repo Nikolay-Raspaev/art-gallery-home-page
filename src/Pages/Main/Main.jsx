@@ -75,9 +75,7 @@ const Main = (props) => {
   useEffect(() => {
     getAuthors();
     getLocations();
-    setTimeout(function () {
-      setParam();
-    }, 100);
+    setParam();
   }, []);
 
   useEffect(() => {
