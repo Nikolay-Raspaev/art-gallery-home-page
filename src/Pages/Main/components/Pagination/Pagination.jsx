@@ -8,7 +8,7 @@ const Pagination = ({
   currentPage,
   setCurrentPage,
   paginationPages,
-  countPages,
+  countPages
 }) => {
   return (
     <div className={s.pagination}>

@@ -4,6 +4,12 @@ $white-gray-color: rgba(255, 255, 255, 0.75);
 .catalog {
   display: flex;
   flex-wrap: wrap;
+  opacity: 0;
+  transition: opacity 1s ease-in-out ;
+}
+
+.paintingsLoaded{
+  opacity: 1;
 }
 
 .catalog__painting {

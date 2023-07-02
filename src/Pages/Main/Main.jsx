@@ -66,9 +66,11 @@ const Main = (props) => {
   ]);
 
   const getPaintings = async () => {
+    setIsLoaded(false);
     const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName,dateValue);
     setPaintings(response.data);
     setTotalCount(parseInt(response.headers.get("x-total-count")));
+    setIsLoaded(true);
   };
 
   const getAuthors = async () => {
@@ -80,6 +82,8 @@ const Main = (props) => {
     const response = await fetch(host + "/locations");
     return await response.json();
   };
+
+  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <div className={props.isThemeLight ? "page page__light" : "page page__dark"}>
@@ -114,14 +118,16 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
-      <PaintingList paintings={newPaintings} host={host} />
-      <Pagination
-        isThemeLight={props.isThemeLight}
-        currentPage={currentPage}
-        countPages={countPages}
-        setCurrentPage={setCurrentPage}
-        paginationPages={paginationPages}
-      />
+      <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded}/>
+      {newPaintings.length !== 0 &&
+        <Pagination
+          isThemeLight={props.isThemeLight}
+          currentPage={currentPage}
+          countPages={countPages}
+          setCurrentPage={setCurrentPage}
+          paginationPages={paginationPages}
+        />
+      }
     </div>
   );
 };
