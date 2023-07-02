@@ -3,7 +3,7 @@ import s from "./SelectForInput.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
-const SelectForInput = ({ isThemeLight, value, setValue }) => {
+const SelectForInput = (props) => {
   const itemRef = useRef(null);
 
   useEffect(() => {
@@ -12,8 +12,32 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
         setIsActive(false);
       }
     };
-    document.addEventListener("click", handleClickOutside);
+    document.addEventListener("mousedown", handleClickOutside);
   }, []);
+
+    //// Альтернативный вариант проверки нажатия, с такой проверкой событие удаляется после того как срабатывает, однако
+    //// если добавлять и удалять событие с помощью метода addClickOutside, ClickOutside сработает столько раз, сколько
+    //// подряд закрыли и открыли селект
+    // const ClickOutside = (event) => {
+    //     if (itemRef.current && !itemRef.current.contains(event.target)) {
+    //         setIsActive(false);
+    //         console.log("The 'item' div is not clicked.");
+    //         document.removeEventListener('mousedown', ClickOutside);
+    //         console.log('ClickOutside__removeEventListener');
+    //     }
+    // };
+    //
+    // const addClickOutside = () =>{
+    //     if (!isActive){
+    //         setIsActive(true)
+    //         document.addEventListener("mousedown", ClickOutside);
+    //         console.log('addEventListener');
+    //     }
+    //     else{
+    //         setIsActive(!isActive)
+    //         console.log('removeEventListener');
+    //     }
+    // }
 
   const [isActive, setIsActive] = useState(false);
 
@@ -24,7 +48,7 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
           isActive ? s.button__is__activated : ""
         }
               ${
-                isThemeLight
+                props.isThemeLight
                   ? s.activation__button__light
                   : s.activation__button__dark
               }`}
@@ -33,36 +57,36 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
         <span>Created</span>
         <FontAwesomeIcon
           icon={faCaretDown}
-          className={`${s.open} ${isThemeLight ? s.open__light : s.open__dark}`}
+          className={`${s.open} ${props.isThemeLight ? s.open__light : s.open__dark}`}
         />
       </div>
       {isActive ? (
         <div
           className={`${s.content} ${
-            isThemeLight ? s.content__light : s.content__dark
+            props.isThemeLight ? s.content__light : s.content__dark
           }`}
         >
           <input
             className={`${s.input} ${
-              isThemeLight ? s.input__light : s.input__dark
+              props.isThemeLight ? s.input__light : s.input__dark
             }`}
             placeholder="from"
             type="number"
-            value={value.from}
+            value={props.value.from}
             onChange={(event) =>
-              setValue({ ...value, from: event.target.value })
+              props.setValue({ ...props.value, from: event.target.value })
             }
           />
           —
           <input
             className={`${s.input} ${
-              isThemeLight ? s.input__light : s.input__dark
+              props.isThemeLight ? s.input__light : s.input__dark
             }`}
             placeholder="before"
             type="number"
-            value={value.before}
+            value={props.value.before}
             onChange={(event) =>
-              setValue({ ...value, before: event.target.value })
+              props.setValue({ ...props.value, before: event.target.value })
             }
           />
         </div>

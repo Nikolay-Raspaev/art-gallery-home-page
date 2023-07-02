@@ -40,10 +40,6 @@
   cursor: pointer;
 }
 
-svg {
-  cursor: pointer;
-}
-
 ::-webkit-scrollbar-thumb {
   background-color: rgb(123, 123, 123);
   border-radius: 10px;

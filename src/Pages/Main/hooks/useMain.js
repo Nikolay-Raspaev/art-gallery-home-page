@@ -1,15 +1,15 @@
-import { useMemo } from "react";
+import {useMemo} from "react";
 
 export const useReplaceFieldsIdInPaintings = (
   paintings,
   authors,
   locations
 ) => {
-  const newPaintings = useMemo(() => {
+  return useMemo(() => {
     return paintings?.map((painting) => {
       const author = authors.find((author) => author.id === painting.authorId);
       const location = locations.find(
-        (location) => location.id === painting.locationId
+          (location) => location.id === painting.locationId
       );
       if (location && author) {
         return {
@@ -22,30 +22,28 @@ export const useReplaceFieldsIdInPaintings = (
       return painting;
     });
   }, [paintings, authors, locations]);
-  return newPaintings;
 };
 
-export const useCreatePaginationPages = (countPages, currentPage) => {
-  const paginationPages = useMemo(() => {
+export const usePagination = (totalPages, currentPage) => {
+  return useMemo(() => {
     const pageArray = [];
-    if (countPages > 3) {
+    if (totalPages > 3) {
       if (currentPage > 2) {
         for (let i = currentPage - 1; i <= currentPage + 1; i++) {
           pageArray.push(i);
-          if (i === countPages) break;
+          if (i === totalPages) break;
         }
       } else {
         for (let i = 1; i <= 3; i++) {
           pageArray.push(i);
-          if (i === countPages) break;
+          if (i === totalPages) break;
         }
       }
     } else {
-      for (let i = 1; i <= countPages; i++) {
+      for (let i = 1; i <= totalPages; i++) {
         pageArray.push(i);
       }
     }
     return pageArray;
-  }, [countPages, currentPage]);
-  return paginationPages;
+  }, [totalPages, currentPage]);
 };

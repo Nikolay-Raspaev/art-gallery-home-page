@@ -1,16 +1,14 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../../svg/logo.svg";
 import sun_white from "../../svg/sun-white.svg";
 import sun_black from "../../svg/sun-black.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
-import {
-  useCreatePaginationPages,
-  useReplaceFieldsIdInPaintings,
-} from "./hooks/useMain";
+import {useReplaceFieldsIdInPaintings} from "./hooks/useMain";
 import QueryService from "./API/QueryService";
 import {useFetching} from "./hooks/useFetching";
+import {getPageCount} from "./components/utils/pages";
 
 const Main = (props) => {
   const host = "https://test-front.framework.team";
@@ -29,9 +27,9 @@ const Main = (props) => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const perPage = 12;
+  const [limit, setLimit] = useState(12);
 
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalPages, setTotalPages] = useState(0);
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
@@ -40,12 +38,6 @@ const Main = (props) => {
     authors,
     locations
   );
-
-  const countPages = useMemo(() => {
-    return Math.ceil(totalCount / perPage);
-  }, [totalCount, perPage]);
-
-  const paginationPages = useCreatePaginationPages(countPages, currentPage);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -67,9 +59,10 @@ const Main = (props) => {
   ]);
 
   const [fetchPaintings, paintingError, isLoaded] = useFetching(async() =>{
-    const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName, dateValue);
+    const response = await QueryService.getPaintings(host, currentPage, limit, selectedAuthorID, selectedLocationId, paintingName, dateValue);
     setPaintings(response.data);
-    setTotalCount(response.headers.get("x-total-count"));
+    const totalCount = response.headers.get("x-total-count");
+    setTotalPages(getPageCount(totalCount, limit))
   })
 
   const getAuthors = async () => {
@@ -118,15 +111,14 @@ const Main = (props) => {
         setDateValue={setDateValue}
       />
       {paintingError &&
-        <h1>Произошла ошибка {paintingError}</h1>}
+        <h1 style={{display:'flex', justifyContent: 'center'}}>Произошла ошибка {paintingError}</h1>}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
           isThemeLight={props.isThemeLight}
           currentPage={currentPage}
-          countPages={countPages}
+          totalPages={totalPages}
           setCurrentPage={setCurrentPage}
-          paginationPages={paginationPages}
         />
       )}
     </div>

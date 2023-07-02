@@ -4,16 +4,16 @@ export default class QueryService {
   static async getPaintings(
     host,
     currentPage,
-    perPage,
+    limit,
     selectedAuthorID,
     selectedLocationId,
     paintingName,
     dateValue
   ) {
-      const url = `${host}/paintngs`;
+      const url = `${host}/paintings`;
       const params = {
         _page: currentPage,
-        _limit: perPage,
+        _limit: limit,
         ...(selectedAuthorID && { authorId: selectedAuthorID }),
         ...(selectedLocationId && {
           anyObjectField: "locationId",

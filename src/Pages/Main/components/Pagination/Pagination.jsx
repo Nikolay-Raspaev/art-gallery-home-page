@@ -2,34 +2,30 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import s from "./Pagination.module.scss";
+import {usePagination} from "../../hooks/useMain";
 
-const Pagination = ({
-  isThemeLight,
-  currentPage,
-  setCurrentPage,
-  paginationPages,
-  countPages,
-}) => {
+const Pagination = (props) => {
+    const paginationPages = usePagination(props.totalPages, props.currentPage);
   return (
     <div className={s.pagination}>
       <button
         className={`${s.pagination__angel} ${s.double__left} ${
-          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+          props.isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={1 === currentPage}
+        disabled={1 === props.currentPage}
         onClick={() => {
-          setCurrentPage(1);
+          props.setCurrentPage(1);
         }}
       >
         <FontAwesomeIcon icon={faAnglesRight} rotation={180} />
       </button>
       <button
         className={`${s.pagination__angel} ${
-          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+          props.isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={1 === currentPage}
+        disabled={1 === props.currentPage}
         onClick={() => {
-          setCurrentPage(currentPage - 1);
+          props.setCurrentPage(props.currentPage - 1);
         }}
       >
         <FontAwesomeIcon icon={faAngleRight} rotation={180} />
@@ -37,12 +33,12 @@ const Pagination = ({
       {paginationPages?.map((page) => (
         <button
           className={`${s.pagination__page} ${
-            isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+            props.isThemeLight ? s.pagination__page__light : s.pagination__page__dark
           }`}
-          disabled={page === currentPage}
+          disabled={page === props.currentPage}
           key={page}
           onClick={() => {
-            setCurrentPage(page);
+            props.setCurrentPage(page);
           }}
         >
           {page}
@@ -50,22 +46,22 @@ const Pagination = ({
       ))}
       <button
         className={`${s.pagination__angel} ${
-          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+          props.isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={countPages === currentPage}
+        disabled={props.totalPages === props.currentPage}
         onClick={() => {
-          setCurrentPage(currentPage + 1);
+          props.setCurrentPage(props.currentPage + 1);
         }}
       >
         <FontAwesomeIcon icon={faAngleRight} />
       </button>
       <button
         className={`${s.pagination__angel} ${s.double__right} ${
-          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+          props.isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
-        disabled={countPages === currentPage}
+        disabled={props.totalPages === props.currentPage}
         onClick={() => {
-          setCurrentPage(countPages);
+          props.setCurrentPage(props.totalPages);
         }}
       >
         <FontAwesomeIcon icon={faAnglesRight} />
