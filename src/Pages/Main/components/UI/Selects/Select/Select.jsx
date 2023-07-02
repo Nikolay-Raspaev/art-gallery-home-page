@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, {useEffect, useRef, useState} from "react";
 import s from "./Select.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-regular-svg-icons";
@@ -12,12 +12,25 @@ const Select = ({
   value,
   setValue,
 }) => {
+
+  const itemRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (itemRef.current && !itemRef.current.contains(event.target)) {
+        setIsActive(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+  }, []);
+
+
   const [isActive, setIsActive] = useState(false);
 
   const [selected, setSelected] = useState("");
 
   return (
-    <div className={s.dropdown}>
+    <div className={s.dropdown} ref={itemRef}>
       <div
         className={`${s.dropdown__button} ${isActive ? s.button__active : ""} ${
           isThemeLight && isActive ? s.button__active__light : ""
@@ -72,7 +85,6 @@ const Select = ({
                       onClick={() => {
                         setValue(option.id);
                         setSelected(option[selectedName]);
-                        setIsActive(false);
                       }}
                   >
                     <span>{option[selectedName]}</span>
