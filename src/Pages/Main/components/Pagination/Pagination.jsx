@@ -17,7 +17,7 @@ const Pagination = ({
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === currentPage}
-        onClick={(e) => {
+        onClick={() => {
           setCurrentPage(1);
         }}
       >
@@ -28,20 +28,20 @@ const Pagination = ({
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === currentPage}
-        onClick={(e) => {
+        onClick={() => {
           setCurrentPage(currentPage - 1);
         }}
       >
         <FontAwesomeIcon icon={faAngleRight} rotation={180} />
       </button>
-      {paginationPages?.map((page, index) => (
+      {paginationPages?.map((page) => (
         <button
           className={`${s.pagination__page} ${
             isThemeLight ? s.pagination__page__light : s.pagination__page__dark
           }`}
           disabled={page === currentPage}
           key={page}
-          onClick={(e) => {
+          onClick={() => {
             setCurrentPage(page);
           }}
         >
@@ -53,7 +53,7 @@ const Pagination = ({
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={countPages === currentPage}
-        onClick={(e) => {
+        onClick={() => {
           setCurrentPage(currentPage + 1);
         }}
       >
@@ -64,7 +64,7 @@ const Pagination = ({
           isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={countPages === currentPage}
-        onClick={(e) => {
+        onClick={() => {
           setCurrentPage(countPages);
         }}
       >

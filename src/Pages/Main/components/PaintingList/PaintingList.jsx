@@ -1,11 +1,10 @@
-import React, {useState} from "react";
+import React from "react";
 import s from "./PaintingList.module.scss";
 
 const PaintingList = (props) => {
-  console.log(props.isLoaded)
   return (
     <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ''}`}>
-      {props.paintings?.map((painting, index) => (
+      {props.paintings?.map((painting) => (
         <div className={s.catalog__painting} key={painting.id}>
           <img
             src={props.host + painting.imageUrl}

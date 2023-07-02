@@ -74,13 +74,11 @@ const Main = (props) => {
   };
 
   const getAuthors = async () => {
-    const response = await fetch(host + "/authors");
-    return await response.json();
+    return await QueryService.getAuthors(host);
   };
 
   const getLocations = async () => {
-    const response = await fetch(host + "/locations");
-    return await response.json();
+    return await QueryService.getLocations(host);
   };
 
   const [isLoaded, setIsLoaded] = useState(false);
