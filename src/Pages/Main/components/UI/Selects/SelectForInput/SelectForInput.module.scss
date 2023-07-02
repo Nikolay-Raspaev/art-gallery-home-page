@@ -83,13 +83,6 @@ $input-light: rgb(239, 239, 239);
   border-bottom: none;
 }
 
-.btn__text {
-  width: 100%;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 @media (max-width: 1365px) and (min-width: 1024px) {
   .content {
     flex-direction: column;
