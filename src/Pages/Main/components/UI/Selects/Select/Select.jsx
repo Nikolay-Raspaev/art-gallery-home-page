@@ -20,6 +20,13 @@ const Select = (props) => {
 
   const [selected, setSelected] = useState("");
 
+  useEffect(() => {
+    const option = props.options.find((option) => option.id === parseInt(props.value));
+    if (option) {
+      setSelected(option[props.selectedName]);
+    }
+  }, [props.options]);
+
   return (
     <div className={s.dropdown} ref={itemRef}>
       <div
