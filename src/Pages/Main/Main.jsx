@@ -33,9 +33,17 @@ const Main = () => {
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
+  const newPaintings = useReplaceFieldsIdInPaintings(
+      paintings,
+      authors,
+      locations
+  );
+
   const countPages = useMemo(() => {
     return Math.ceil(totalCount / perPage);
   }, [totalCount, perPage]);
+
+  const paginationPages = useCreatePaginationPages(countPages, currentPage);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -70,14 +78,6 @@ const Main = () => {
     setPaintings(await response.json());
     setTotalCount(response.headers.get("x-total-count"));
   };
-
-  const newPaintings = useReplaceFieldsIdInPaintings(
-    paintings,
-    authors,
-    locations
-  );
-
-  const paginationPages = useCreatePaginationPages(countPages, currentPage);
 
   const getAuthors = async () => {
     const response = await fetch(host + "/authors");
