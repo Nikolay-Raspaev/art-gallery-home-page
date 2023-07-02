@@ -10,7 +10,6 @@ export default class QueryService {
     paintingName,
     dateValue
   ) {
-    try {
       const url = `${host}/paintings`;
       const params = {
         _page: currentPage,
@@ -25,24 +24,13 @@ export default class QueryService {
         ...(dateValue.before && { created_lte: dateValue.before }),
       };
       return await axios.get(url, { params });
-    } catch (e) {
-      console.log(e);
-    }
   }
 
   static async getLocations(host) {
-    try {
-      return (await axios.get(host + "/locations")).data;
-    } catch (e) {
-      console.log(e);
-    }
+    return (await axios.get(host + "/locations")).data;
   }
 
   static async getAuthors(host) {
-    try {
-      return (await axios.get(host + "/authors")).data;
-    } catch (e) {
-      console.log(e);
-    }
+    return (await axios.get(host + "/authors")).data;
   }
 }
