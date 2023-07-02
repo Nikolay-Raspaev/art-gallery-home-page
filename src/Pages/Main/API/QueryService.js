@@ -10,7 +10,7 @@ export default class QueryService {
     paintingName,
     dateValue
   ) {
-      const url = `${host}/paintings`;
+      const url = `${host}/paintngs`;
       const params = {
         _page: currentPage,
         _limit: perPage,

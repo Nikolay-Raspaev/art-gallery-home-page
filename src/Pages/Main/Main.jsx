@@ -10,6 +10,7 @@ import {
   useReplaceFieldsIdInPaintings,
 } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
+import {useFetching} from "./hooks/useFetching";
 
 const Main = (props) => {
   const host = "https://test-front.framework.team";
@@ -34,8 +35,6 @@ const Main = (props) => {
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
-  const [isLoaded, setIsLoaded] = useState(0);
-
   const newPaintings = useReplaceFieldsIdInPaintings(
     paintings,
     authors,
@@ -58,7 +57,7 @@ const Main = (props) => {
   }, []);
 
   useEffect(() => {
-    getPaintings();
+    fetchPaintings();
   }, [
     selectedAuthorID,
     selectedLocationId,
@@ -67,13 +66,11 @@ const Main = (props) => {
     currentPage,
   ]);
 
-  const getPaintings = async () => {
-    setIsLoaded(false);
+  const [fetchPaintings, paintingError, isLoaded] = useFetching(async() =>{
     const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName, dateValue);
     setPaintings(response.data);
     setTotalCount(response.headers.get("x-total-count"));
-    setIsLoaded(true);
-  };
+  })
 
   const getAuthors = async () => {
     const authors = await QueryService.getAuthors(host);
@@ -120,6 +117,8 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
+      {paintingError &&
+        <h1>Произошла ошибка {paintingError}</h1>}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
