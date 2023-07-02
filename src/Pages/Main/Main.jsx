@@ -10,6 +10,7 @@ import {
   useReplaceFieldsIdInPaintings,
 } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
+import {useFetching} from "./hooks/useFetching";
 
 const Main = (props) => {
   const host = "https://test-front.framework.team";
@@ -51,12 +52,12 @@ const Main = (props) => {
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   useEffect(() => {
-    getAuthors().then((data) => setAuthors(data));
-    getLocations().then((data) => setLocations(data));
+    getAuthors();
+    getLocations();
   }, []);
 
   useEffect(() => {
-    getPaintings();
+    fetchPaintings();
   }, [
     selectedAuthorID,
     selectedLocationId,
@@ -65,23 +66,21 @@ const Main = (props) => {
     currentPage,
   ]);
 
-  const getPaintings = async () => {
-    setIsLoaded(false);
+  const [fetchPaintings, paintingError, isLoaded] = useFetching(async() =>{
     const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName, dateValue);
     setPaintings(response.data);
-    setTotalCount(parseInt(response.headers.get("x-total-count")));
-    setIsLoaded(true);
-  };
+    setTotalCount(response.headers.get("x-total-count"));
+  })
 
   const getAuthors = async () => {
-    return await QueryService.getAuthors(host);
+    const authors = await QueryService.getAuthors(host);
+    setAuthors(authors);
   };
 
   const getLocations = async () => {
-    return await QueryService.getLocations(host);
+    const locations = await QueryService.getLocations(host);
+    setLocations(locations);
   };
-
-  const [isLoaded, setIsLoaded] = useState(false);
 
   return (
     <div
@@ -118,6 +117,8 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
+      {paintingError &&
+        <h1>Произошла ошибка {paintingError}</h1>}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination

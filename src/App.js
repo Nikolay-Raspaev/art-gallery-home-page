@@ -3,7 +3,7 @@ import "./styles/App.css";
 import { useEffect, useState } from "react";
 
 const App = () => {
-  const [isThemeLight, setIsThemeLight] = useState();
+  const [isThemeLight, setIsThemeLight] = useState(true);
   const handleThemeChange = (newTheme) => {
     setIsThemeLight(newTheme);
     saveThemeToLocalStorage(newTheme);
