@@ -9,8 +9,9 @@ import {
   useCreatePaginationPages,
   useReplaceFieldsIdInPaintings,
 } from "./hooks/useMain";
+import QueryService from "./API/QueryService";
 
-const Main = () => {
+const Main = (props) => {
   const host = "https://test-front.framework.team";
 
   const [paintingName, setPaintingName] = useState("");
@@ -65,74 +66,43 @@ const Main = () => {
   ]);
 
   const getPaintings = async () => {
-    let url = `${host}/paintings?_page=${currentPage}&_limit=${perPage}${
-      selectedAuthorID ? `&authorId=${selectedAuthorID}` : ""
-    }${
-      selectedLocationId
-        ? `&anyObjectField=locationId&locationId=${selectedLocationId}`
-        : ""
-    }${paintingName ? `&anyObjectField=name&name=${paintingName}` : ""}${
-      dateValue.from ? `&created_gte=${dateValue.from}` : ""
-    }${dateValue.before ? `&created_lte=${dateValue.before}` : ""}`;
-    const response = await fetch(url);
-    setPaintings(await response.json());
-    setTotalCount(response.headers.get("x-total-count"));
+    const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName,dateValue);
+    setPaintings(response.data);
+    setTotalCount(parseInt(response.headers.get("x-total-count")));
   };
 
   const getAuthors = async () => {
     const response = await fetch(host + "/authors");
-    const data = await response.json();
-    return data;
+    return await response.json();
   };
 
   const getLocations = async () => {
     const response = await fetch(host + "/locations");
-    const data = await response.json();
-    return data;
+    return await response.json();
   };
-
-  const [isThemeLight, setIsThemeLight] = useState();
-
-  const saveThemeToLocalStorage = (isLight) => {
-    localStorage.setItem("isLight", isLight);
-  };
-
-  const handleThemeChange = (newTheme) => {
-    setIsThemeLight(newTheme);
-    saveThemeToLocalStorage(newTheme);
-  };
-
-  const loadThemeFromLocalStorage = () => {
-    const storedIsLight = localStorage.getItem("isLight");
-    setIsThemeLight(storedIsLight === "true");
-  };
-
-  useEffect(() => {
-    loadThemeFromLocalStorage();
-  }, []);
 
   return (
-    <div className={isThemeLight ? "page page__light" : "page page__dark"}>
+    <div className={props.isThemeLight ? "page page__light" : "page page__dark"}>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
-        {isThemeLight ? (
+        {props.isThemeLight ? (
           <img
             src={sun_black}
             className="page__svg__switch"
             alt="Switch Theme"
-            onClick={() => handleThemeChange(!isThemeLight)}
+            onClick={() => props.handleThemeChange(!props.isThemeLight)}
           />
         ) : (
           <img
             src={sun_white}
             className="page__svg__switch"
             alt="Switch Theme"
-            onClick={() => handleThemeChange(!isThemeLight)}
+            onClick={() => props.handleThemeChange(!props.isThemeLight)}
           />
         )}
       </div>
       <Filter
-        isThemeLight={isThemeLight}
+        isThemeLight={props.isThemeLight}
         paintingName={paintingName}
         setPaintingName={setPaintingName}
         selectedAuthorID={selectedAuthorID}
@@ -146,7 +116,7 @@ const Main = () => {
       />
       <PaintingList paintings={newPaintings} host={host} />
       <Pagination
-        isThemeLight={isThemeLight}
+        isThemeLight={props.isThemeLight}
         currentPage={currentPage}
         countPages={countPages}
         setCurrentPage={setCurrentPage}

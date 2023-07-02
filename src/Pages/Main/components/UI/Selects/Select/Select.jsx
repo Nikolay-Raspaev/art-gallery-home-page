@@ -24,7 +24,7 @@ const Select = ({
         }
         ${!isThemeLight && isActive ? s.button__active__dark : ""}
         ${isThemeLight ? s.button__light : s.button__dark}`}
-        onClick={(e) => setIsActive(!isActive)}
+        onClick={() => setIsActive(!isActive)}
       >
         <div className={s.button__text}>
           {selected ? selected : defaultValue}
@@ -36,7 +36,7 @@ const Select = ({
               className={
                 isThemeLight ? s.button__close__light : s.button__close__dark
               }
-              onClick={(e) => {
+              onClick={() => {
                 setSelected("");
                 setValue(0);
               }}
@@ -53,7 +53,6 @@ const Select = ({
           />
         </div>
       </div>
-
       {isActive && (
           <div className={`${s.container}`}>
             <div className={`${s.content__dividing_line} ${
@@ -64,14 +63,13 @@ const Select = ({
                     isThemeLight ? s.content__light : s.content__dark
                 }`}
             >
-
               {options.map((option) => (
                   <div
                       key={option.id}
                       className={`${s.item} ${
                           isThemeLight ? s.item__light : s.item__dark
                       }`}
-                      onClick={(e) => {
+                      onClick={() => {
                         setValue(option.id);
                         setSelected(option[selectedName]);
                         setIsActive(false);
