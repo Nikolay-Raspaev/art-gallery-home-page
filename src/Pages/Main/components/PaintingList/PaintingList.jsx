@@ -3,7 +3,7 @@ import s from "./PaintingList.module.scss";
 
 const PaintingList = (props) => {
   return (
-    <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ''}`}>
+    <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ""}`}>
       {props.paintings?.map((painting) => (
         <div className={s.catalog__painting} key={painting.id}>
           <img

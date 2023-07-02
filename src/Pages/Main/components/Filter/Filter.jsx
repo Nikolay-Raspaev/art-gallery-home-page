@@ -12,6 +12,7 @@ const Filter = (props) => {
         value={props.paintingName}
         placeholder="Name"
         onChange={(event) => props.setPaintingName(event.target.value)}
+        maxLength={45}
       />
       <Select
         isThemeLight={props.isThemeLight}

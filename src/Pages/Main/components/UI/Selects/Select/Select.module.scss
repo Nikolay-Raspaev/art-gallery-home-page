@@ -62,7 +62,7 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   background-color: $white-color;
   border: 1px solid $dark-color;
   border-top: none;
-  .content__dividing_line{
+  .content__dividing_line {
     width: 100%;
     height: 1px;
     background-color: $dark-gray-color;
@@ -78,21 +78,21 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
 }
 
 .dropdown {
-  .container{
+  .container {
     position: absolute;
     max-height: 22.5rem;
     width: 100%;
     z-index: 2;
-    .content__dividing_line{
+    .content__dividing_line {
       width: 100%;
       height: 1px;
     }
-    .dividing_line__light{
+    .dividing_line__light {
       border-left: 1px solid $dark-color;
       border-right: 1px solid $dark-color;
       background-color: $dark-gray-color;
     }
-    .dividing_line__dark{
+    .dividing_line__dark {
       border-left: 1px solid $white-color;
       border-right: 1px solid $white-color;
       background-color: $gray-color;
@@ -166,4 +166,3 @@ span {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-

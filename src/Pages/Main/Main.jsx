@@ -35,9 +35,9 @@ const Main = (props) => {
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
 
   const newPaintings = useReplaceFieldsIdInPaintings(
-      paintings,
-      authors,
-      locations
+    paintings,
+    authors,
+    locations
   );
 
   const countPages = useMemo(() => {
@@ -67,7 +67,7 @@ const Main = (props) => {
 
   const getPaintings = async () => {
     setIsLoaded(false);
-    const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName,dateValue);
+    const response = await QueryService.getPaintings(host, currentPage, perPage, selectedAuthorID, selectedLocationId, paintingName, dateValue);
     setPaintings(response.data);
     setTotalCount(parseInt(response.headers.get("x-total-count")));
     setIsLoaded(true);
@@ -84,7 +84,9 @@ const Main = (props) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   return (
-    <div className={props.isThemeLight ? "page page__light" : "page page__dark"}>
+    <div
+      className={props.isThemeLight ? "page page__light" : "page page__dark"}
+    >
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
         {props.isThemeLight ? (
@@ -116,8 +118,8 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
-      <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded}/>
-      {newPaintings.length !== 0 &&
+      <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
+      {newPaintings.length !== 0 && (
         <Pagination
           isThemeLight={props.isThemeLight}
           currentPage={currentPage}
@@ -125,7 +127,7 @@ const Main = (props) => {
           setCurrentPage={setCurrentPage}
           paginationPages={paginationPages}
         />
-      }
+      )}
     </div>
   );
 };

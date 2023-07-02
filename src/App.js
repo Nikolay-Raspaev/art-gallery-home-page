@@ -1,6 +1,6 @@
 import Main from "./Pages/Main/Main";
 import "./styles/App.css";
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 
 const App = () => {
   const [isThemeLight, setIsThemeLight] = useState();
@@ -20,7 +20,9 @@ const App = () => {
   useEffect(() => {
     loadThemeFromLocalStorage();
   }, []);
-  return <Main isThemeLight={isThemeLight} handleThemeChange={handleThemeChange}/>;
+  return (
+    <Main isThemeLight={isThemeLight} handleThemeChange={handleThemeChange} />
+  );
 };
 
 export default App;

@@ -1,20 +1,19 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "./SelectForInput.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCaretDown } from "@fortawesome/free-solid-svg-icons";
 
 const SelectForInput = ({ isThemeLight, value, setValue }) => {
+  const itemRef = useRef(null);
 
-    const itemRef = useRef(null);
-
-    useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (itemRef.current && !itemRef.current.contains(event.target)) {
-                setIsActive(false);
-            }
-        };
-        document.addEventListener('click', handleClickOutside);
-    }, []);
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (itemRef.current && !itemRef.current.contains(event.target)) {
+        setIsActive(false);
+      }
+    };
+    document.addEventListener("click", handleClickOutside);
+  }, []);
 
   const [isActive, setIsActive] = useState(false);
 
@@ -31,7 +30,7 @@ const SelectForInput = ({ isThemeLight, value, setValue }) => {
               }`}
         onClick={() => setIsActive(!isActive)}
       >
-        <div className={s.button__text}>Created</div>
+        <span>Created</span>
         <FontAwesomeIcon
           icon={faCaretDown}
           className={`${s.open} ${isThemeLight ? s.open__light : s.open__dark}`}

@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import s from "./Select.module.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHandPointer } from "@fortawesome/free-regular-svg-icons";
@@ -12,7 +12,6 @@ const Select = ({
   value,
   setValue,
 }) => {
-
   const itemRef = useRef(null);
 
   useEffect(() => {
@@ -21,9 +20,8 @@ const Select = ({
         setIsActive(false);
       }
     };
-    document.addEventListener('click', handleClickOutside);
+    document.addEventListener("click", handleClickOutside);
   }, []);
-
 
   const [isActive, setIsActive] = useState(false);
 
@@ -67,36 +65,37 @@ const Select = ({
         </div>
       </div>
       {isActive && (
-          <div className={`${s.container}`}>
-            <div className={`${s.content__dividing_line} ${
-                isThemeLight ? s.dividing_line__light : s.dividing_line__dark
-            }`}></div>
-            <div
-                className={`${s.content} ${
-                    isThemeLight ? s.content__light : s.content__dark
+        <div className={`${s.container}`}>
+          <div
+            className={`${s.content__dividing_line} ${
+              isThemeLight ? s.dividing_line__light : s.dividing_line__dark
+            }`}
+          ></div>
+          <div
+            className={`${s.content} ${
+              isThemeLight ? s.content__light : s.content__dark
+            }`}
+          >
+            {options.map((option) => (
+              <div
+                key={option.id}
+                className={`${s.item} ${
+                  isThemeLight ? s.item__light : s.item__dark
                 }`}
-            >
-              {options.map((option) => (
-                  <div
-                      key={option.id}
-                      className={`${s.item} ${
-                          isThemeLight ? s.item__light : s.item__dark
-                      }`}
-                      onClick={() => {
-                        setValue(option.id);
-                        setSelected(option[selectedName]);
-                      }}
-                  >
-                    <span>{option[selectedName]}</span>
-                    <FontAwesomeIcon
-                        icon={faHandPointer}
-                        className={s.item__pointer}
-                    />
-                  </div>
-              ))}
-            </div>
+                onClick={() => {
+                  setValue(option.id);
+                  setSelected(option[selectedName]);
+                }}
+              >
+                <span>{option[selectedName]}</span>
+                <FontAwesomeIcon
+                  icon={faHandPointer}
+                  className={s.item__pointer}
+                />
+              </div>
+            ))}
           </div>
-
+        </div>
       )}
     </div>
   );
