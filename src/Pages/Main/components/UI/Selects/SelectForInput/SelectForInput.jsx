@@ -15,43 +15,41 @@ const SelectForInput = (props) => {
     document.addEventListener("mousedown", handleClickOutside);
   }, []);
 
-    //// Альтернативный вариант проверки нажатия, с такой проверкой событие удаляется после того как срабатывает, однако
-    //// если добавлять и удалять событие с помощью метода addClickOutside, ClickOutside сработает столько раз, сколько
-    //// подряд закрыли и открыли селект
-    // const ClickOutside = (event) => {
-    //     if (itemRef.current && !itemRef.current.contains(event.target)) {
-    //         setIsActive(false);
-    //         console.log("The 'item' div is not clicked.");
-    //         document.removeEventListener('mousedown', ClickOutside);
-    //         console.log('ClickOutside__removeEventListener');
-    //     }
-    // };
-    //
-    // const addClickOutside = () =>{
-    //     if (!isActive){
-    //         setIsActive(true)
-    //         document.addEventListener("mousedown", ClickOutside);
-    //         console.log('addEventListener');
-    //     }
-    //     else{
-    //         setIsActive(!isActive)
-    //         console.log('removeEventListener');
-    //     }
-    // }
+  //// Альтернативный вариант проверки нажатия, с такой проверкой событие удаляется после того как срабатывает, однако
+  //// если добавлять и удалять событие с помощью метода addClickOutside, ClickOutside сработает столько раз, сколько
+  //// подряд закрыли и открыли селект
+  // const ClickOutside = (event) => {
+  //     if (itemRef.current && !itemRef.current.contains(event.target)) {
+  //         setIsActive(false);
+  //         console.log("The 'item' div is not clicked.");
+  //         document.removeEventListener('mousedown', ClickOutside);
+  //         console.log('ClickOutside__removeEventListener');
+  //     }
+  // };
+  //
+  // const addClickOutside = () =>{
+  //     if (!isActive){
+  //         setIsActive(true)
+  //         document.addEventListener("mousedown", ClickOutside);
+  //         console.log('addEventListener');
+  //     }
+  //     else{
+  //         setIsActive(!isActive)
+  //         console.log('removeEventListener');
+  //     }
+  // }
 
-    const changeValueFrom = (from) =>{
-        if (parseInt(props.value.before) >= parseInt(from) || !from){
-            props.setValue({ ...props.value, from: from })
-        }
+  const changeValueFrom = (from) => {
+    if ((from > 0 && from.length < 5) || !from) {
+      props.setValue({ ...props.value, from: from });
     }
+  };
 
-    const changeValueBefore = (before) =>{
-        console.log(props.value.from);
-        console.log(parseInt(before));
-        if (parseInt(props.value.from) <= parseInt(before) || !props.value.from){
-            props.setValue({ ...props.value, before: before })
-        }
+  const changeValueBefore = (before) => {
+    if ((before > 0 && before.length < 5) || !before) {
+      props.setValue({ ...props.value, before: before });
     }
+  };
 
   const [isActive, setIsActive] = useState(false);
 
@@ -71,7 +69,9 @@ const SelectForInput = (props) => {
         <span>Created</span>
         <FontAwesomeIcon
           icon={faCaretDown}
-          className={`${s.open} ${props.isThemeLight ? s.open__light : s.open__dark}`}
+          className={`${s.open} ${
+            props.isThemeLight ? s.open__light : s.open__dark
+          }`}
         />
       </div>
       {isActive ? (
@@ -87,8 +87,12 @@ const SelectForInput = (props) => {
             placeholder="from"
             type="number"
             value={props.value.from}
-            onChange={(event) => changeValueFrom(event.target.value)
-            }
+            onKeyPress={(e) => {
+              if (e.key === "-") {
+                e.preventDefault();
+              }
+            }}
+            onChange={(event) => changeValueFrom(event.target.value)}
           />
           —
           <input
@@ -98,6 +102,11 @@ const SelectForInput = (props) => {
             placeholder="before"
             type="number"
             value={props.value.before}
+            onKeyPress={(e) => {
+              if (e.key === "-") {
+                e.preventDefault();
+              }
+            }}
             onChange={(event) => changeValueBefore(event.target.value)}
           />
         </div>
