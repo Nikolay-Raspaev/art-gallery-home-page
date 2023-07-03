@@ -27,7 +27,7 @@ $white-gray-color: rgba(255, 255, 255, 0.75);
   position: absolute;
   width: 100%;
   height: 100%;
-  object-fit: fill;
+  background-size: cover;
 }
 
 .catalog__painting__overlay {
