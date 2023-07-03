@@ -39,6 +39,20 @@ const SelectForInput = (props) => {
     //     }
     // }
 
+    const changeValueFrom = (from) =>{
+        if (parseInt(props.value.before) >= parseInt(from) || !from){
+            props.setValue({ ...props.value, from: from })
+        }
+    }
+
+    const changeValueBefore = (before) =>{
+        console.log(props.value.from);
+        console.log(parseInt(before));
+        if (parseInt(props.value.from) <= parseInt(before) || !props.value.from){
+            props.setValue({ ...props.value, before: before })
+        }
+    }
+
   const [isActive, setIsActive] = useState(false);
 
   return (
@@ -73,8 +87,7 @@ const SelectForInput = (props) => {
             placeholder="from"
             type="number"
             value={props.value.from}
-            onChange={(event) =>
-              props.setValue({ ...props.value, from: event.target.value })
+            onChange={(event) => changeValueFrom(event.target.value)
             }
           />
           —
@@ -85,9 +98,7 @@ const SelectForInput = (props) => {
             placeholder="before"
             type="number"
             value={props.value.before}
-            onChange={(event) =>
-              props.setValue({ ...props.value, before: event.target.value })
-            }
+            onChange={(event) => changeValueBefore(event.target.value)}
           />
         </div>
       ) : (
