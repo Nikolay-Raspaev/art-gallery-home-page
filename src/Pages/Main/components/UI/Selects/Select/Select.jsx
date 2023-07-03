@@ -38,7 +38,9 @@ const Select = (props) => {
             <FontAwesomeIcon
               icon={faXmark}
               className={
-                props.isThemeLight ? s.button__close__light : s.button__close__dark
+                props.isThemeLight
+                  ? s.button__close__light
+                  : s.button__close__dark
               }
               onClick={() => {
                 setSelected("");
@@ -52,7 +54,7 @@ const Select = (props) => {
           <FontAwesomeIcon
             icon={faCaretDown}
             className={`${s.button__open} ${
-                props.isThemeLight ? s.button__open__light : s.button__open__dark
+              props.isThemeLight ? s.button__open__light : s.button__open__dark
             }`}
           />
         </div>
@@ -61,12 +63,14 @@ const Select = (props) => {
         <div className={`${s.container}`}>
           <div
             className={`${s.content__dividing_line} ${
-                props.isThemeLight ? s.dividing_line__light : s.dividing_line__dark
+              props.isThemeLight
+                ? s.dividing_line__light
+                : s.dividing_line__dark
             }`}
           ></div>
           <div
             className={`${s.content} ${
-                props.isThemeLight ? s.content__light : s.content__dark
+              props.isThemeLight ? s.content__light : s.content__dark
             }`}
           >
             {props.options.map((option) => (

@@ -10,20 +10,20 @@ export default class QueryService {
     paintingName,
     dateValue
   ) {
-      const url = `${host}/paintings`;
-      const params = {
-        _page: currentPage,
-        _limit: limit,
-        ...(selectedAuthorID && { authorId: selectedAuthorID }),
-        ...(selectedLocationId && {
-          anyObjectField: "locationId",
-          locationId: selectedLocationId,
-        }),
-        ...(paintingName && { anyObjectField: "name", name: paintingName }),
-        ...(dateValue.from && { created_gte: dateValue.from }),
-        ...(dateValue.before && { created_lte: dateValue.before }),
-      };
-      return await axios.get(url, { params });
+    const url = `${host}/paintings`;
+    const params = {
+      _page: currentPage,
+      _limit: limit,
+      ...(selectedAuthorID && { authorId: selectedAuthorID }),
+      ...(selectedLocationId && {
+        anyObjectField: "locationId",
+        locationId: selectedLocationId,
+      }),
+      ...(paintingName && { anyObjectField: "name", name: paintingName }),
+      ...(dateValue.from && { created_gte: dateValue.from }),
+      ...(dateValue.before && { created_lte: dateValue.before }),
+    };
+    return await axios.get(url, { params });
   }
 
   static async getLocations(host) {

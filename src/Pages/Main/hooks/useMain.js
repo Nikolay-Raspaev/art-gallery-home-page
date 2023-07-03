@@ -1,4 +1,4 @@
-import {useMemo} from "react";
+import { useMemo } from "react";
 
 export const useReplaceFieldsIdInPaintings = (
   paintings,
@@ -9,7 +9,7 @@ export const useReplaceFieldsIdInPaintings = (
     return paintings?.map((painting) => {
       const author = authors.find((author) => author.id === painting.authorId);
       const location = locations.find(
-          (location) => location.id === painting.locationId
+        (location) => location.id === painting.locationId
       );
       if (location && author) {
         return {

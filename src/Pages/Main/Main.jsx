@@ -5,10 +5,10 @@ import sun_black from "../../svg/sun-black.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
-import {useReplaceFieldsIdInPaintings} from "./hooks/useMain";
+import { useReplaceFieldsIdInPaintings } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
-import {useFetching} from "./hooks/useFetching";
-import {getPageCount} from "./components/utils/pages";
+import { useFetching } from "./hooks/useFetching";
+import { getPageCount } from "./components/utils/pages";
 
 const Main = (props) => {
   const host = "https://test-front.framework.team";
@@ -58,12 +58,20 @@ const Main = (props) => {
     currentPage,
   ]);
 
-  const [fetchPaintings, paintingError, isLoaded] = useFetching(async() =>{
-    const response = await QueryService.getPaintings(host, currentPage, limit, selectedAuthorID, selectedLocationId, paintingName, dateValue);
+  const [fetchPaintings, paintingError, isLoaded] = useFetching(async () => {
+    const response = await QueryService.getPaintings(
+      host,
+      currentPage,
+      limit,
+      selectedAuthorID,
+      selectedLocationId,
+      paintingName,
+      dateValue
+    );
     setPaintings(response.data);
     const totalCount = response.headers.get("x-total-count");
-    setTotalPages(getPageCount(totalCount, limit))
-  })
+    setTotalPages(getPageCount(totalCount, limit));
+  });
 
   const getAuthors = async () => {
     const authors = await QueryService.getAuthors(host);
@@ -110,8 +118,11 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
-      {paintingError &&
-        <h1 style={{display:'flex', justifyContent: 'center'}}>Произошла ошибка {paintingError}</h1>}
+      {paintingError && (
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Произошла ошибка {paintingError}
+        </h1>
+      )}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
