@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAnglesRight, faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import s from "./Pagination.module.scss";
 import { usePagination } from "../../hooks/useMain";
+import {ReactComponent as FaAnglesLeft} from "../../../../svg/faAnglesLeft.svg";
 
 const Pagination = (props) => {
   const paginationPages = usePagination(props.totalPages, props.currentPage);
@@ -18,8 +19,7 @@ const Pagination = (props) => {
         onClick={() => {
           props.setCurrentPage(1);
         }}
-      >
-        <FontAwesomeIcon icon={faAnglesRight} rotation={180} />
+      ><FaAnglesLeft className={s.icon}/>
       </button>
       <button
         className={`${s.pagination__angel} ${
@@ -74,7 +74,7 @@ const Pagination = (props) => {
           props.setCurrentPage(props.totalPages);
         }}
       >
-        <FontAwesomeIcon icon={faAnglesRight} />
+          <FaAnglesLeft className={s.icon} style={{transform: "rotate(180deg)"}}/>
       </button>
     </div>
   );

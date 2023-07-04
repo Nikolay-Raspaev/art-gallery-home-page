@@ -20,6 +20,9 @@ $button-pages-light-collor: rgba(237, 237, 237);
   button.pagination__page.pagination__page__light:disabled {
     background-color: $dark-color;
     color: $white-color;
+    s.icon{
+      fill: red;
+    }
   }
   button.pagination__page.pagination__page__dark:disabled {
     background-color: $white-color;
