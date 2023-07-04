@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import logo from "../../svg/logo.svg";
-import sun_white from "../../svg/sun-white.svg";
-import sun_black from "../../svg/sun-black.svg";
+import {ReactComponent as Sun} from "../../svg/sun.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
@@ -89,21 +88,7 @@ const Main = (props) => {
     >
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
-        {props.isThemeLight ? (
-          <img
-            src={sun_black}
-            className="page__svg__switch"
-            alt="Switch Theme"
-            onClick={() => props.handleThemeChange(!props.isThemeLight)}
-          />
-        ) : (
-          <img
-            src={sun_white}
-            className="page__svg__switch"
-            alt="Switch Theme"
-            onClick={() => props.handleThemeChange(!props.isThemeLight)}
-          />
-        )}
+        <Sun onClick={() => props.handleThemeChange(!props.isThemeLight)}/>
       </div>
       <Filter
         isThemeLight={props.isThemeLight}
