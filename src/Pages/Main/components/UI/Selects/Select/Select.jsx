@@ -20,15 +20,53 @@ const Select = (props) => {
 
     const [selected, setSelected] = useState("");
 
+    const scrollTimeoutRef = useRef(null);
+
+    const selectRef = useRef(null);
+
+    const handleMouseDown = () => {
+        isScrollerAtBottom ? scrollUp() : assignFunction();
+    };
+
+    const scrollUp = () => {
+        selectRef.current.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
+
+    const handleMouseUp = () => {
+        clearInterval(scrollTimeoutRef.current);
+    };
+
+    const assignFunction = () => {
+        scrollTimeoutRef.current = setInterval(scrollDown, 2);
+    };
+
+    const scrollDown = () => {
+        selectRef.current.scrollBy(0, 1);
+    };
+
+    const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
+    const scrollerAtBottom = (event) => {
+        const scrollTop = selectRef.current.scrollTop;
+        const scrollHeight = selectRef.current.scrollHeight;
+        const clientHeight = selectRef.current.clientHeight;
+        scrollHeight <= clientHeight + scrollTop ? setIsScrollerAtBottom(true) : setIsScrollerAtBottom(false);
+    };
+
     return (
         <div className={s.dropdown} ref={itemRef}>
             <div
-                className={`${s.dropdown__button} ${isActive ? s.button__active : ""} ${
-                    props.isThemeLight && isActive ? s.button__active__light : ""
+                className={`${s.dropdown__button} ${isActive ? s.button__active : ""} 
+                    ${props.isThemeLight && isActive ? s.button__active__light : ""}
+                    ${!props.isThemeLight && isActive ? s.button__active__dark : ""}
+                    ${props.isThemeLight ? s.button__light : s.button__dark}`
                 }
-        ${!props.isThemeLight && isActive ? s.button__active__dark : ""}
-        ${props.isThemeLight ? s.button__light : s.button__dark}`}
-                onClick={() => setIsActive(!isActive)}
+                onClick={() => {
+                    setIsActive(!isActive);
+                    setIsScrollerAtBottom(false);}
+            }
             >
                 <div className={s.button__text}>
                     {selected ? selected : props.defaultValue}
@@ -51,18 +89,30 @@ const Select = (props) => {
                     ) : (
                         ""
                     )}
-                    <div
-                        className={`${s.button__open} ${
-                            props.isThemeLight ? s.button__open__light : s.button__open__dark
-                        }`}
-                    >
-                        {" "}
-                        <DownTriangle/>
-                    </div>
+                    {isActive
+                    ? <div className={`${s.button__open}`}
+                           onClick={(e) => e.stopPropagation()}
+                           onMouseDown={handleMouseDown}
+                           onMouseUp={handleMouseUp}
+                           onMouseLeave={handleMouseUp}
+                        >
+                            {isScrollerAtBottom
+                                ? <DownTriangle  style={{transform: "rotate(180deg)"}}/>
+                                : <DownTriangle/>
+                            }
+
+                        </div>
+                    : <div className={s.button__open}
+                        >
+                            <DownTriangle/>
+                        </div>}
+
                 </div>
             </div>
             {isActive && (
-                <div className={`${s.container}`}>
+                <div className={`${s.container} ${
+                    props.isThemeLight ? s.container__content__light : s.container__content__dark
+                }`}>
                     <div
                         className={`${s.content__dividing_line} ${
                             props.isThemeLight
@@ -70,10 +120,8 @@ const Select = (props) => {
                                 : s.dividing_line__dark
                         }`}
                     ></div>
-                    <div
-                        className={`${s.content} ${
-                            props.isThemeLight ? s.content__light : s.content__dark
-                        }`}
+                    <div ref={selectRef} onScroll={scrollerAtBottom}
+                        className={s.content}
                     >
                         {props.options.map((option) => (
                             <div

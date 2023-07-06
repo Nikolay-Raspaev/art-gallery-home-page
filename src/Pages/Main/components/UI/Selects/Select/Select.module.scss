@@ -52,7 +52,7 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   padding-bottom: 2px;
 }
 
-.content__light {
+.container__content__light {
   background-color: $white-color;
   border: 1px solid $dark-color;
   border-top: none;
@@ -66,7 +66,7 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   }
 }
 
-.content__dark {
+.container__content__dark {
   background-color: $dark-dark-gray-color;
   border: 1px solid $white-color;
   border-top: none;
@@ -98,13 +98,27 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
 
     .content {
       max-height: 21.1rem;
-      overflow-y: auto;
+      overflow-y: scroll;
       border-bottom-left-radius: 0.47rem;
       border-bottom-right-radius: 0.47rem;
       padding-top: 0.8rem;
+      margin-right: 0.5rem;
     }
   }
 }
+/*.content::-webkit-scrollbar-thumb {
+  background-color: rgb(123, 123, 123);
+  border-radius: 10px;
+}
+
+.content::-webkit-scrollbar {
+  width: 11px;
+}
+
+.content::-webkit-scrollbar-track {
+}*/
+
+
 
 .button__active__light {
   border-bottom: none;

@@ -1,7 +1,6 @@
-import React, {useState, useEffect} from "react";
+import React, {useEffect, useState} from "react";
 import logo from "../../svg/logo.svg";
 import {ReactComponent as Sun} from "../../svg/sun.svg";
-import {ReactComponent as Sуфцуфun} from "../../svg/sun.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
@@ -83,10 +82,13 @@ const Main = (props) => {
         setLocations(locations);
     };
 
+
+
+
+
+
     return (
-        <div
-            className={props.isThemeLight ? "page page__light" : "page page__dark"}
-        >
+        <div className={props.isThemeLight ? "page page__light" : "page page__dark"}>
             <div className="page__svg">
                 <img src={logo} className="page__svg__logo" alt="Framework Team Logo"/>
                 <Sun onClick={() => props.handleThemeChange(!props.isThemeLight)}/>
