@@ -31,13 +31,16 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   font-weight: bold;
   cursor: pointer;
   align-items: center;
+
   .button__icon {
     display: flex;
     align-items: center;
+
     .button__close__light {
       padding: 0 1rem 0 1rem;
       color: $dark-gray-color;
     }
+
     .button__close__dark {
       padding: 0 1rem 0 1rem;
       color: $gray-color;
@@ -45,23 +48,15 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   }
 }
 
-.button__open__light {
-  color: $dark-gray-color;
-}
-.button__open__dark {
-  color: $gray-color;
-}
-
 .button__open {
-  width: 14px;
-  height: 22px;
-  padding-bottom: 0.3rem;
+  padding-bottom: 2px;
 }
 
 .content__light {
   background-color: $white-color;
   border: 1px solid $dark-color;
   border-top: none;
+
   .content__dividing_line {
     width: 100%;
     height: 1px;
@@ -83,20 +78,24 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
     max-height: 22.5rem;
     width: 100%;
     z-index: 2;
+
     .content__dividing_line {
       width: 100%;
       height: 1px;
     }
+
     .dividing_line__light {
       border-left: 1px solid $dark-color;
       border-right: 1px solid $dark-color;
       background-color: $dark-gray-color;
     }
+
     .dividing_line__dark {
       border-left: 1px solid $white-color;
       border-right: 1px solid $white-color;
       background-color: $gray-color;
     }
+
     .content {
       max-height: 21.1rem;
       overflow-y: auto;
@@ -128,10 +127,9 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   padding: 0.7rem;
   cursor: pointer;
   transition: all 0.2s;
+
   .item__pointer {
-    width: 1.1rem;
     visibility: hidden;
-    height: 1.1rem;
     padding-right: 2rem;
   }
 }
@@ -139,6 +137,7 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
 .dropdown .content .item__light:hover {
   background: $dark-color;
   color: $white-color;
+
   .item__pointer {
     visibility: visible;
     color: $white-color;
@@ -148,6 +147,7 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
 .dropdown .content .item__dark:hover {
   background: $white-color;
   color: $dark-color;
+
   .item__pointer {
     visibility: visible;
     color: $dark-color;

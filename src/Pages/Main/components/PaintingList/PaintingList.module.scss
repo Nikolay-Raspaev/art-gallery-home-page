@@ -38,6 +38,7 @@ $white-gray-color: rgba(255, 255, 255, 0.75);
   background-color: rgba(255, 255, 255, 0.75);
   color: $dark-color;
   padding: 0.3rem 0.1rem 0.3rem 0.9rem;
+
   .painting__name {
     font-size: 1.3rem;
   }
@@ -68,6 +69,7 @@ $white-gray-color: rgba(255, 255, 255, 0.75);
     padding-bottom: 68.4%;
   }
 }
+
 @media (max-width: 1023px) and (min-width: 768px) {
   .catalog__painting {
     width: 47.8%;
