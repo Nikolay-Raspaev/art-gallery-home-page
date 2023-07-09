@@ -1,7 +1,6 @@
 import React, {
   useEffect,
   useState,
-  useReducer,
   memo,
   useContext,
 } from "react";
@@ -15,6 +14,7 @@ import QueryService from "./API/QueryService";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
 import { ThemeContext } from "../../providers/ThemeProvider";
+import {useLocation} from "react-router-dom";
 
 const Main = memo((props) => {
   const host = "https://test-front.framework.team";
@@ -47,6 +47,34 @@ const Main = memo((props) => {
 
   const { isThemeLight, setIsThemeLight } = useContext(ThemeContext);
 
+  const location = useLocation();
+
+  const setParam = () => {
+    const searchParams = new URLSearchParams(location.search);
+    const page = searchParams.get("_page");
+    if (page) setCurrentPage(page);
+
+    const limit = searchParams.get("_limit");
+    if (limit) setLimit(limit);
+
+    const authorId = searchParams.get("authorId");
+    if (authorId) setSelectedAuthorId(authorId);
+
+    const locationId = searchParams.get("locationId");
+    if (locationId) setSelectedLocationId(locationId);
+
+    const name = searchParams.get("name");
+    if (name) setPaintingName(name);
+
+    const created_gte = searchParams.get("created_gte");
+    if (created_gte) setDateValue({ ...dateValue, from: created_gte });
+
+    const created_lte = searchParams.get("created_lte");
+    if (created_lte) setDateValue({ ...dateValue, before: created_lte });
+
+    console.log(searchParams.toString());
+  };
+
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
@@ -54,6 +82,7 @@ const Main = memo((props) => {
   useEffect(() => {
     getAuthors();
     getLocations();
+    setParam();
   }, []);
 
   useEffect(() => {
@@ -101,7 +130,6 @@ const Main = memo((props) => {
         />
       </div>
       <Filter
-        isThemeLight={props.isThemeLight}
         paintingName={paintingName}
         setPaintingName={setPaintingName}
         selectedAuthorID={selectedAuthorID}
@@ -121,7 +149,6 @@ const Main = memo((props) => {
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
-          isThemeLight={props.isThemeLight}
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
