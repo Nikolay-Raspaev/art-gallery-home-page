@@ -10,6 +10,10 @@ const Select = (props) => {
 
   const itemRef = useRef(null);
 
+  const [isActive, setIsActive] = useState(false);
+
+  const [selected, setSelected] = useState("");
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (itemRef.current && !itemRef.current.contains(event.target)) {
@@ -22,24 +26,14 @@ const Select = (props) => {
     };
   }, []);
 
-  const [isActive, setIsActive] = useState(false);
-
-  const [selected, setSelected] = useState("");
-
   useEffect(() => {
     const option = props.options.find((option) => option.id === parseInt(props.value));
-    if (option) {
-      setSelected(option[props.selectedName]);
-    }
-  }, [props.options]);
+    option ? setSelected(option[props.selectedName]) : setSelected('');
+  }, [props.options, props.value]);
 
   const scrollTimeoutRef = useRef(null);
 
   const selectRef = useRef(null);
-
-  const handleMouseDown = () => {
-    isScrollerAtBottom ? scrollUp() : assignFunction();
-  };
 
   const scrollUp = () => {
     selectRef.current.scrollTo({
@@ -58,6 +52,10 @@ const Select = (props) => {
 
   const scrollDown = () => {
     selectRef.current.scrollBy(0, 1);
+  };
+
+  const handleMouseDown = () => {
+    isScrollerAtBottom ? scrollUp() : assignFunction();
   };
 
   const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);

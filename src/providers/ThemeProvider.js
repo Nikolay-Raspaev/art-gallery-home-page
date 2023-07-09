@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect, useMemo } from "react";
+import {createContext, useMemo, useState} from "react";
 
 export const ThemeContext = createContext({ isThemeLight: true });
 

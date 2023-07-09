@@ -4,11 +4,9 @@ import "./styles/App.css";
 import {ThemeProvider} from "./providers/ThemeProvider";
 import Layout from "./components/Layout";
 
-
-
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/">
       <ThemeProvider>
         <Layout>
           <Main/>

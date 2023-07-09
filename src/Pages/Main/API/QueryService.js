@@ -23,6 +23,10 @@ export default class QueryService {
     return await axios.get(`${host}/paintings${url}`);
   }
 
+  static async getPaintingsHistory(host, url) {
+    return await axios.get(`${host}/paintings${url}`);
+  }
+
   static async getLocations(host) {
     return (await axios.get(host + "/locations")).data;
   }
