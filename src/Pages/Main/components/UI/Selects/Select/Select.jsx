@@ -60,18 +60,9 @@ const Select = (props) => {
   return (
     <div className={s.dropdown} ref={itemRef}>
       <div
-        className={`${s.dropdown__button} ${isActive ? s.button__active : ""} 
-                    ${
-                      props.isThemeLight && isActive
-                        ? s.button__active__light
-                        : ""
-                    }
-                    ${
-                      !props.isThemeLight && isActive
-                        ? s.button__active__dark
-                        : ""
-                    }
-                    ${props.isThemeLight ? s.button__light : s.button__dark}`}
+        className={`${s.dropdown__button} ${isActive ? s.button__active : ""} ${
+          props.isThemeLight ? s.button__light : s.button__dark
+        }`}
         onClick={() => {
           setIsActive(!isActive);
           setIsScrollerAtBottom(false);
@@ -83,11 +74,7 @@ const Select = (props) => {
         <div className={s.button__icon}>
           {props.value ? (
             <div
-              className={
-                props.isThemeLight
-                  ? s.button__close__light
-                  : s.button__close__dark
-              }
+              className={s.button__close}
               onClick={() => {
                 setSelected("");
                 props.setValue(0);
@@ -100,7 +87,7 @@ const Select = (props) => {
           )}
           {isActive ? (
             <div
-              className={`${s.button__open}`}
+              className={s.button__open}
               onClick={(e) => e.stopPropagation()}
               onMouseDown={handleMouseDown}
               onMouseUp={handleMouseUp}
@@ -122,18 +109,16 @@ const Select = (props) => {
       {isActive && (
         <div
           className={`${s.container} ${
-            props.isThemeLight
-              ? s.container__content__light
-              : s.container__content__dark
+            props.isThemeLight ? s.container__light : s.container__dark
           }`}
         >
           <div
-            className={`${s.content__dividing_line} ${
+            className={`${s.container__dividing_line} ${
               props.isThemeLight
                 ? s.dividing_line__light
                 : s.dividing_line__dark
             }`}
-          ></div>
+          />
           <div
             ref={selectRef}
             onScroll={scrollerAtBottom}

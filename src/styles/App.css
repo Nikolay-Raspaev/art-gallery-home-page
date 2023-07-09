@@ -1,97 +1,94 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-.page__light {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-}
-
-.page__dark {
-    background-color: rgb(0, 0, 0);
-    color: rgb(255, 255, 255);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 .page {
-    max-width: 100%;
-    padding-top: 35px;
-    padding-left: 3.125vw;
-    padding-right: 3.125vw;
-    margin: 0 auto;
-    min-height: 100vh;
+  max-width: 100%;
+  padding-top: 35px;
+  padding-left: 3.125vw;
+  padding-right: 3.125vw;
+  margin: 0 auto;
+  min-height: 100vh;
+}
+
+.page__light {
+  background-color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+}
+
+.page__dark {
+  background-color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
 }
 
 .page .page__svg {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .page .page__svg .page__svg__logo {
-    width: 64px;
-    height: 64px;
-    margin-bottom: 24px;
-    margin-left: 1.09%;
+  width: 64px;
+  height: 64px;
+  margin-bottom: 24px;
+  margin-left: 1.09%;
 }
 
 .page .page__svg .page__svg__switch {
-    margin-right: 1.09%;
+  margin-right: 1.09%;
 }
 
-.page .page__svg .page__svg__switch svg {
-    cursor: pointer;
+.page .page__svg .svg {
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: rgb(123, 123, 123);
-    border-radius: 10px;
+  background-color: rgb(123, 123, 123);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar {
-    width: 11px;
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 11px;
 }
 
 ::-webkit-scrollbar-track {
-    border-radius: 10px;
+  border-radius: 10px;
 }
 
 @media (max-width: 319px) {
-    .page {
-        padding-left: 3.125vw;
-        padding-right: 3.125vw;
-    }
+  .page {
+    padding-left: 3.125vw;
+    padding-right: 3.125vw;
+  }
 }
 
 @media (max-width: 767px) and (min-width: 320px) {
-    .page {
-        padding-left: 3.125vw;
-        padding-right: 3.125vw;
-    }
+  .page {
+    padding-left: 3.125vw;
+    padding-right: 3.125vw;
+  }
 }
 
 @media (max-width: 1023px) and (min-width: 768px) {
-    .page {
-        padding-left: 2.8571428571vw;
-        padding-right: 2.8571428571vw;
-    }
+  .page {
+    padding-left: 2.8571428571vw;
+    padding-right: 2.8571428571vw;
+  }
 }
 
 @media (max-width: 1365px) and (min-width: 1024px) {
-    .page {
-        padding-left: 3.125vw;
-        padding-right: 3.125vw;
-    }
+  .page {
+    padding-left: 3.125vw;
+    padding-right: 3.125vw;
+  }
 }
 
 @media (min-width: 1366px) {
-    .page {
-        padding-left: 8.3333333333vw;
-        padding-right: 8.3333333333vw;
-    }
-}
-
-.div__img {
-    border-image: url(https://test-front.framework.team/images/L_Enlevement_d_Europe.jpeg);
+  .page {
+    padding-left: 8.3333333333vw;
+    padding-right: 8.3333333333vw;
+  }
 }

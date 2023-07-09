@@ -88,7 +88,10 @@ const Main = (props) => {
     >
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
-        <Sun onClick={() => props.handleThemeChange(!props.isThemeLight)} />
+        <Sun
+          className="page__svg__switch svg"
+          onClick={() => props.handleThemeChange(!props.isThemeLight)}
+        />
       </div>
       <Filter
         isThemeLight={props.isThemeLight}

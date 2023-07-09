@@ -14,30 +14,6 @@ const SelectForInput = (props) => {
     document.addEventListener("mousedown", handleClickOutside);
   }, []);
 
-  //// Альтернативный вариант проверки нажатия, с такой проверкой событие удаляется после того как срабатывает, однако
-  //// если добавлять и удалять событие с помощью метода addClickOutside, ClickOutside сработает столько раз, сколько
-  //// подряд закрыли и открыли селект
-  // const ClickOutside = (event) => {
-  //     if (itemRef.current && !itemRef.current.contains(event.target)) {
-  //         setIsActive(false);
-  //         console.log("The 'item' div is not clicked.");
-  //         document.removeEventListener('mousedown', ClickOutside);
-  //         console.log('ClickOutside__removeEventListener');
-  //     }
-  // };
-  //
-  // const addClickOutside = () =>{
-  //     if (!isActive){
-  //         setIsActive(true)
-  //         document.addEventListener("mousedown", ClickOutside);
-  //         console.log('addEventListener');
-  //     }
-  //     else{
-  //         setIsActive(!isActive)
-  //         console.log('removeEventListener');
-  //     }
-  // }
-
   const changeValueFrom = (from) => {
     if ((from > 0 && from.length < 5) || !from) {
       props.setValue({ ...props.value, from: from });
@@ -66,11 +42,7 @@ const SelectForInput = (props) => {
         onClick={() => setIsActive(!isActive)}
       >
         <span>Created</span>
-        <div
-          className={`${s.open} ${
-            props.isThemeLight ? s.open__light : s.open__dark
-          }`}
-        >
+        <div className={s.open}>
           <DownTriangle />
         </div>
       </div>
@@ -81,13 +53,11 @@ const SelectForInput = (props) => {
           }`}
         >
           <input
-            className={`${s.input} ${
-              props.isThemeLight ? s.input__light : s.input__dark
-            }`}
+            className={`${s.input} ${props.isThemeLight ? s.input__light : ""}`}
             placeholder="from"
             type="number"
             value={props.value.from}
-            onKeyDown ={(e) => {
+            onKeyDown={(e) => {
               if (e.key === "-") {
                 e.preventDefault();
               }
