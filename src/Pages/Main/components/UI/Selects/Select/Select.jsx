@@ -17,6 +17,9 @@ const Select = (props) => {
       }
     };
     document.addEventListener("click", handleClickOutside);
+    return function cleanup() {
+      document.removeEventListener("click", handleClickOutside);
+    };
   }, []);
 
   const [isActive, setIsActive] = useState(false);

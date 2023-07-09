@@ -101,7 +101,6 @@ const Main = memo((props) => {
         />
       </div>
       <Filter
-        isThemeLight={isThemeLight}
         paintingName={paintingName}
         setPaintingName={setPaintingName}
         selectedAuthorID={selectedAuthorID}
@@ -121,7 +120,6 @@ const Main = memo((props) => {
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
-          isThemeLight={isThemeLight}
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}

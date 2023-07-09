@@ -15,6 +15,9 @@ const SelectForInput = (props) => {
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
+    return function cleanup() {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
   }, []);
 
   const changeValueFrom = (from) => {
