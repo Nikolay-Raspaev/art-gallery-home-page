@@ -26,11 +26,6 @@ const Select = (props) => {
     };
   }, []);
 
-  useEffect(() => {
-    const option = props.options.find((option) => option.id === parseInt(props.value));
-    option ? setSelected(option[props.selectedName]) : setSelected('');
-  }, [props.options, props.value]);
-
   const scrollTimeoutRef = useRef(null);
 
   const selectRef = useRef(null);

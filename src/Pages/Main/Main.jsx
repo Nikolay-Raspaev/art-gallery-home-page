@@ -1,15 +1,14 @@
-import React, {memo, useContext, useEffect, useState,} from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import logo from "../../svg/logo.svg";
-import {ReactComponent as Sun} from "../../svg/sun.svg";
+import { ReactComponent as Sun } from "../../svg/sun.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
-import {useReplaceFieldsIdInPaintings} from "./hooks/useMain";
+import { useReplaceFieldsIdInPaintings } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
-import {useFetching} from "./hooks/useFetching";
-import {getPageCount} from "./components/utils/pages";
-import {ThemeContext} from "../../providers/ThemeProvider";
-import {useLocation} from "react-router-dom";
+import { useFetching } from "./hooks/useFetching";
+import { getPageCount } from "./components/utils/pages";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
 const Main = memo(() => {
   const host = "https://test-front.framework.team";
@@ -41,49 +40,6 @@ const Main = memo(() => {
   );
   const { isThemeLight, setIsThemeLight } = useContext(ThemeContext);
 
-  const location = useLocation();
-
-  const [ isHistory, setIsHistory ] = useState(false);
-
-  useEffect(() => {
-    setIsHistory(true);
-    fetchPaintingsHistory().then( () => setParam()).then(() => setIsHistory(false));
-  }, [location]);
-
-  const [fetchPaintingsHistory, paintingErrorHistory] = useFetching(async () => {
-    const response = await QueryService.getPaintingsHistory(
-        host,
-        location.search
-    );
-    setPaintings(response.data);
-    const totalCount = response.headers.get("x-total-count");
-    setTotalPages(getPageCount(totalCount, limit));
-  });
-  const setParam = () => {
-
-    const searchParams = new URLSearchParams(location.search);
-    const page = searchParams.get("_page");
-    if (page) setCurrentPage(page);
-
-    const limit = searchParams.get("_limit");
-    if (limit) setLimit(limit);
-
-    const authorId = searchParams.get("authorId");
-    authorId ? setSelectedAuthorId(authorId) : setSelectedAuthorId(0);
-
-    const locationId = searchParams.get("locationId");
-    locationId ? setSelectedLocationId(locationId) : setSelectedLocationId(0);
-
-    const name = searchParams.get("name");
-    name ? setPaintingName(name) : setPaintingName('');
-
-    const created_gte = searchParams.get("created_gte");
-    created_gte ? setDateValue(created_gte) : setDateValue(0);
-
-    const created_lte = searchParams.get("created_lte");
-    created_lte ? setDateValue(created_lte) : setDateValue(0);
-  };
-
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
@@ -91,11 +47,10 @@ const Main = memo(() => {
   useEffect(() => {
     getAuthors();
     getLocations();
-    setParam();
   }, []);
 
   useEffect(() => {
-    if (!isHistory) fetchPaintings();
+    fetchPaintings();
   }, [
     selectedAuthorID,
     selectedLocationId,
@@ -154,11 +109,6 @@ const Main = memo(() => {
         <h1 style={{ display: "flex", justifyContent: "center" }}>
           Произошла ошибка {paintingError}
         </h1>
-      )}
-      {paintingErrorHistory && (
-          <h1 style={{ display: "flex", justifyContent: "center" }}>
-            Произошла ошибка {paintingErrorHistory}
-          </h1>
       )}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
