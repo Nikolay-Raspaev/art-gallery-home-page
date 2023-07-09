@@ -42,10 +42,10 @@ $white-gray-color: rgba(255, 255, 255, 0.75);
   .painting__name {
     font-size: 1.3rem;
   }
-}
 
-.painting__field {
-  display: none;
+  .painting__field {
+    display: none;
+  }
 }
 
 .catalog__painting:hover .painting__field {

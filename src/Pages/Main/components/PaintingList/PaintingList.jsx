@@ -6,11 +6,6 @@ const PaintingList = (props) => {
     <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ""}`}>
       {props.paintings?.map((painting) => (
         <div className={s.catalog__painting} key={painting.id}>
-          {/*          <img
-            src={props.host + painting.imageUrl}
-            alt={painting.name}
-            className={s.catalog__painting__img}
-          />*/}
           <div
             className={s.catalog__painting__img}
             style={{

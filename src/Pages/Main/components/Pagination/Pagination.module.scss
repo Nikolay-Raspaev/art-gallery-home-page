@@ -10,6 +10,11 @@ $button-pages-light-collor: rgba(237, 237, 237);
   padding: 40px 1.09% 40px 1.09%;
   display: flex;
 
+  .pagination__angel {
+    min-height: 40px;
+    min-width: 40px;
+  }
+
   .double__left {
     border-bottom-left-radius: 7px;
     border-top-left-radius: 7px;
@@ -23,10 +28,6 @@ $button-pages-light-collor: rgba(237, 237, 237);
   button.pagination__page.pagination__page__light:disabled {
     background-color: $dark-color;
     color: $white-color;
-
-    s.icon {
-      fill: red;
-    }
   }
 
   button.pagination__page.pagination__page__dark:disabled {
@@ -60,11 +61,6 @@ $button-pages-light-collor: rgba(237, 237, 237);
 }
 
 .pagination__page {
-  min-height: 40px;
-  min-width: 40px;
-}
-
-.pagination__angel {
   min-height: 40px;
   min-width: 40px;
 }
