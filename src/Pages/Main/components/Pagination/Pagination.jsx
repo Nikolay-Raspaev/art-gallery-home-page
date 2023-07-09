@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import s from "./Pagination.module.scss";
 import { usePagination } from "../../hooks/useMain";
 import { ReactComponent as AnglesLeft } from "../../../../svg/anglesLeft.svg";
 import { ReactComponent as AngleLeft } from "../../../../svg/angleLeft.svg";
+import { ThemeContext } from "../../../../providers/ThemeProvider";
 
 const Pagination = (props) => {
+  const { isThemeLight } = useContext(ThemeContext);
+
   const paginationPages = usePagination(props.totalPages, props.currentPage);
   return (
     <div className={s.pagination}>
       <button
         className={`${s.pagination__angel} ${s.double__left} ${
-          props.isThemeLight
-            ? s.pagination__page__light
-            : s.pagination__page__dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === props.currentPage}
         onClick={() => {
@@ -23,9 +24,7 @@ const Pagination = (props) => {
       </button>
       <button
         className={`${s.pagination__angel} ${
-          props.isThemeLight
-            ? s.pagination__page__light
-            : s.pagination__page__dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={1 === props.currentPage}
         onClick={() => {
@@ -37,9 +36,7 @@ const Pagination = (props) => {
       {paginationPages?.map((page) => (
         <button
           className={`${s.pagination__page} ${
-            props.isThemeLight
-              ? s.pagination__page__light
-              : s.pagination__page__dark
+            isThemeLight ? s.pagination__page__light : s.pagination__page__dark
           }`}
           disabled={page === props.currentPage}
           key={page}
@@ -52,9 +49,7 @@ const Pagination = (props) => {
       ))}
       <button
         className={`${s.pagination__angel} ${
-          props.isThemeLight
-            ? s.pagination__page__light
-            : s.pagination__page__dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={props.totalPages === props.currentPage}
         onClick={() => {
@@ -65,9 +60,7 @@ const Pagination = (props) => {
       </button>
       <button
         className={`${s.pagination__angel} ${s.double__right} ${
-          props.isThemeLight
-            ? s.pagination__page__light
-            : s.pagination__page__dark
+          isThemeLight ? s.pagination__page__light : s.pagination__page__dark
         }`}
         disabled={props.totalPages === props.currentPage}
         onClick={() => {

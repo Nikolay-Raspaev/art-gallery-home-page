@@ -1,28 +1,16 @@
-import Main from "./Pages/Main/Main";
 import "./styles/App.css";
-import {useEffect, useState} from "react";
+import Main from "./Pages/Main/Main";
+import { ThemeProvider } from "./providers/ThemeProvider";
+import Layout from "./components/Layout";
 
 const App = () => {
-    const [isThemeLight, setIsThemeLight] = useState(true);
-    const handleThemeChange = (newTheme) => {
-        setIsThemeLight(newTheme);
-        saveThemeToLocalStorage(newTheme);
-    };
-    const saveThemeToLocalStorage = (isLight) => {
-        localStorage.setItem("isLight", isLight);
-    };
-
-    const loadThemeFromLocalStorage = () => {
-        const storedIsLight = localStorage.getItem("isLight");
-        setIsThemeLight(storedIsLight === "true");
-    };
-
-    useEffect(() => {
-        loadThemeFromLocalStorage();
-    }, []);
-    return (
-        <Main isThemeLight={isThemeLight} handleThemeChange={handleThemeChange}/>
-    );
+  return (
+    <ThemeProvider>
+      <Layout>
+        <Main></Main>
+      </Layout>
+    </ThemeProvider>
+  );
 };
 
 export default App;

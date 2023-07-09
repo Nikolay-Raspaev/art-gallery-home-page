@@ -1,4 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, {
+  useEffect,
+  useState,
+  useReducer,
+  memo,
+  useContext,
+} from "react";
 import logo from "../../svg/logo.svg";
 import { ReactComponent as Sun } from "../../svg/sun.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
@@ -8,8 +14,9 @@ import { useReplaceFieldsIdInPaintings } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
-const Main = (props) => {
+const Main = memo((props) => {
   const host = "https://test-front.framework.team";
 
   const [paintingName, setPaintingName] = useState("");
@@ -37,6 +44,8 @@ const Main = (props) => {
     authors,
     locations
   );
+
+  const { isThemeLight, setIsThemeLight } = useContext(ThemeContext);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -83,18 +92,16 @@ const Main = (props) => {
   };
 
   return (
-    <div
-      className={props.isThemeLight ? "page page__light" : "page page__dark"}
-    >
+    <div className={isThemeLight ? "page page__light" : "page page__dark"}>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
         <Sun
           className="page__svg__switch svg"
-          onClick={() => props.handleThemeChange(!props.isThemeLight)}
+          onClick={() => setIsThemeLight(!isThemeLight)}
         />
       </div>
       <Filter
-        isThemeLight={props.isThemeLight}
+        isThemeLight={isThemeLight}
         paintingName={paintingName}
         setPaintingName={setPaintingName}
         selectedAuthorID={selectedAuthorID}
@@ -114,7 +121,7 @@ const Main = (props) => {
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
-          isThemeLight={props.isThemeLight}
+          isThemeLight={isThemeLight}
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
@@ -122,6 +129,6 @@ const Main = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Main;

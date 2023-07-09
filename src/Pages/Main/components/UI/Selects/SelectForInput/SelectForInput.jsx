@@ -1,8 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import s from "./SelectForInput.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
+import { ThemeContext } from "../../../../../../providers/ThemeProvider";
 
 const SelectForInput = (props) => {
+  const { isThemeLight } = useContext(ThemeContext);
+
   const itemRef = useRef(null);
 
   useEffect(() => {
@@ -35,7 +38,7 @@ const SelectForInput = (props) => {
           isActive ? s.button__is__activated : ""
         }
               ${
-                props.isThemeLight
+                isThemeLight
                   ? s.activation__button__light
                   : s.activation__button__dark
               }`}
@@ -49,11 +52,11 @@ const SelectForInput = (props) => {
       {isActive ? (
         <div
           className={`${s.content} ${
-            props.isThemeLight ? s.content__light : s.content__dark
+            isThemeLight ? s.content__light : s.content__dark
           }`}
         >
           <input
-            className={`${s.input} ${props.isThemeLight ? s.input__light : ""}`}
+            className={`${s.input} ${isThemeLight ? s.input__light : ""}`}
             placeholder="from"
             type="number"
             value={props.value.from}
@@ -67,7 +70,7 @@ const SelectForInput = (props) => {
           —
           <input
             className={`${s.input} ${
-              props.isThemeLight ? s.input__light : s.input__dark
+              isThemeLight ? s.input__light : s.input__dark
             }`}
             placeholder="before"
             type="number"

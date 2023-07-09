@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import s from "./Select.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
 import { ReactComponent as Pointer } from "../../../../../../svg/pointer.svg";
 import { ReactComponent as Cross } from "../../../../../../svg/cross.svg";
+import { ThemeContext } from "../../../../../../providers/ThemeProvider";
 
 const Select = (props) => {
+  const { isThemeLight } = useContext(ThemeContext);
+
   const itemRef = useRef(null);
 
   useEffect(() => {
@@ -61,7 +64,7 @@ const Select = (props) => {
     <div className={s.dropdown} ref={itemRef}>
       <div
         className={`${s.dropdown__button} ${isActive ? s.button__active : ""} ${
-          props.isThemeLight ? s.button__light : s.button__dark
+          isThemeLight ? s.button__light : s.button__dark
         }`}
         onClick={() => {
           setIsActive(!isActive);
@@ -109,14 +112,12 @@ const Select = (props) => {
       {isActive && (
         <div
           className={`${s.container} ${
-            props.isThemeLight ? s.container__light : s.container__dark
+            isThemeLight ? s.container__light : s.container__dark
           }`}
         >
           <div
             className={`${s.container__dividing_line} ${
-              props.isThemeLight
-                ? s.dividing_line__light
-                : s.dividing_line__dark
+              isThemeLight ? s.dividing_line__light : s.dividing_line__dark
             }`}
           />
           <div
@@ -128,7 +129,7 @@ const Select = (props) => {
               <div
                 key={option.id}
                 className={`${s.item} ${
-                  props.isThemeLight ? s.item__light : s.item__dark
+                  isThemeLight ? s.item__light : s.item__dark
                 }`}
                 onClick={() => {
                   props.setValue(option.id);
