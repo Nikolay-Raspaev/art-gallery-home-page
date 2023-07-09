@@ -6,10 +6,11 @@ const PaintingList = (props) => {
     <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ""}`}>
       {props.paintings?.map((painting) => (
         <div className={s.catalog__painting} key={painting.id}>
-          <img
-            src={props.host + painting.imageUrl}
-            alt={painting.name}
+          <div
             className={s.catalog__painting__img}
+            style={{
+              backgroundImage: `url(${props.host}${painting.imageUrl})`,
+            }}
           />
           <div className={s.catalog__painting__overlay}>
             <p className={s.painting__name}>

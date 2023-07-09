@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, {
+  useEffect,
+  useState,
+  useReducer,
+  memo,
+  useContext,
+} from "react";
 import logo from "../../svg/logo.svg";
-import sun_white from "../../svg/sun-white.svg";
-import sun_black from "../../svg/sun-black.svg";
+import { ReactComponent as Sun } from "../../svg/sun.svg";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
-import {useReplaceFieldsIdInPaintings} from "./hooks/useMain";
+import { useReplaceFieldsIdInPaintings } from "./hooks/useMain";
 import QueryService from "./API/QueryService";
-import {useFetching} from "./hooks/useFetching";
-import {getPageCount} from "./components/utils/pages";
-import {useLocation} from "react-router-dom";
+import { useFetching } from "./hooks/useFetching";
+import { getPageCount } from "./components/utils/pages";
+import { ThemeContext } from "../../providers/ThemeProvider";
 
-const Main = (props) => {
+const Main = memo((props) => {
   const host = "https://test-front.framework.team";
 
   const [paintingName, setPaintingName] = useState("");
@@ -40,33 +45,7 @@ const Main = (props) => {
     locations
   );
 
-  const location = useLocation();
-
-  const setParam = () => {
-    const searchParams = new URLSearchParams(location.search);
-    const page = searchParams.get("_page");
-    if (page) setCurrentPage(page);
-
-    const limit = searchParams.get("_limit");
-    if (limit) setLimit(limit);
-
-    const authorId = searchParams.get("authorId");
-    if (authorId) setSelectedAuthorId(authorId);
-
-    const locationId = searchParams.get("locationId");
-    if (locationId) setSelectedLocationId(locationId);
-
-    const name = searchParams.get("name");
-    if (name) setPaintingName(name);
-
-    const created_gte = searchParams.get("created_gte");
-    if (created_gte) setDateValue({ ...dateValue, from: created_gte });
-
-    const created_lte = searchParams.get("created_lte");
-    if (created_lte) setDateValue({ ...dateValue, before: created_lte });
-
-    console.log(searchParams.toString());
-  };
+  const { isThemeLight, setIsThemeLight } = useContext(ThemeContext);
 
   useEffect(() => {
     setCurrentPage(1);
@@ -75,7 +54,6 @@ const Main = (props) => {
   useEffect(() => {
     getAuthors();
     getLocations();
-    setParam();
   }, []);
 
   useEffect(() => {
@@ -88,12 +66,20 @@ const Main = (props) => {
     currentPage,
   ]);
 
-  const [fetchPaintings, paintingError, isLoaded] = useFetching(async() =>{
-    const response = await QueryService.getPaintings(host, currentPage, limit, selectedAuthorID, selectedLocationId, paintingName, dateValue);
+  const [fetchPaintings, paintingError, isLoaded] = useFetching(async () => {
+    const response = await QueryService.getPaintings(
+      host,
+      currentPage,
+      limit,
+      selectedAuthorID,
+      selectedLocationId,
+      paintingName,
+      dateValue
+    );
     setPaintings(response.data);
     const totalCount = response.headers.get("x-total-count");
-    setTotalPages(getPageCount(totalCount, limit))
-  })
+    setTotalPages(getPageCount(totalCount, limit));
+  });
 
   const getAuthors = async () => {
     const authors = await QueryService.getAuthors(host);
@@ -106,26 +92,13 @@ const Main = (props) => {
   };
 
   return (
-    <div
-      className={props.isThemeLight ? "page page__light" : "page page__dark"}
-    >
+    <div className={isThemeLight ? "page page__light" : "page page__dark"}>
       <div className="page__svg">
         <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
-        {props.isThemeLight ? (
-          <img
-            src={sun_black}
-            className="page__svg__switch"
-            alt="Switch Theme"
-            onClick={() => props.handleThemeChange(!props.isThemeLight)}
-          />
-        ) : (
-          <img
-            src={sun_white}
-            className="page__svg__switch"
-            alt="Switch Theme"
-            onClick={() => props.handleThemeChange(!props.isThemeLight)}
-          />
-        )}
+        <Sun
+          className="page__svg__switch svg"
+          onClick={() => setIsThemeLight(!isThemeLight)}
+        />
       </div>
       <Filter
         isThemeLight={props.isThemeLight}
@@ -140,8 +113,11 @@ const Main = (props) => {
         dateValue={dateValue}
         setDateValue={setDateValue}
       />
-      {paintingError &&
-        <h1 style={{display:'flex', justifyContent: 'center'}}>Произошла ошибка {paintingError}</h1>}
+      {paintingError && (
+        <h1 style={{ display: "flex", justifyContent: "center" }}>
+          Произошла ошибка {paintingError}
+        </h1>
+      )}
       <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
@@ -153,6 +129,6 @@ const Main = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Main;

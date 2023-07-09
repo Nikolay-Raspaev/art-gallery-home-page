@@ -1,6 +1,7 @@
 $dark-color: rgb(0, 0, 0);
 $white-color: rgb(255, 255, 255);
 $dark-dark-gray-color: rgba(12, 12, 12);
+
 .input__name {
   height: 2.76rem;
   min-width: 22.82%;
@@ -16,7 +17,6 @@ $dark-dark-gray-color: rgba(12, 12, 12);
 }
 
 .light {
-  background-color: rgb(255, 255, 255);
-  color: $dark-color;
+  background-color: $white-color;
   border: 1px solid $dark-color;
 }

@@ -8,14 +8,12 @@ const Filter = (props) => {
   return (
     <div className={s.filter}>
       <Input
-        isThemeLight={props.isThemeLight}
         value={props.paintingName}
         placeholder="Name"
         onChange={(event) => props.setPaintingName(event.target.value)}
         maxLength={45}
       />
       <Select
-        isThemeLight={props.isThemeLight}
         value={props.selectedAuthorID}
         selectedName="name"
         setValue={props.setSelectedAuthorId}
@@ -23,18 +21,13 @@ const Filter = (props) => {
         options={props.authors}
       />
       <Select
-        isThemeLight={props.isThemeLight}
         value={props.selectedLocationId}
         selectedName="location"
         setValue={props.setSelectedLocationId}
         defaultValue="Location"
         options={props.locations}
       />
-      <SelectForInput
-        isThemeLight={props.isThemeLight}
-        value={props.dateValue}
-        setValue={props.setDateValue}
-      />
+      <SelectForInput value={props.dateValue} setValue={props.setDateValue} />
     </div>
   );
 };

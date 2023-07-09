@@ -11,40 +11,37 @@ $input-light: rgb(239, 239, 239);
   position: relative;
   min-width: 22.82%;
   margin: 1.09%;
+
+  .activation__button {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.47rem;
+    height: 2.76rem;
+    padding: 0 1rem 0 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    align-items: center;
+    width: 100%;
+  }
+
+  div.button__is__activated {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-bottom: none;
+  }
+
+  .activation__button__light {
+    border: 1px solid $dark-color;
+  }
+
+  .activation__button__dark {
+    background: $dark-dark-gray-color;
+    border: 1px solid $white-color;
+  }
 }
 
-.activation__button__light {
-  background: $white-color;
-  border: 1px solid $dark-color;
-}
-
-.activation__button__dark {
-  background: $dark-dark-gray-color;
-  border: 1px solid $white-color;
-}
-
-.activation__button {
-  display: flex;
-  justify-content: space-between;
-  border-radius: 0.47rem;
-  height: 2.76rem;
-  padding: 0 1rem 0 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  align-items: center;
-  width: 100%;
-}
-
-.content__light {
-  background: $white-color;
-  border: 1px solid $dark-color;
-  border-top: 1px solid $white-color;
-}
-
-.content__dark {
-  background: $dark-dark-gray-color;
-  border: 1px solid $white-color;
-  border-top: none;
+.open {
+  padding-bottom: 2px;
 }
 
 .content {
@@ -59,14 +56,16 @@ $input-light: rgb(239, 239, 239);
   align-items: center;
 }
 
-.input__light {
-  background-color: $input-light;
-  color: $dark-color;
+.content__light {
+  border: 1px solid $dark-color;
+  border-top: none;
+  background: $white-color;
 }
 
-.input__dark {
-  background-color: $white-color;
-  color: $dark-color;
+.content__dark {
+  background: $dark-dark-gray-color;
+  border: 1px solid $white-color;
+  border-top: none;
 }
 
 .input {
@@ -77,23 +76,17 @@ $input-light: rgb(239, 239, 239);
   border-radius: 0.47rem;
 }
 
-.button__is__activated {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0;
-  border-bottom: none;
+.input__light {
+  background-color: $input-light;
 }
 
 @media (max-width: 1365px) and (min-width: 1024px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-  }
   .input {
     width: 50%;
   }
 }
 
-@media (max-width: 1023px) and (min-width: 768px) {
+@media (max-width: 1023px) and (min-width: 320px) {
   .content {
     flex-direction: column;
     align-items: center;
@@ -101,27 +94,4 @@ $input-light: rgb(239, 239, 239);
   .input {
     width: 80%;
   }
-}
-
-@media (max-width: 767px) and (min-width: 320px) {
-  .content {
-    flex-direction: column;
-    align-items: center;
-  }
-  .input {
-    width: 80%;
-  }
-}
-
-.open {
-  width: 14px;
-  height: 22px;
-  padding-bottom: 0.3rem;
-}
-
-.open__light {
-  color: $dark-gray-color;
-}
-.open__dark {
-  color: $gray-color;
 }
