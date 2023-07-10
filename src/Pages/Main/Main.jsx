@@ -10,7 +10,7 @@ import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
 import { ThemeContext } from "../../providers/ThemeProvider";
 
-const Main = memo(() => {
+const Main = () => {
   const host = "https://test-front.framework.team";
 
   const [paintingName, setPaintingName] = useState("");
@@ -120,6 +120,6 @@ const Main = memo(() => {
       )}
     </div>
   );
-});
+};
 
 export default Main;

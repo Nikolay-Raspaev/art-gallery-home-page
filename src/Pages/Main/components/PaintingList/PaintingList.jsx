@@ -13,9 +13,7 @@ const PaintingList = (props) => {
             }}
           />
           <div className={s.catalog__painting__overlay}>
-            <p className={s.painting__name}>
-              <b>{painting.name}</b>
-            </p>
+            <p className={s.painting__name}>{painting.name}</p>
             <div className={s.painting__field}>
               <p>
                 <b>Author:</b> {painting.author}

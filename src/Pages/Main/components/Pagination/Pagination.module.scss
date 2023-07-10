@@ -63,6 +63,9 @@ $button-pages-light-collor: rgba(237, 237, 237);
 .pagination__page {
   min-height: 40px;
   min-width: 40px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 20px;
 }
 
 .pagination__angel:hover:not([disabled]) {
