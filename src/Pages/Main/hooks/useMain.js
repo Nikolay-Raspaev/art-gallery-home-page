@@ -21,7 +21,7 @@ export const useReplaceFieldsIdInPaintings = (
             }
             return painting;
         });
-    }, [paintings, authors, locations]);
+    }, [paintings]);
 };
 
 export const usePagination = (totalPages, currentPage) => {

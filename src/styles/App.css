@@ -24,27 +24,6 @@
   color: rgb(255, 255, 255);
 }
 
-.page .page__svg {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.page .page__svg .page__svg__logo {
-  width: 64px;
-  height: 64px;
-  margin-bottom: 24px;
-  margin-left: 1.09%;
-}
-
-.page .page__svg .page__svg__switch {
-  margin-right: 1.09%;
-}
-
-.page .page__svg .svg {
-  cursor: pointer;
-}
-
 ::-webkit-scrollbar-thumb {
   background-color: rgb(123, 123, 123);
   border-radius: 10px;

@@ -1,6 +1,4 @@
-import React, { memo, useContext, useEffect, useState } from "react";
-import logo from "../../svg/logo.svg";
-import { ReactComponent as Sun } from "../../svg/sun.svg";
+import React, {memo, useContext, useEffect, useState} from "react";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
@@ -9,10 +7,11 @@ import QueryService from "./API/QueryService";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
 import { ThemeContext } from "../../providers/ThemeProvider";
+import {host, limit} from "./Consts";
+import Header from "./components/Header/Header";
 
-const Main = () => {
-  const host = "https://test-front.framework.team";
 
+const Main = memo(() => {
   const [paintingName, setPaintingName] = useState("");
 
   const [paintings, setPaintings] = useState([]);
@@ -27,8 +26,6 @@ const Main = () => {
 
   const [currentPage, setCurrentPage] = useState(1);
 
-  const [limit, setLimit] = useState(12);
-
   const [totalPages, setTotalPages] = useState(0);
 
   const [dateValue, setDateValue] = useState({ from: "", before: "" });
@@ -38,15 +35,15 @@ const Main = () => {
     authors,
     locations
   );
-  const { isThemeLight, setIsThemeLight } = useContext(ThemeContext);
+  const { isThemeLight } = useContext(ThemeContext);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   useEffect(() => {
-    getAuthors();
-    getLocations();
+    getAuthors().then(authors => setAuthors(authors));
+    getLocations().then(locations => setLocations(locations));
   }, []);
 
   useEffect(() => {
@@ -75,24 +72,16 @@ const Main = () => {
   });
 
   const getAuthors = async () => {
-    const authors = await QueryService.getAuthors(host);
-    setAuthors(authors);
+    return await QueryService.getAuthors(host);
   };
 
   const getLocations = async () => {
-    const locations = await QueryService.getLocations(host);
-    setLocations(locations);
+    return await QueryService.getLocations(host);
   };
 
   return (
     <div className={isThemeLight ? "page page__light" : "page page__dark"}>
-      <div className="page__svg">
-        <img src={logo} className="page__svg__logo" alt="Framework Team Logo" />
-        <Sun
-          className="page__svg__switch svg"
-          onClick={() => setIsThemeLight(!isThemeLight)}
-        />
-      </div>
+      <Header/>
       <Filter
         paintingName={paintingName}
         setPaintingName={setPaintingName}
@@ -110,7 +99,7 @@ const Main = () => {
           Произошла ошибка {paintingError}
         </h1>
       )}
-      <PaintingList paintings={newPaintings} host={host} isLoaded={isLoaded} />
+      <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
           currentPage={currentPage}
@@ -120,6 +109,6 @@ const Main = () => {
       )}
     </div>
   );
-};
+});
 
 export default Main;

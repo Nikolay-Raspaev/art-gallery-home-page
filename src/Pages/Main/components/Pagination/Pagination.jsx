@@ -1,11 +1,11 @@
-import React, { useContext } from "react";
+import React, {memo, useContext} from "react";
 import s from "./Pagination.module.scss";
 import { usePagination } from "../../hooks/useMain";
 import { ReactComponent as AnglesLeft } from "../../../../svg/anglesLeft.svg";
 import { ReactComponent as AngleLeft } from "../../../../svg/angleLeft.svg";
 import { ThemeContext } from "../../../../providers/ThemeProvider";
 
-const Pagination = (props) => {
+const Pagination = memo((props) => {
   const { isThemeLight } = useContext(ThemeContext);
 
   const paginationPages = usePagination(props.totalPages, props.currentPage);
@@ -71,6 +71,6 @@ const Pagination = (props) => {
       </button>
     </div>
   );
-};
+});
 
 export default Pagination;

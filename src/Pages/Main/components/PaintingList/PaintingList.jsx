@@ -1,35 +1,15 @@
-import React from "react";
+import React, {memo} from "react";
 import s from "./PaintingList.module.scss";
+import Painting from "./Painting/Painting";
 
-const PaintingList = (props) => {
+const PaintingList = memo((props) => {
   return (
     <div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ""}`}>
       {props.paintings?.map((painting) => (
-        <div className={s.catalog__painting} key={painting.id}>
-          <div
-            className={s.catalog__painting__img}
-            style={{
-              backgroundImage: `url(${props.host}${painting.imageUrl})`,
-            }}
-          />
-          <div className={s.catalog__painting__overlay}>
-            <p className={s.painting__name}>{painting.name}</p>
-            <div className={s.painting__field}>
-              <p>
-                <b>Author:</b> {painting.author}
-              </p>
-              <p>
-                <b>Created:</b> {painting.created}
-              </p>
-              <p>
-                <b>Location:</b> {painting.location}
-              </p>
-            </div>
-          </div>
-        </div>
+          <Painting painting={painting} key={painting.id}/>
       ))}
     </div>
   );
-};
+});
 
 export default PaintingList;
