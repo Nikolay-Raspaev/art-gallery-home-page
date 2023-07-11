@@ -99,7 +99,7 @@ const Main = memo(() => {
           Произошла ошибка {paintingError}
         </h1>
       )}
-      <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
+     <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
           currentPage={currentPage}

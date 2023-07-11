@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {memo, useContext, useEffect, useRef, useState} from "react";
 import s from "./SelectForInput.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
 import { ThemeContext } from "../../../../../../providers/ThemeProvider";
 
-const SelectForInput = (props) => {
+const SelectForInput = memo((props) => {
   const { isThemeLight } = useContext(ThemeContext);
 
   const itemRef = useRef(null);
@@ -91,6 +91,6 @@ const SelectForInput = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default SelectForInput;

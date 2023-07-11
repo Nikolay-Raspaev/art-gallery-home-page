@@ -1,17 +1,17 @@
-import React from "react";
+import React, {memo} from "react";
 import Input from "../UI/Input/Input";
 import SelectForInput from "../UI/Selects/SelectForInput/SelectForInput";
 import Select from "../UI/Selects/Select/Select";
 import s from "./Filter.module.scss";
 
-const Filter = (props) => {
+const Filter = memo((props) => {
   return (
     <div className={s.filter}>
       <Input
-        value={props.paintingName}
         placeholder="Name"
-        onChange={(event) => props.setPaintingName(event.target.value)}
         maxLength={45}
+        value={props.paintingName}
+        setValue={props.setPaintingName}
       />
       <Select
         value={props.selectedAuthorID}
@@ -30,6 +30,6 @@ const Filter = (props) => {
       <SelectForInput value={props.dateValue} setValue={props.setDateValue} />
     </div>
   );
-};
+});
 
 export default Filter;

@@ -1,11 +1,11 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
+import React, {memo, useContext, useEffect, useRef, useState} from "react";
 import s from "./Select.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
 import { ReactComponent as Pointer } from "../../../../../../svg/pointer.svg";
 import { ReactComponent as Cross } from "../../../../../../svg/cross.svg";
 import { ThemeContext } from "../../../../../../providers/ThemeProvider";
 
-const Select = (props) => {
+const Select = memo((props) => {
   const { isThemeLight } = useContext(ThemeContext);
 
   const itemRef = useRef(null);
@@ -150,6 +150,6 @@ const Select = (props) => {
       )}
     </div>
   );
-};
+});
 
 export default Select;

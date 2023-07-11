@@ -5,12 +5,8 @@ const Layout = ({ children }) => {
   const { isThemeLight } = useContext(ThemeContext);
 
   useEffect(() => {
-    saveThemeToLocalStorage(isThemeLight);
+    localStorage.setItem("isLight", isThemeLight)
   }, [isThemeLight]);
-
-  const saveThemeToLocalStorage = (isLight) => {
-    localStorage.setItem("isLight", isLight);
-  };
 
   return <>{children}</>;
 };
