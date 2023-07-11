@@ -1,6 +1,6 @@
-import Main from "./Pages/Main/Main";
-import { ThemeProvider } from "./providers/ThemeProvider";
-import Layout from "./components/Layout";
+import Main from './Pages/Main/Main';
+import { ThemeProvider } from './providers/ThemeProvider';
+import Layout from './components/Layout';
 
 function App() {
   return (
