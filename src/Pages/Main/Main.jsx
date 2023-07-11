@@ -1,4 +1,5 @@
-import React, {memo, useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
+import s from "./Main.module.scss";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
@@ -80,7 +81,7 @@ const Main = () => {
   };
 
   return (
-    <div className={isThemeLight ? "page page__light" : "page page__dark"}>
+    <div className={`${s.page} ${isThemeLight ? s.page__light : s.page__dark}`}>
       <Header/>
       <Filter
         paintingName={paintingName}

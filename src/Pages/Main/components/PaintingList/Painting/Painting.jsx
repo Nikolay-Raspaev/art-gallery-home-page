@@ -15,13 +15,13 @@ const Painting = (props) => {
                 <p className={s.painting__name}>{props.painting.name}</p>
                 <div className={s.painting__field}>
                     <p>
-                        <b>Author:</b> {props.painting.author}
+                        <span>Author:</span> {props.painting.author}
                     </p>
                     <p>
-                        <b>Created:</b> {props.painting.created}
+                        <span>Created:</span> {props.painting.created}
                     </p>
                     <p>
-                        <b>Location:</b> {props.painting.location}
+                        <span>Location:</span> {props.painting.location}
                     </p>
                 </div>
             </div>

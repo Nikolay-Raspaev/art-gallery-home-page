@@ -74,9 +74,9 @@ const Select = memo((props) => {
           setIsScrollerAtBottom(false);
         }}
       >
-        <div className={s.button__text}>
+        <span className={s.button__text}>
           {selected ? selected : props.defaultValue}
-        </div>
+        </span>
         <div className={s.button__icon}>
           {props.value ? (
             <div
