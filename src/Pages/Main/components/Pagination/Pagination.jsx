@@ -1,9 +1,9 @@
 import React, {memo, useContext} from "react";
 import s from "./Pagination.module.scss";
-import { usePagination } from "../../hooks/useMain";
 import { ReactComponent as AnglesLeft } from "../../../../svg/anglesLeft.svg";
 import { ReactComponent as AngleLeft } from "../../../../svg/angleLeft.svg";
 import { ThemeContext } from "../../../../providers/ThemeProvider";
+import {usePagination} from "../../hooks/usePagination";
 
 const Pagination = memo((props) => {
   const { isThemeLight } = useContext(ThemeContext);

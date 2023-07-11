@@ -2,7 +2,7 @@ import React, {memo, useContext, useEffect, useState} from "react";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
 import Filter from "./components/Filter/Filter";
-import { useReplaceFieldsIdInPaintings } from "./hooks/useMain";
+import { useReplaceFieldsIdInPaintings } from "./hooks/useReplaceFieldsIdInPaintings";
 import QueryService from "./API/QueryService";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
