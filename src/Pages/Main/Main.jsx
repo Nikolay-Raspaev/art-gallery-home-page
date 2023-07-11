@@ -11,7 +11,7 @@ import {host, limit} from "./Consts";
 import Header from "./components/Header/Header";
 
 
-const Main = memo(() => {
+const Main = () => {
   const [paintingName, setPaintingName] = useState("");
 
   const [paintings, setPaintings] = useState([]);
@@ -109,6 +109,6 @@ const Main = memo(() => {
       )}
     </div>
   );
-});
+};
 
 export default Main;
