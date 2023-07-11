@@ -1,4 +1,4 @@
-import React, {memo} from "react";
+import React, { memo } from "react";
 import Input from "../UI/Input/Input";
 import SelectForInput from "../UI/Selects/SelectForInput/SelectForInput";
 import Select from "../UI/Selects/Select/Select";

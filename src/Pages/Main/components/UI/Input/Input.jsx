@@ -1,4 +1,4 @@
-import React, {memo, useContext} from "react";
+import React, { memo, useContext } from "react";
 import s from "./Input.module.scss";
 import { ThemeContext } from "../../../../../providers/ThemeProvider";
 

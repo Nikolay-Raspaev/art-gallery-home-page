@@ -5,7 +5,7 @@ const Layout = ({ children }) => {
   const { isThemeLight } = useContext(ThemeContext);
 
   useEffect(() => {
-    localStorage.setItem("isLight", isThemeLight)
+    localStorage.setItem("isLight", isThemeLight);
   }, [isThemeLight]);
 
   return <>{children}</>;

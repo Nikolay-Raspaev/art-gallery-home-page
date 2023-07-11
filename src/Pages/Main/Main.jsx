@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, { useContext, useEffect, useState } from "react";
 import s from "./Main.module.scss";
 import PaintingList from "./components/PaintingList/PaintingList";
 import Pagination from "./components/Pagination/Pagination";
@@ -8,9 +8,8 @@ import QueryService from "./API/QueryService";
 import { useFetching } from "./hooks/useFetching";
 import { getPageCount } from "./components/utils/pages";
 import { ThemeContext } from "../../providers/ThemeProvider";
-import {host, limit} from "./Consts";
+import { host, limit } from "./Consts";
 import Header from "./components/Header/Header";
-
 
 const Main = () => {
   const [paintingName, setPaintingName] = useState("");
@@ -43,8 +42,8 @@ const Main = () => {
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   useEffect(() => {
-    getAuthors().then(authors => setAuthors(authors));
-    getLocations().then(locations => setLocations(locations));
+    getAuthors().then((authors) => setAuthors(authors));
+    getLocations().then((locations) => setLocations(locations));
   }, []);
 
   useEffect(() => {
@@ -82,7 +81,7 @@ const Main = () => {
 
   return (
     <div className={`${s.page} ${isThemeLight ? s.page__light : s.page__dark}`}>
-      <Header/>
+      <Header />
       <Filter
         paintingName={paintingName}
         setPaintingName={setPaintingName}
@@ -100,7 +99,7 @@ const Main = () => {
           Произошла ошибка {paintingError}
         </h1>
       )}
-     <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
+      <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
       {newPaintings.length !== 0 && (
         <Pagination
           currentPage={currentPage}

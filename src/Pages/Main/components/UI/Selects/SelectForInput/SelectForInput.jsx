@@ -1,4 +1,4 @@
-import React, {memo, useContext, useEffect, useRef, useState} from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import s from "./SelectForInput.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
 import { ThemeContext } from "../../../../../../providers/ThemeProvider";

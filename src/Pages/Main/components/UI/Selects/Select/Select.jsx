@@ -1,4 +1,4 @@
-import React, {memo, useContext, useEffect, useRef, useState} from "react";
+import React, { memo, useContext, useEffect, useRef, useState } from "react";
 import s from "./Select.module.scss";
 import { ReactComponent as DownTriangle } from "../../../../../../svg/downTriangle.svg";
 import { ReactComponent as Pointer } from "../../../../../../svg/pointer.svg";
