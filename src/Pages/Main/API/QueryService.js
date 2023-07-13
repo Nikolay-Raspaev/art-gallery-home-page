@@ -1,27 +1,20 @@
 import axios from 'axios';
+import { host, limit } from '../Consts';
 
 export default class QueryService {
-	static async getPaintings(
-		host,
-		currentPage,
-		limit,
-		selectedAuthorID,
-		selectedLocationId,
-		paintingName,
-		dateValue
-	) {
+	static async getPaintings(incomingParams) {
 		const url = `${host}/paintings`;
 		const params = {
-			_page: currentPage,
+			_page: incomingParams.currentPage,
 			_limit: limit,
-			...(selectedAuthorID && { authorId: selectedAuthorID }),
-			...(selectedLocationId && {
+			...(incomingParams.selectedAuthorID && { authorId: incomingParams.selectedAuthorID }),
+			...(incomingParams.selectedLocationId && {
 				anyObjectField: 'locationId',
-				locationId: selectedLocationId
+				locationId: incomingParams.selectedLocationId
 			}),
-			...(paintingName && { anyObjectField: 'name', name: paintingName }),
-			...(dateValue.from && { created_gte: dateValue.from }),
-			...(dateValue.before && { created_lte: dateValue.before })
+			...(incomingParams.paintingName && { anyObjectField: 'name', name: incomingParams.paintingName }),
+			...(incomingParams.dateValue?.from && { created_gte: incomingParams.dateValue?.from }),
+			...(incomingParams.dateValue?.before && { created_lte: incomingParams.dateValue?.before })
 		};
 		return await axios.get(url, { params });
 	}

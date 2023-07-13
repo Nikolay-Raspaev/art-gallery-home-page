@@ -9,6 +9,7 @@ const Pagination = memo((props) => {
 	const { isThemeLight } = useContext(ThemeContext);
 
 	const paginationPages = usePagination(props.totalPages, props.currentPage);
+
 	return (
 		<div className={s.pagination}>
 			<button
@@ -33,7 +34,7 @@ const Pagination = memo((props) => {
 			>
 				<AngleLeft />
 			</button>
-			{paginationPages?.map((page) => (
+			{paginationPages.map((page) => (
 				<button
 					className={`${s.pagination__page} ${
 						isThemeLight ? s.pagination__page__light : s.pagination__page__dark

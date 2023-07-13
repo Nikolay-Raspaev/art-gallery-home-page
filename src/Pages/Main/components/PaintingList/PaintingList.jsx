@@ -5,7 +5,7 @@ import Painting from './Painting/Painting';
 const PaintingList = memo((props) => {
 	return (
 		<div className={`${s.catalog} ${props.isLoaded ? s.paintingsLoaded : ''}`}>
-			{props.paintings?.map((painting) => (
+			{props.paintings.map((painting) => (
 				<Painting painting={painting} key={painting.id} />
 			))}
 		</div>
