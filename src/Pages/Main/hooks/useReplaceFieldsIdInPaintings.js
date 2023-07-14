@@ -24,6 +24,6 @@ export const useReplaceFieldsIdInPaintings = (
 			return painting;
 		});
 		setIsLoaded(true);
-		return [newPaintings, isLoaded]
-	}, [paintings]);
+		return [newPaintings, isLoaded];
+	}, [paintings, authors, locations]);
 };
