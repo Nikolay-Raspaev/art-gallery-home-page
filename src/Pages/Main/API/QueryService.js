@@ -7,14 +7,19 @@ export default class QueryService {
 		const params = {
 			_page: incomingParams.currentPage,
 			_limit: limit,
-			...(incomingParams.selectedAuthorID && { authorId: incomingParams.selectedAuthorID }),
+			...(incomingParams.selectedAuthorID && {
+				authorId: incomingParams.selectedAuthorID
+			}),
 			...(incomingParams.selectedLocationId && {
-				anyObjectField: 'locationId',
 				locationId: incomingParams.selectedLocationId
 			}),
-			...(incomingParams.paintingName && { anyObjectField: 'name', name: incomingParams.paintingName }),
-			...(incomingParams.dateValue?.from && { created_gte: incomingParams.dateValue?.from }),
-			...(incomingParams.dateValue?.before && { created_lte: incomingParams.dateValue?.before })
+			...(incomingParams.paintingName && { name: incomingParams.paintingName }),
+			...(incomingParams.dateValue?.from && {
+				created_gte: incomingParams.dateValue?.from
+			}),
+			...(incomingParams.dateValue?.before && {
+				created_lte: incomingParams.dateValue?.before
+			})
 		};
 		return await axios.get(url, { params });
 	}
