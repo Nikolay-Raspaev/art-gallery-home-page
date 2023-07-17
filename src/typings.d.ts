@@ -1,11 +1,11 @@
 declare module '*.scss' {
-    const content: { [className: string]: string };
-    export default content;
+  const content: { [className: string]: string };
+  export default content;
 }
 
 declare module '*.svg' {
-    const svgUrl: string;
-    const svgComponent: SvgrComponent;
-    export default svgUrl;
-    export { svgComponent as ReactComponent };
+  const svgUrl: string;
+  const svgComponent: SvgrComponent;
+  export default svgUrl;
+  export { svgComponent as ReactComponent };
 }

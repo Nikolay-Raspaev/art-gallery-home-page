@@ -21,7 +21,8 @@
 		"eject": "react-scripts eject",
 		"predeploy": "npm run build",
 		"deploy": "gh-pages -d build",
-		"lint": "eslint src"
+		"lint": "eslint src",
+		"fix": "eslint --fix src"
 	},
 	"eslintConfig": {
 		"extends": [
@@ -44,7 +45,10 @@
 	"devDependencies": {
 		"@babel/plugin-proposal-private-property-in-object": "^7.21.11",
 		"@types/node": "^20.4.2",
+		"@typescript-eslint/eslint-plugin": "^5.62.0",
+		"@typescript-eslint/parser": "^5.62.0",
 		"eslint-config-airbnb": "^19.0.4",
+		"eslint-config-airbnb-typescript": "^17.1.0",
 		"gh-pages": "^5.0.0",
 		"sass": "^1.63.6"
 	}

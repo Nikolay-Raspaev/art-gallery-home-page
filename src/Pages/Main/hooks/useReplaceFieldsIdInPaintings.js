@@ -1,29 +1,31 @@
 import { useMemo, useState } from 'react';
 
 export const useReplaceFieldsIdInPaintings = (
-	paintings,
-	authors,
-	locations
+  paintings,
+  authors,
+  locations,
 ) => {
-	const [isLoaded, setIsLoaded] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(false);
 
-	return useMemo(() => {
-		setIsLoaded(false);
-		const newPaintings = paintings?.map((painting) => {
-			const author = authors.find((author) => author.id === painting.authorId);
-			const location = locations.find(
-				(location) => location.id === painting.locationId
-			);
-			if (location && author) {
-				return {
-					location: location.location,
-					author: author.name,
-					...painting
-				};
-			}
-			return painting;
-		});
-		setIsLoaded(true);
-		return [newPaintings, isLoaded];
-	}, [paintings, authors, locations]);
+  return useMemo(() => {
+    setIsLoaded(false);
+    const newPaintings = paintings?.map((painting) => {
+      const currentAuthor = authors.find(
+        (author) => author.id === painting.authorId,
+      );
+      const currentLocation = locations.find(
+        (location) => location.id === painting.locationId,
+      );
+      if (currentLocation && currentAuthor) {
+        return {
+          location: currentLocation.location,
+          author: currentAuthor.name,
+          ...painting,
+        };
+      }
+      return painting;
+    });
+    setIsLoaded(true);
+    return [newPaintings, isLoaded];
+  }, [paintings, authors, locations]);
 };

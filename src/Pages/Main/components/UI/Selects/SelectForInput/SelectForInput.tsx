@@ -1,7 +1,14 @@
-import React, {FC, memo, useContext, useEffect, useRef, useState} from 'react';
+import React, {
+	FC,
+	memo,
+	useContext,
+	useEffect,
+	useRef,
+	useState,
+} from 'react';
 import s from './SelectForInput.module.scss';
-import {ReactComponent as DownTriangle} from '../../../../../../svg/downTriangle.svg';
-import {ThemeContext} from '../../../../../../providers/ThemeProvider';
+import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
+import { ThemeContext } from '../../../../../../providers/ThemeProvider';
 
 interface ISelectForInputProps {
 	value: {
@@ -11,13 +18,15 @@ interface ISelectForInputProps {
 	setValue: React.Dispatch<React.SetStateAction<object>>;
 }
 
-const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
+const SelectForInput: FC<ISelectForInputProps> = memo(({ value, setValue }) => {
 	const { isLightTheme } = useContext(ThemeContext);
 
-	const itemRef= useRef<HTMLDivElement>(null);
+	const itemRef = useRef<HTMLDivElement>(null);
+
+	const [isActive, setIsActive] = useState(false);
 
 	useEffect(() => {
-		const handleClickOutside = (event : MouseEvent | TouchEvent) => {
+		const handleClickOutside = (event: MouseEvent | TouchEvent) => {
 			if (itemRef.current && !itemRef.current.contains(event.target as Node)) {
 				setIsActive(false);
 			}
@@ -29,22 +38,26 @@ const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
 	}, []);
 
 	const changeValueFrom = (from: string) => {
-		if ((parseInt(from) > 0 && String(from).length < 5) || !from) {
-			setValue({ ...value, from: from });
+		if ((Number(from) > 0 && String(from).length < 5) || !from) {
+			setValue({
+ ...value, from,
+});
 		}
 	};
 
 	const changeValueBefore = (before: string) => {
-		if ((parseInt(before) > 0 && String(before).length < 5) || !before) {
-			setValue({ ...value, before: before });
+		if ((Number(before) > 0 && String(before).length < 5) || !before) {
+			setValue({
+ ...value, before,
+});
 		}
 	};
 
-	const [isActive, setIsActive] = useState(false);
-
 	return (
-		<div className={s.container} ref={itemRef}>
-			<div
+  <div className={s.container} ref={itemRef}>
+    <div
+				role="button"
+				tabIndex={0}
 				className={`${s.activation__button} ${
 					isActive ? s.button__is__activated : ''
 				}
@@ -54,22 +67,23 @@ const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
 									: s.activation__button__dark
 							}`}
 				onClick={() => setIsActive(!isActive)}
-			>
-				<span>Created</span>
-				<div className={s.open}>
-					<DownTriangle />
-				</div>
-			</div>
-			{isActive ? (
-				<div
+				onKeyDown={() => setIsActive(!isActive)}
+    >
+      <span>Created</span>
+      <div className={s.open}>
+        <DownTriangle />
+      </div>
+    </div>
+    {isActive ? (
+      <div
 					className={`${s.content} ${
 						isLightTheme ? s.content__light : s.content__dark
 					}`}
-				>
-					<input
+      >
+        <input
 						className={`${s.input} ${isLightTheme ? s.input__light : ''}`}
-						placeholder='from'
-						type='number'
+						placeholder="from"
+						type="number"
 						value={value.from}
 						onKeyDown={(e) => {
 							if (e.key === '-' || e.key === 'e') {
@@ -77,14 +91,14 @@ const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
 							}
 						}}
 						onChange={(event) => changeValueFrom(event.target.value)}
-					/>
-					—
-					<input
+        />
+        —
+        <input
 						className={`${s.input} ${
 							isLightTheme ? s.input__light : s.input__dark
 						}`}
-						placeholder='before'
-						type='number'
+						placeholder="before"
+						type="number"
 						value={value.before}
 						onKeyDown={(e) => {
 							if (e.key === '-' || e.key === 'e') {
@@ -92,12 +106,12 @@ const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
 							}
 						}}
 						onChange={(event) => changeValueBefore(event.target.value)}
-					/>
-				</div>
+        />
+      </div>
 			) : (
 				''
 			)}
-		</div>
+  </div>
 	);
 });
 
