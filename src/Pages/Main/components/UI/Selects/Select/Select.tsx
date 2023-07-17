@@ -1,22 +1,35 @@
-import React, { memo, useContext, useEffect, useRef, useState } from 'react';
+import React, {FC, memo, useContext, useEffect, useRef, useState} from 'react';
 import s from './Select.module.scss';
-import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
-import { ReactComponent as Pointer } from '../../../../../../svg/pointer.svg';
-import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { ThemeContext } from '../../../../../../providers/ThemeProvider';
+import {ReactComponent as DownTriangle} from '../../../../../../svg/downTriangle.svg';
+import {ReactComponent as Pointer} from '../../../../../../svg/pointer.svg';
+import {ReactComponent as Cross} from '../../../../../../svg/cross.svg';
+import {ThemeContext} from '../../../../../../providers/ThemeProvider';
 
-const Select = memo((props) => {
-	const { isThemeLight } = useContext(ThemeContext);
+type TOption = {
+	id: number;
+	name: string;
+};
 
-	const itemRef = useRef(null);
+interface ISelectProps {
+	defaultValue: string;
+	value: number;
+	setValue: React.Dispatch<React.SetStateAction<number>>;
+	options: TOption[];
+	selectedName: string;
+}
+
+const Select: FC<ISelectProps> = memo(({defaultValue, value, setValue, options, selectedName}) => {
+	const { isLightTheme } = useContext(ThemeContext);
+
+	const itemRef = useRef<HTMLDivElement>(null);
 
 	const [isActive, setIsActive] = useState(false);
 
-	const [selected, setSelected] = useState('');
+	const [selected, setSelected] = useState<string>('');
 
 	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (itemRef.current && !itemRef.current.contains(event.target)) {
+		const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+			if (itemRef.current && !itemRef.current.contains(event.target as Node)) {
 				setIsActive(false);
 			}
 		};
@@ -26,27 +39,27 @@ const Select = memo((props) => {
 		};
 	}, []);
 
-	const scrollTimeoutRef = useRef(null);
+	const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-	const selectRef = useRef(null);
+	const selectRef = useRef<HTMLDivElement>(null);
 
 	const scrollUp = () => {
-		selectRef.current.scrollTo({
+		selectRef.current?.scrollTo({
 			top: 0,
 			behavior: 'smooth'
 		});
 	};
 
 	const handleMouseUp = () => {
-		clearInterval(scrollTimeoutRef.current);
+		clearInterval(scrollTimeoutRef.current as NodeJS.Timeout);
 	};
 
 	const assignFunction = () => {
-		scrollTimeoutRef.current = setInterval(scrollDown, 2);
+		scrollTimeoutRef.current = setInterval(scrollDown, 2) as NodeJS.Timeout;
 	};
 
 	const scrollDown = () => {
-		selectRef.current.scrollBy(0, 1);
+		selectRef.current?.scrollBy(0, 1);
 	};
 
 	const handleMouseDown = () => {
@@ -55,19 +68,21 @@ const Select = memo((props) => {
 
 	const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
 	const scrollerAtBottom = () => {
-		const scrollTop = selectRef.current.scrollTop;
-		const scrollHeight = selectRef.current.scrollHeight;
-		const clientHeight = selectRef.current.clientHeight;
-		scrollHeight <= clientHeight + scrollTop
-			? setIsScrollerAtBottom(true)
-			: setIsScrollerAtBottom(false);
+		const scrollTop = selectRef.current?.scrollTop;
+		const scrollHeight = selectRef.current?.scrollHeight;
+		const clientHeight = selectRef.current?.clientHeight;
+		if (scrollHeight && clientHeight && scrollTop){
+			scrollHeight <= clientHeight + scrollTop
+				? setIsScrollerAtBottom(true)
+				: setIsScrollerAtBottom(false);
+		}
 	};
 
 	return (
 		<div className={s.dropdown} ref={itemRef}>
 			<div
 				className={`${s.dropdown__button} ${isActive ? s.button__active : ''} ${
-					isThemeLight ? s.button__light : s.button__dark
+					isLightTheme ? s.button__light : s.button__dark
 				}`}
 				onClick={() => {
 					setIsActive(!isActive);
@@ -75,15 +90,15 @@ const Select = memo((props) => {
 				}}
 			>
 				<span className={s.button__text}>
-					{selected ? selected : props.defaultValue}
+					{selected ? selected : defaultValue}
 				</span>
 				<div className={s.button__icon}>
-					{props.value ? (
+					{value ? (
 						<div
 							className={s.button__close}
 							onClick={() => {
 								setSelected('');
-								props.setValue(0);
+								setValue(0);
 							}}
 						>
 							<Cross />
@@ -115,12 +130,12 @@ const Select = memo((props) => {
 			{isActive && (
 				<div
 					className={`${s.container} ${
-						isThemeLight ? s.container__light : s.container__dark
+						isLightTheme ? s.container__light : s.container__dark
 					}`}
 				>
 					<div
 						className={`${s.container__dividing_line} ${
-							isThemeLight ? s.dividing_line__light : s.dividing_line__dark
+							isLightTheme ? s.dividing_line__light : s.dividing_line__dark
 						}`}
 					/>
 					<div
@@ -128,18 +143,18 @@ const Select = memo((props) => {
 						onScroll={scrollerAtBottom}
 						className={s.content}
 					>
-						{props.options.map((option) => (
+						{options.map((option) => (
 							<div
 								key={option.id}
 								className={`${s.item} ${
-									isThemeLight ? s.item__light : s.item__dark
+									isLightTheme ? s.item__light : s.item__dark
 								}`}
 								onClick={() => {
-									props.setValue(option.id);
-									setSelected(option[props.selectedName]);
+									setValue(option.id);
+									setSelected(String(option[selectedName as keyof typeof option]));
 								}}
 							>
-								<span>{option[props.selectedName]}</span>
+								<span>{option[selectedName as keyof typeof option]}</span>
 								<div className={s.item__pointer}>
 									<Pointer />
 								</div>

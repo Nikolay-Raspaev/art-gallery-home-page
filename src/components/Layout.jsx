@@ -1,12 +1,12 @@
-import { useEffect, useContext } from "react";
-import { ThemeContext } from "../providers/ThemeProvider";
+import {useContext, useEffect} from "react";
+import {ThemeContext} from "../providers/ThemeProvider";
 
 const Layout = ({ children }) => {
-  const { isThemeLight } = useContext(ThemeContext);
+  const { isLightTheme } = useContext(ThemeContext);
 
   useEffect(() => {
-    localStorage.setItem("isLight", isThemeLight);
-  }, [isThemeLight]);
+    localStorage.setItem("isLight", isLightTheme);
+  }, [isLightTheme]);
 
   return <>{children}</>;
 };

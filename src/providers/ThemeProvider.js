@@ -1,15 +1,15 @@
-import { createContext, useMemo, useState } from 'react';
+import {createContext, useMemo, useState} from 'react';
 
-export const ThemeContext = createContext({ isThemeLight: true });
+export const ThemeContext = createContext({ isLightTheme: true });
 
 export const ThemeProvider = ({ children }) => {
-	const [isThemeLight, setIsThemeLight] = useState(
+	const [isLightTheme, setIsThemeLight] = useState(
 		localStorage.getItem('isLight') === 'true'
 	);
 
 	const value = useMemo(
-		() => ({ isThemeLight, setIsThemeLight }),
-		[isThemeLight]
+		() => ({ isLightTheme, setIsThemeLight }),
+		[isLightTheme]
 	);
 
 	return (

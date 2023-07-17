@@ -1,17 +1,17 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, {useCallback, useContext, useEffect, useState} from 'react';
 import s from './Main.module.scss';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
 import Filter from './components/Filter/Filter';
-import { useReplaceFieldsIdInPaintings } from './hooks/useReplaceFieldsIdInPaintings';
+import {useReplaceFieldsIdInPaintings} from './hooks/useReplaceFieldsIdInPaintings';
 import QueryService from './API/QueryService';
-import { getPageCount } from './components/utils/pages';
-import { ThemeContext } from '../../providers/ThemeProvider';
-import { host, limit } from './Consts';
+import {getPageCount} from './components/utils/pages';
+import {ThemeContext} from '../../providers/ThemeProvider';
+import {host, limit} from './Consts';
 import Header from './components/Header/Header';
 
 const Main = () => {
-	const { isThemeLight } = useContext(ThemeContext);
+	const { isLightTheme } = useContext(ThemeContext);
 
 	const [paintings, setPaintings] = useState([]);
 
@@ -53,7 +53,7 @@ const Main = () => {
 	}, []);
 
 	return (
-		<div className={`${s.page} ${isThemeLight ? s.page__light : s.page__dark}`}>
+		<div className={`${s.page} ${isLightTheme ? s.page__light : s.page__dark}`}>
 			<Header />
 			<Filter
 				changePage={changePage}

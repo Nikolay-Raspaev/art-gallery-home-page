@@ -1,16 +1,24 @@
-import React, { memo, useContext, useEffect, useRef, useState } from 'react';
+import React, {FC, memo, useContext, useEffect, useRef, useState} from 'react';
 import s from './SelectForInput.module.scss';
-import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
-import { ThemeContext } from '../../../../../../providers/ThemeProvider';
+import {ReactComponent as DownTriangle} from '../../../../../../svg/downTriangle.svg';
+import {ThemeContext} from '../../../../../../providers/ThemeProvider';
 
-const SelectForInput = memo((props) => {
-	const { isThemeLight } = useContext(ThemeContext);
+interface ISelectForInputProps {
+	value: {
+		before: string;
+		from: string;
+	};
+	setValue: React.Dispatch<React.SetStateAction<object>>;
+}
 
-	const itemRef = useRef(null);
+const SelectForInput: FC<ISelectForInputProps>  = memo(({value, setValue}) => {
+	const { isLightTheme } = useContext(ThemeContext);
+
+	const itemRef= useRef<HTMLDivElement>(null);
 
 	useEffect(() => {
-		const handleClickOutside = (event) => {
-			if (itemRef.current && !itemRef.current.contains(event.target)) {
+		const handleClickOutside = (event : MouseEvent | TouchEvent) => {
+			if (itemRef.current && !itemRef.current.contains(event.target as Node)) {
 				setIsActive(false);
 			}
 		};
@@ -20,15 +28,15 @@ const SelectForInput = memo((props) => {
 		};
 	}, []);
 
-	const changeValueFrom = (from) => {
-		if ((from > 0 && from.length < 5) || !from) {
-			props.setValue({ ...props.value, from: from });
+	const changeValueFrom = (from: string) => {
+		if ((parseInt(from) > 0 && String(from).length < 5) || !from) {
+			setValue({ ...value, from: from });
 		}
 	};
 
-	const changeValueBefore = (before) => {
-		if ((before > 0 && before.length < 5) || !before) {
-			props.setValue({ ...props.value, before: before });
+	const changeValueBefore = (before: string) => {
+		if ((parseInt(before) > 0 && String(before).length < 5) || !before) {
+			setValue({ ...value, before: before });
 		}
 	};
 
@@ -41,7 +49,7 @@ const SelectForInput = memo((props) => {
 					isActive ? s.button__is__activated : ''
 				}
               ${
-								isThemeLight
+								isLightTheme
 									? s.activation__button__light
 									: s.activation__button__dark
 							}`}
@@ -55,16 +63,16 @@ const SelectForInput = memo((props) => {
 			{isActive ? (
 				<div
 					className={`${s.content} ${
-						isThemeLight ? s.content__light : s.content__dark
+						isLightTheme ? s.content__light : s.content__dark
 					}`}
 				>
 					<input
-						className={`${s.input} ${isThemeLight ? s.input__light : ''}`}
+						className={`${s.input} ${isLightTheme ? s.input__light : ''}`}
 						placeholder='from'
 						type='number'
-						value={props.value.from}
+						value={value.from}
 						onKeyDown={(e) => {
-							if (e.key === '-') {
+							if (e.key === '-' || e.key === 'e') {
 								e.preventDefault();
 							}
 						}}
@@ -73,13 +81,13 @@ const SelectForInput = memo((props) => {
 					—
 					<input
 						className={`${s.input} ${
-							isThemeLight ? s.input__light : s.input__dark
+							isLightTheme ? s.input__light : s.input__dark
 						}`}
 						placeholder='before'
 						type='number'
-						value={props.value.before}
+						value={value.before}
 						onKeyDown={(e) => {
-							if (e.key === '-') {
+							if (e.key === '-' || e.key === 'e') {
 								e.preventDefault();
 							}
 						}}

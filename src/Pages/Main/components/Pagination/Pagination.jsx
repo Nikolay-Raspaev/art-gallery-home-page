@@ -1,12 +1,12 @@
-import React, { memo, useContext } from 'react';
+import React, {memo, useContext} from 'react';
 import s from './Pagination.module.scss';
-import { ReactComponent as AnglesLeft } from '../../../../svg/anglesLeft.svg';
-import { ReactComponent as AngleLeft } from '../../../../svg/angleLeft.svg';
-import { ThemeContext } from '../../../../providers/ThemeProvider';
-import { usePagination } from '../../hooks/usePagination';
+import {ReactComponent as AnglesLeft} from '../../../../svg/anglesLeft.svg';
+import {ReactComponent as AngleLeft} from '../../../../svg/angleLeft.svg';
+import {ThemeContext} from '../../../../providers/ThemeProvider';
+import {usePagination} from '../../hooks/usePagination';
 
 const Pagination = memo((props) => {
-	const { isThemeLight } = useContext(ThemeContext);
+	const { isLightTheme } = useContext(ThemeContext);
 
 	const paginationPages = usePagination(props.totalPages, props.currentPage);
 
@@ -14,7 +14,7 @@ const Pagination = memo((props) => {
 		<div className={s.pagination}>
 			<button
 				className={`${s.pagination__angel} ${s.double__left} ${
-					isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+					isLightTheme ? s.pagination__page__light : s.pagination__page__dark
 				}`}
 				disabled={1 === props.currentPage}
 				onClick={() => {
@@ -25,7 +25,7 @@ const Pagination = memo((props) => {
 			</button>
 			<button
 				className={`${s.pagination__angel} ${
-					isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+					isLightTheme ? s.pagination__page__light : s.pagination__page__dark
 				}`}
 				disabled={1 === props.currentPage}
 				onClick={() => {
@@ -37,7 +37,7 @@ const Pagination = memo((props) => {
 			{paginationPages.map((page) => (
 				<button
 					className={`${s.pagination__page} ${
-						isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+						isLightTheme ? s.pagination__page__light : s.pagination__page__dark
 					}`}
 					disabled={page === props.currentPage}
 					key={page}
@@ -50,7 +50,7 @@ const Pagination = memo((props) => {
 			))}
 			<button
 				className={`${s.pagination__angel} ${
-					isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+					isLightTheme ? s.pagination__page__light : s.pagination__page__dark
 				}`}
 				disabled={props.totalPages === props.currentPage}
 				onClick={() => {
@@ -61,7 +61,7 @@ const Pagination = memo((props) => {
 			</button>
 			<button
 				className={`${s.pagination__angel} ${s.double__right} ${
-					isThemeLight ? s.pagination__page__light : s.pagination__page__dark
+					isLightTheme ? s.pagination__page__light : s.pagination__page__dark
 				}`}
 				disabled={props.totalPages === props.currentPage}
 				onClick={() => {
