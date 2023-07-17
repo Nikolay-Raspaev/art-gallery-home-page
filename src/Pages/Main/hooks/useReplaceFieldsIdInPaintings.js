@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 export const useReplaceFieldsIdInPaintings = (
   paintings,
   authors,
-  locations,
+  locations
 ) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -11,16 +11,16 @@ export const useReplaceFieldsIdInPaintings = (
     setIsLoaded(false);
     const newPaintings = paintings?.map((painting) => {
       const currentAuthor = authors.find(
-        (author) => author.id === painting.authorId,
+        (author) => author.id === painting.authorId
       );
       const currentLocation = locations.find(
-        (location) => location.id === painting.locationId,
+        (location) => location.id === painting.locationId
       );
       if (currentLocation && currentAuthor) {
         return {
           location: currentLocation.location,
           author: currentAuthor.name,
-          ...painting,
+          ...painting
         };
       }
       return painting;

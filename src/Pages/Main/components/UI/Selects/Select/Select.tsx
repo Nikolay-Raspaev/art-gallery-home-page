@@ -159,7 +159,7 @@ const Select: FC<ISelectProps> = memo(
             >
               {options.map((option) => (
                 <div
-                  key={option.id} 
+                  key={option.id}
                   className={`${s.item} ${
                     isLightTheme ? s.item__light : s.item__dark
                   }`}

@@ -21,7 +21,7 @@ const Input: FC<IInput> = memo(
         maxLength={maxLength}
       />
     );
-  },
+  }
 );
 
 export default Input;

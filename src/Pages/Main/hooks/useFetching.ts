@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-export const useFetching = (callback: () => Promise<void>) => {
+export const useFetching = (
+  callback: () => Promise<void>
+): [() => Promise<void>, string] => {
   const [error, setError] = useState('');
 
   const fetching = async () => {
