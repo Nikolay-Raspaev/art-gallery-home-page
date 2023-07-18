@@ -25,23 +25,21 @@ const Select: FC<ISelectProps> = memo(
 
     const [selected, setSelected] = useState<string>('');
 
-    const toggleOpen = () => setIsActive(false);
-
-    useOutsideClick(itemRef, toggleOpen);
-
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
     const selectRef = useRef<HTMLDivElement>(null);
+
+    const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
+
+    const toggleOpen = () => setIsActive(false);
+
+    useOutsideClick(itemRef, toggleOpen);
 
     const scrollUp = () => {
       selectRef.current?.scrollTo({
         top: 0,
         behavior: 'smooth'
       });
-    };
-
-    const handleMouseUp = () => {
-      clearInterval(scrollTimeoutRef.current as NodeJS.Timeout);
     };
 
     const scrollDown = () => {
@@ -52,7 +50,9 @@ const Select: FC<ISelectProps> = memo(
       scrollTimeoutRef.current = setInterval(scrollDown, 2) as NodeJS.Timeout;
     };
 
-    const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
+    const handleMouseUp = () => {
+      clearInterval(scrollTimeoutRef.current as NodeJS.Timeout);
+    };
 
     const handleMouseDown = () => {
       isScrollerAtBottom ? scrollUp() : assignFunction();
