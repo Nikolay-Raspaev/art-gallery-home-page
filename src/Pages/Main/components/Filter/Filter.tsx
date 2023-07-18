@@ -1,4 +1,4 @@
-import React, { FC, memo, useEffect, useState } from 'react';
+import React, { FC, memo, useContext, useEffect, useState } from 'react';
 import { AxiosResponse } from 'axios';
 import Input from '../UI/Input/Input';
 import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
@@ -7,6 +7,7 @@ import s from './Filter.module.scss';
 import { useFetching } from '../../hooks/useFetching';
 import QueryService from '../../API/QueryService';
 import { IAuthor, IAxiosPainting, ILocation } from '../../API/Interface';
+import { ThemeContext } from '../../../../providers/ThemeProvider';
 
 interface IFilter {
   currentPage: number;
@@ -18,6 +19,8 @@ interface IFilter {
 
 const Filter: FC<IFilter> = memo(
   ({ currentPage, afterFetch, changePage, authors, locations }) => {
+    const { isLightTheme } = useContext(ThemeContext);
+
     const [selectedAuthorID, setSelectedAuthorId] = useState(0);
 
     const [selectedLocationId, setSelectedLocationId] = useState(0);
@@ -59,12 +62,14 @@ const Filter: FC<IFilter> = memo(
       <div className={s.filter}>
         {paintingError}
         <Input
+          isLightTheme={isLightTheme}
           placeholder="Name"
           maxLength={45}
           value={paintingName}
           setValue={setPaintingName}
         />
         <Select
+          isLightTheme={isLightTheme}
           value={selectedAuthorID}
           selectedName="name"
           setValue={setSelectedAuthorId}
@@ -72,13 +77,18 @@ const Filter: FC<IFilter> = memo(
           options={authors}
         />
         <Select
+          isLightTheme={isLightTheme}
           value={selectedLocationId}
           selectedName="location"
           setValue={setSelectedLocationId}
           defaultValue="Location"
           options={locations}
         />
-        <SelectForInput value={dateValue} setValue={setDateValue} />
+        <SelectForInput
+          isLightTheme={isLightTheme}
+          value={dateValue}
+          setValue={setDateValue}
+        />
       </div>
     );
   }

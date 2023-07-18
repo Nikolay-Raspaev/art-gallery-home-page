@@ -1,15 +1,7 @@
-import React, {
-  FC,
-  memo,
-  useContext,
-  useEffect,
-  useRef,
-  useState
-} from 'react';
+import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import s from './Select.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { ThemeContext } from '../../../../../../providers/ThemeProvider';
 import { IAuthor, ILocation } from '../../../../API/Interface';
 
 interface ISelectProps {
@@ -18,12 +10,11 @@ interface ISelectProps {
   setValue: React.Dispatch<React.SetStateAction<number>>;
   options: (IAuthor | ILocation)[];
   selectedName: string;
+  isLightTheme: boolean;
 }
 
 const Select: FC<ISelectProps> = memo(
-  ({ defaultValue, value, setValue, options, selectedName }) => {
-    const { isLightTheme } = useContext(ThemeContext);
-
+  ({ defaultValue, value, setValue, options, selectedName, isLightTheme }) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     const [isActive, setIsActive] = useState(false);
