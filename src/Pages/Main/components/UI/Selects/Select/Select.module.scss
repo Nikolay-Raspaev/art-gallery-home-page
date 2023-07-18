@@ -112,12 +112,6 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
     padding: 0.7rem;
     cursor: pointer;
     transition: all 0.2s;
-
-    .item__pointer {
-      visibility: hidden;
-      padding-right: 1rem;
-    }
-
     span {
       white-space: nowrap;
       overflow: hidden;
@@ -128,20 +122,10 @@ $dark-gray-color: rgba(0, 0, 0, 0.3);
   .item__light:hover {
     background: $dark-color;
     color: $white-color;
-
-    .item__pointer {
-      visibility: visible;
-      color: $white-color;
-    }
   }
 
   .item__dark:hover {
     background: $white-color;
     color: $dark-color;
-
-    .item__pointer {
-      visibility: visible;
-      color: $dark-color;
-    }
   }
 }

@@ -1,4 +1,5 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
+import { AxiosHeaders, AxiosResponse } from 'axios';
 import s from './Main.module.scss';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
@@ -7,19 +8,17 @@ import { useReplaceFieldsIdInPaintings } from './hooks/useReplaceFieldsIdInPaint
 import QueryService from './API/QueryService';
 import { getPageCount } from './components/utils/pages';
 import { ThemeContext } from '../../providers/ThemeProvider';
-import { host, limit } from './Consts';
 import Header from './components/Header/Header';
-import { AxiosResponse } from 'axios';
-import { IAxiosPainting } from './API/Interface';
+import { IAuthor, IAxiosPainting, ILocation } from './API/Interface';
 
 const Main = () => {
   const { isLightTheme } = useContext(ThemeContext);
 
-  const [paintings, setPaintings] = useState([]);
+  const [paintings, setPaintings] = useState<IAxiosPainting[]>([]);
 
-  const [authors, setAuthors] = useState([]);
+  const [authors, setAuthors] = useState<IAuthor[]>([]);
 
-  const [locations, setLocations] = useState([]);
+  const [locations, setLocations] = useState<ILocation[]>([]);
 
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,30 +29,28 @@ const Main = () => {
     authors,
     locations
   );
+  console.log(newPaintings);
 
   useEffect(() => {
-    getAuthors().then((authors) => setAuthors(authors));
-    getLocations().then((locations) => setLocations(locations));
+    QueryService.getAuthors().then((axiosAuthors) => setAuthors(axiosAuthors));
+    QueryService.getLocations().then((axiosLocations) =>
+      setLocations(axiosLocations)
+    );
   }, []);
 
   const afterFetch = useCallback(
     (response: AxiosResponse<IAxiosPainting[], any>) => {
       setPaintings(response.data);
-      const totalCount = response.headers.get('x-total-count');
-      setTotalPages(getPageCount(totalCount, limit));
+      const headers = response.headers as AxiosHeaders;
+      if (headers) {
+        const totalCount = headers.get('x-total-count');
+        setTotalPages(getPageCount(totalCount));
+      }
     },
     []
   );
 
-  const getAuthors = async () => {
-    return await QueryService.getAuthors(host);
-  };
-
-  const getLocations = async () => {
-    return await QueryService.getLocations(host);
-  };
-
-  const changePage = useCallback((value) => {
+  const changePage = useCallback((value: number) => {
     setCurrentPage(value);
   }, []);
 

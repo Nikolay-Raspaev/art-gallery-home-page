@@ -1,19 +1,19 @@
 import React, { FC, memo, useEffect, useState } from 'react';
+import { AxiosResponse } from 'axios';
 import Input from '../UI/Input/Input';
 import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
 import Select from '../UI/Selects/Select/Select';
 import s from './Filter.module.scss';
 import { useFetching } from '../../hooks/useFetching';
 import QueryService from '../../API/QueryService';
-import { AxiosResponse } from 'axios';
-import { IAxiosPainting } from '../../API/Interface';
+import { IAuthor, IAxiosPainting, ILocation } from '../../API/Interface';
 
 interface IFilter {
   currentPage: number;
   afterFetch: (response: AxiosResponse<IAxiosPainting[], any>) => void;
   changePage: (value: number) => void;
-  authors: [];
-  locations: [];
+  authors: IAuthor[];
+  locations: ILocation[];
 }
 
 const Filter: FC<IFilter> = memo(
@@ -28,7 +28,7 @@ const Filter: FC<IFilter> = memo(
 
     const [fetchPaintings, paintingError] = useFetching(async () => {
       const response = await QueryService.getPaintings({
-        currentPage: currentPage,
+        currentPage,
         selectedAuthorID,
         selectedLocationId,
         paintingName,

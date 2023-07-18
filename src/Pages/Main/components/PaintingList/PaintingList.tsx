@@ -6,8 +6,10 @@ interface IId {
   id: number;
 }
 
+export interface IPaintingProps extends IPainting, IId {}
+
 interface IPaintingList {
-  paintings: (IPainting & IId)[];
+  paintings: IPaintingProps[];
   isLoaded: boolean;
 }
 

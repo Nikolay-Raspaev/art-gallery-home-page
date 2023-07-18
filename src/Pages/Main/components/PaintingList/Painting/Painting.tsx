@@ -23,21 +23,19 @@ const Painting: FC<IPaintingProps> = ({ painting }) => (
       }}
     />
     <div className={s.catalog__painting__overlay}>
-      <p className={s.painting__name}>{painting.name}</p>
-      <div className={s.painting__field}>
-        <p>
-          <span>Author:</span>
-          {painting.author}
-        </p>
-        <p>
-          <span>Created:</span>
-          {painting.created}
-        </p>
-        <p>
-          <span>Location:</span>
-          {painting.location}
-        </p>
-      </div>
+      <h1 className={s.painting__name}>{painting.name}</h1>
+      <p>
+        <span>Author:</span>
+        {painting.author}
+      </p>
+      <p>
+        <span>Created:</span>
+        {painting.created}
+      </p>
+      <p>
+        <span>Location:</span>
+        {painting.location}
+      </p>
     </div>
   </div>
 );

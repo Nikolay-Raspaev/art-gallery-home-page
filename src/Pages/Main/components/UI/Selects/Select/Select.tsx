@@ -8,20 +8,15 @@ import React, {
 } from 'react';
 import s from './Select.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
-import { ReactComponent as Pointer } from '../../../../../../svg/pointer.svg';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
 import { ThemeContext } from '../../../../../../providers/ThemeProvider';
-
-type TOption = {
-  id: number;
-  name: string;
-};
+import { IAuthor, ILocation } from '../../../../API/Interface';
 
 interface ISelectProps {
   defaultValue: string;
   value: number;
   setValue: React.Dispatch<React.SetStateAction<number>>;
-  options: TOption[];
+  options: (IAuthor | ILocation)[];
   selectedName: string;
 }
 
@@ -171,9 +166,6 @@ const Select: FC<ISelectProps> = memo(
                   }}
                 >
                   <span>{option[selectedName as keyof typeof option]}</span>
-                  <div className={s.item__pointer}>
-                    <Pointer />
-                  </div>
                 </div>
               ))}
             </div>

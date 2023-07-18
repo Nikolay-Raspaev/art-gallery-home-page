@@ -1,1 +1,3 @@
-export const getPageCount = (totalCount, limit) => Math.ceil(totalCount / limit);
+import { limit } from '../../Consts';
+
+export const getPageCount = (totalCount) => Math.ceil(totalCount / limit);
