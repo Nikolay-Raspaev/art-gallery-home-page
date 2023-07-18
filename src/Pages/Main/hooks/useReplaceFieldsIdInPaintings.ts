@@ -19,15 +19,21 @@ export const useReplaceFieldsIdInPaintings = (
       );
       if (currentLocation && currentAuthor) {
         return {
+          id: painting.id,
           location: currentLocation.name,
           author: currentAuthor.name,
-          ...painting
+          created: painting.created,
+          imageUrl: painting.imageUrl,
+          name: painting.name
         };
       }
       return {
-        author: '',
+        id: painting.id,
         location: '',
-        ...painting
+        author: '',
+        created: painting.created,
+        imageUrl: painting.imageUrl,
+        name: painting.name
       };
     });
     setIsLoaded(true);
