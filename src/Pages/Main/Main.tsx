@@ -10,7 +10,7 @@ import QueryService from './API/QueryService';
 import { getPageCount } from './components/utils/pages';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import Header from './components/Header/Header';
-import { IAuthor, ILocation, IPainting } from '../Types/types';
+import { IOption, IPainting } from '../Types/types';
 import { useFetching } from './hooks/useFetching';
 import { FilterContext } from '../../providers/FilterProvider';
 
@@ -21,9 +21,9 @@ const Main = () => {
 
   const [paintings, setPaintings] = useState<IPainting[]>([]);
 
-  const [authors, setAuthors] = useState<IAuthor[]>([]);
+  const [authors, setAuthors] = useState<IOption[]>([]);
 
-  const [locations, setLocations] = useState<ILocation[]>([]);
+  const [locations, setLocations] = useState<IOption[]>([]);
 
   const [currentPage, setCurrentPage] = useState(1);
 

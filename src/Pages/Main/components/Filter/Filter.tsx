@@ -4,15 +4,15 @@ import Input from '../UI/Input/Input';
 import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
 import Select from '../UI/Selects/Select/Select';
 import styles from './Filter.module.scss';
-import { IAuthor, ILocation } from '../../../Types/types';
+import { IOption } from '../../../Types/types';
 import { ThemeContext } from '../../../../providers/ThemeProvider';
 import { FilterContext } from '../../../../providers/FilterProvider';
 
 const cx = cn.bind(styles);
 
 interface IFilter {
-  authors: IAuthor[];
-  locations: ILocation[];
+  authors: IOption[];
+  locations: IOption[];
 }
 
 const Filter: FC<IFilter> = memo(({ authors, locations }) => {
@@ -41,7 +41,6 @@ const Filter: FC<IFilter> = memo(({ authors, locations }) => {
       <Select
         isLightTheme={isLightTheme}
         value={selectedAuthorID}
-        selectedName="name"
         setValue={setSelectedAuthorId}
         defaultValue="Author"
         options={authors}
@@ -49,7 +48,6 @@ const Filter: FC<IFilter> = memo(({ authors, locations }) => {
       <Select
         isLightTheme={isLightTheme}
         value={selectedLocationId}
-        selectedName="location"
         setValue={setSelectedLocationId}
         defaultValue="Location"
         options={locations}

@@ -2,7 +2,7 @@ import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Select.module.scss';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { IAuthor, ILocation } from '../../../../../Types/types';
+import { IOption } from '../../../../../Types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 import SelectTriange from './SelectTriange/SelectTriange';
 
@@ -12,13 +12,12 @@ interface ISelectProps {
   defaultValue: string;
   value: number;
   setValue: (value: number) => void;
-  options: (IAuthor | ILocation)[];
-  selectedName: string;
+  options: IOption[];
   isLightTheme: boolean;
 }
 
 const Select: FC<ISelectProps> = memo(
-  ({ defaultValue, value, setValue, options, selectedName, isLightTheme }) => {
+  ({ defaultValue, value, setValue, options, isLightTheme }) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     const [isActive, setIsActive] = useState(false);
@@ -107,12 +106,10 @@ const Select: FC<ISelectProps> = memo(
                   })}
                   onClick={() => {
                     setValue(option.id);
-                    setSelected(
-                      String(option[selectedName as keyof typeof option])
-                    );
+                    setSelected(option.name);
                   }}
                 >
-                  <span>{option[selectedName as keyof typeof option]}</span>
+                  <span>{option.name}</span>
                 </div>
               ))}
             </div>

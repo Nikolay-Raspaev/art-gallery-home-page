@@ -1,15 +1,10 @@
 import { useMemo, useState } from 'react';
-import {
-  IAuthor,
-  ILocation,
-  IPainting,
-  IViewPainting
-} from '../../Types/types';
+import { IOption, IPainting, IViewPainting } from '../../Types/types';
 
 export const useReplaceFieldsIdInPaintings = (
   paintings: IPainting[],
-  authors: IAuthor[],
-  locations: ILocation[]
+  authors: IOption[],
+  locations: IOption[]
 ) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -24,7 +19,7 @@ export const useReplaceFieldsIdInPaintings = (
       );
       if (currentLocation && currentAuthor) {
         return {
-          location: currentLocation.location,
+          location: currentLocation.name,
           author: currentAuthor.name,
           ...painting
         };

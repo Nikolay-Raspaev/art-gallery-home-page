@@ -15,7 +15,7 @@ export interface IViewPainting {
   location: string;
 }
 
-export interface IAuthor {
+export interface IOption {
   id: number;
   name: string;
 }

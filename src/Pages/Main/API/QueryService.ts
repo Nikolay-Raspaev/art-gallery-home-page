@@ -1,5 +1,5 @@
 import { LIMIT } from '../Consts';
-import { DateValue, IAuthor, ILocation, IPainting } from '../../Types/types';
+import { DateValue, ILocation, IOption, IPainting } from '../../Types/types';
 import { instance } from './Instance';
 
 interface IIncomingParamsForPaintings {
@@ -37,10 +37,16 @@ export default class QueryService {
   }
 
   static async getLocations() {
-    return (await instance.get<ILocation[]>(`/locations`)).data;
+    return (await instance.get<ILocation[]>(`/locations`)).data?.map(
+      (obj) =>
+        <IOption>{
+          id: obj.id,
+          name: obj.location
+        }
+    );
   }
 
   static async getAuthors() {
-    return (await instance.get<IAuthor[]>(`/authors`)).data;
+    return (await instance.get<IOption[]>(`/authors`)).data;
   }
 }
