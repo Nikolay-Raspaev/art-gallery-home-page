@@ -1,5 +1,8 @@
 import React, { FC } from 'react';
-import s from './Painting.module.scss';
+import cn from 'classnames/bind';
+import styles from './Painting.module.scss';
+
+const cx = cn.bind(styles);
 
 export interface IPainting {
   imageUrl: string;
@@ -14,15 +17,15 @@ interface IPaintingProps {
 }
 
 const Painting: FC<IPaintingProps> = ({ painting }) => (
-  <div className={s.catalog__painting}>
+  <div className={cx('catalog__painting')}>
     <div
-      className={s.catalog__painting__img}
+      className={cx('catalog__painting__img')}
       style={{
         backgroundImage: `url(${process.env.REACT_APP_BASE_URL}${painting.imageUrl})`
       }}
     />
-    <div className={s.catalog__painting__overlay}>
-      <h1 className={s.painting__name}>{painting.name}</h1>
+    <div className={cx('catalog__painting__overlay')}>
+      <h1 className={cx('painting__name')}>{painting.name}</h1>
       <p>
         <span>Author:</span>
         {painting.author}

@@ -1,6 +1,9 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
-import s from './SelectForInput.module.scss';
+import cn from 'classnames/bind';
+import styles from './SelectForInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
+
+const cx = cn.bind(styles);
 
 export type DateValue = {
   before: string;
@@ -53,34 +56,34 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
     };
 
     return (
-      <div className={s.container} ref={itemRef}>
+      <div className={cx('container')} ref={itemRef}>
         <div
           role="button"
           tabIndex={0}
-          className={`${s.activation__button} ${
-            isActive ? s.button__is__activated : ''
-          }
-              ${
-                isLightTheme
-                  ? s.activation__button__light
-                  : s.activation__button__dark
-              }`}
+          className={cx('activation__button', {
+            button__is__activated: isActive,
+            activation__button__light: isLightTheme,
+            activation__button__dark: !isLightTheme
+          })}
           onClick={() => setIsActive(!isActive)}
           onKeyDown={() => setIsActive(!isActive)}
         >
           <span>Created</span>
-          <div className={s.open}>
+          <div className={cx('open')}>
             <DownTriangle />
           </div>
         </div>
         {isActive ? (
           <div
-            className={`${s.content} ${
-              isLightTheme ? s.content__light : s.content__dark
-            }`}
+            className={cx('content', {
+              content__light: isLightTheme,
+              content__dark: !isLightTheme
+            })}
           >
             <input
-              className={`${s.input} ${isLightTheme ? s.input__light : ''}`}
+              className={cx('input', {
+                input__light: isLightTheme
+              })}
               placeholder="from"
               type="number"
               value={value.from}
@@ -93,9 +96,10 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
             />
             —
             <input
-              className={`${s.input} ${
-                isLightTheme ? s.input__light : s.input__dark
-              }`}
+              className={cx('input', {
+                input__light: isLightTheme,
+                input__dark: !isLightTheme
+              })}
               placeholder="before"
               type="number"
               value={value.before}

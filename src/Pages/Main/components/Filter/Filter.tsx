@@ -1,11 +1,14 @@
 import React, { FC, memo, useContext } from 'react';
+import cn from 'classnames/bind';
 import Input from '../UI/Input/Input';
 import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
 import Select from '../UI/Selects/Select/Select';
-import s from './Filter.module.scss';
+import styles from './Filter.module.scss';
 import { IAuthor, ILocation } from '../../API/Interface';
 import { ThemeContext } from '../../../../providers/ThemeProvider';
 import { FilterContext } from '../../../../providers/FilterProvider';
+
+const cx = cn.bind(styles);
 
 interface IFilter {
   authors: IAuthor[];
@@ -27,7 +30,7 @@ const Filter: FC<IFilter> = memo(({ authors, locations }) => {
   } = useContext(FilterContext);
 
   return (
-    <div className={s.filter}>
+    <div className={cx('filter')}>
       <Input
         isLightTheme={isLightTheme}
         placeholder="Name"

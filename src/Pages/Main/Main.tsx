@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AxiosHeaders } from 'axios';
-import s from './Main.module.scss';
+import cn from 'classnames/bind';
+import styles from './Main.module.scss';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
 import Filter from './components/Filter/Filter';
@@ -12,6 +13,8 @@ import Header from './components/Header/Header';
 import { IAuthor, IAxiosPainting, ILocation } from './API/Interface';
 import { useFetching } from './hooks/useFetching';
 import { FilterContext } from '../../providers/FilterProvider';
+
+const cx = cn.bind(styles);
 
 const Main = () => {
   const { isLightTheme } = useContext(ThemeContext);
@@ -73,7 +76,12 @@ const Main = () => {
   }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   return (
-    <div className={`${s.page} ${isLightTheme ? s.page__light : s.page__dark}`}>
+    <div
+      className={cx('page', {
+        page__light: isLightTheme,
+        page__dark: !isLightTheme
+      })}
+    >
       <Header />
       <Filter authors={authors} locations={locations} />
       {paintingError ? (

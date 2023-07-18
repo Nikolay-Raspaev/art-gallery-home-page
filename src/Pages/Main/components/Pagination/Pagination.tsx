@@ -1,9 +1,12 @@
 import React, { FC, memo, useContext } from 'react';
-import s from './Pagination.module.scss';
+import cn from 'classnames/bind';
+import styles from './Pagination.module.scss';
 import { ReactComponent as AnglesLeft } from '../../../../svg/anglesLeft.svg';
 import { ReactComponent as AngleLeft } from '../../../../svg/angleLeft.svg';
 import { ThemeContext } from '../../../../providers/ThemeProvider';
 import { usePagination } from '../../hooks/usePagination';
+
+const cx = cn.bind(styles);
 
 interface IPagination {
   totalPages: number;
@@ -18,12 +21,13 @@ const Pagination: FC<IPagination> = memo(
     const paginationPages = usePagination(totalPages, currentPage);
 
     return (
-      <div className={s.pagination}>
+      <div className={cx('pagination')}>
         <button
           type="button"
-          className={`${s.pagination__angel} ${s.double__left} ${
-            isLightTheme ? s.pagination__page__light : s.pagination__page__dark
-          }`}
+          className={cx('pagination__angel', 'double__left', {
+            pagination__page__light: isLightTheme,
+            pagination__page__dark: !isLightTheme
+          })}
           disabled={currentPage === 1}
           onClick={() => {
             setCurrentPage(1);
@@ -33,9 +37,10 @@ const Pagination: FC<IPagination> = memo(
         </button>
         <button
           type="button"
-          className={`${s.pagination__angel} ${
-            isLightTheme ? s.pagination__page__light : s.pagination__page__dark
-          }`}
+          className={cx('pagination__angel', {
+            pagination__page__light: isLightTheme,
+            pagination__page__dark: !isLightTheme
+          })}
           disabled={currentPage === 1}
           onClick={() => {
             setCurrentPage(currentPage - 1);
@@ -46,11 +51,10 @@ const Pagination: FC<IPagination> = memo(
         {paginationPages.map((page) => (
           <button
             type="button"
-            className={`${s.pagination__page} ${
-              isLightTheme
-                ? s.pagination__page__light
-                : s.pagination__page__dark
-            }`}
+            className={cx('pagination__page', {
+              pagination__page__light: isLightTheme,
+              pagination__page__dark: !isLightTheme
+            })}
             disabled={page === currentPage}
             key={page}
             onClick={() => {
@@ -62,9 +66,10 @@ const Pagination: FC<IPagination> = memo(
         ))}
         <button
           type="button"
-          className={`${s.pagination__angel} ${
-            isLightTheme ? s.pagination__page__light : s.pagination__page__dark
-          }`}
+          className={cx('pagination__angel', {
+            pagination__page__light: isLightTheme,
+            pagination__page__dark: !isLightTheme
+          })}
           disabled={totalPages === currentPage}
           onClick={() => {
             setCurrentPage(currentPage + 1);
@@ -74,9 +79,10 @@ const Pagination: FC<IPagination> = memo(
         </button>
         <button
           type="button"
-          className={`${s.pagination__angel} ${s.double__right} ${
-            isLightTheme ? s.pagination__page__light : s.pagination__page__dark
-          }`}
+          className={cx('pagination__angel', 'double__right', {
+            pagination__page__light: isLightTheme,
+            pagination__page__dark: !isLightTheme
+          })}
           disabled={totalPages === currentPage}
           onClick={() => {
             setCurrentPage(totalPages);

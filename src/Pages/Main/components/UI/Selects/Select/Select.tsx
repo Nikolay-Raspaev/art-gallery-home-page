@@ -1,8 +1,11 @@
 import React, { FC, memo, useEffect, useRef, useState } from 'react';
-import s from './Select.module.scss';
+import cn from 'classnames/bind';
+import styles from './Select.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
 import { IAuthor, ILocation } from '../../../../API/Interface';
+
+const cx = cn.bind(styles);
 
 interface ISelectProps {
   defaultValue: string;
@@ -77,21 +80,23 @@ const Select: FC<ISelectProps> = memo(
     };
 
     return (
-      <div className={s.dropdown} ref={itemRef}>
+      <div className={cx('dropdown')} ref={itemRef}>
         <div
-          className={`${s.dropdown__button} ${
-            isActive ? s.button__active : ''
-          } ${isLightTheme ? s.button__light : s.button__dark}`}
+          className={cx('dropdown__button', {
+            button__active: isActive,
+            button__light: isLightTheme,
+            button__dark: !isLightTheme
+          })}
           onClick={() => {
             setIsActive(!isActive);
             setIsScrollerAtBottom(false);
           }}
         >
-          <span className={s.button__text}>{selected || defaultValue}</span>
-          <div className={s.button__icon}>
+          <span className={cx('button__text')}>{selected || defaultValue}</span>
+          <div className={cx('button__icon')}>
             {value ? (
               <div
-                className={s.button__close}
+                className={cx('button__close')}
                 onClick={() => {
                   setSelected('');
                   setValue(0);
@@ -104,7 +109,7 @@ const Select: FC<ISelectProps> = memo(
             )}
             {isActive ? (
               <div
-                className={s.button__open}
+                className={cx('button__open')}
                 onClick={(e) => e.stopPropagation()}
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
@@ -121,7 +126,7 @@ const Select: FC<ISelectProps> = memo(
                 )}
               </div>
             ) : (
-              <div className={s.button__open}>
+              <div className={cx('button__open')}>
                 <DownTriangle />
               </div>
             )}
@@ -129,26 +134,29 @@ const Select: FC<ISelectProps> = memo(
         </div>
         {isActive && (
           <div
-            className={`${s.container} ${
-              isLightTheme ? s.container__light : s.container__dark
-            }`}
+            className={cx('container', {
+              container__light: isLightTheme,
+              container__dark: !isLightTheme
+            })}
           >
             <div
-              className={`${s.container__dividing_line} ${
-                isLightTheme ? s.dividing_line__light : s.dividing_line__dark
-              }`}
+              className={cx('container__dividing_line', {
+                dividing_line__light: isLightTheme,
+                dividing_line__dark: !isLightTheme
+              })}
             />
             <div
               ref={selectRef}
               onScroll={scrollerAtBottom}
-              className={s.content}
+              className={cx('content')}
             >
               {options.map((option) => (
                 <div
                   key={option.id}
-                  className={`${s.item} ${
-                    isLightTheme ? s.item__light : s.item__dark
-                  }`}
+                  className={cx('item', {
+                    item__light: isLightTheme,
+                    item__dark: !isLightTheme
+                  })}
                   onClick={() => {
                     setValue(option.id);
                     setSelected(

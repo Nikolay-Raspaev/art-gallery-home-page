@@ -1,5 +1,8 @@
 import React, { FC, memo } from 'react';
-import s from './Input.module.scss';
+import cn from 'classnames/bind';
+import styles from './Input.module.scss';
+
+const cx = cn.bind(styles);
 
 interface IInput {
   value: string;
@@ -12,7 +15,10 @@ interface IInput {
 const Input: FC<IInput> = memo(
   ({ value, setValue, placeholder, maxLength, isLightTheme }) => (
     <input
-      className={`${s.input__name} ${isLightTheme ? s.light : s.dark}`}
+      className={cx('input__name', {
+        light: isLightTheme,
+        dark: !isLightTheme
+      })}
       value={value}
       onChange={(event) => setValue(event.target.value)}
       placeholder={placeholder}
