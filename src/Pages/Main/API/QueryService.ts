@@ -1,8 +1,8 @@
-import { limit } from '../Consts';
+import { LIMIT } from '../Consts';
 import { DateValue, IAuthor, ILocation, IPainting } from '../../Types/types';
 import { instance } from './Instance';
 
-interface incomingParamsForPaintings {
+interface IIncomingParamsForPaintings {
   currentPage: number;
   selectedAuthorID: number;
   selectedLocationId: number;
@@ -12,11 +12,11 @@ interface incomingParamsForPaintings {
 
 export default class QueryService {
   static async getPaintings(
-    incomingParamsForPaintings: incomingParamsForPaintings
+    incomingParamsForPaintings: IIncomingParamsForPaintings
   ) {
     const params = {
       _page: incomingParamsForPaintings.currentPage,
-      _limit: limit,
+      _limit: LIMIT,
       ...(incomingParamsForPaintings.selectedAuthorID && {
         authorId: incomingParamsForPaintings.selectedAuthorID
       }),

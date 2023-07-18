@@ -1,4 +1,4 @@
-import { limit } from '../../Consts';
+import { LIMIT } from '../../Consts';
 
 export const getPageCount = (totalCount: number): number =>
-  Math.ceil(totalCount / limit);
+  Math.ceil(totalCount / LIMIT);
