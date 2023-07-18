@@ -1,12 +1,10 @@
 import Main from './Pages/Main/Main';
 import { ThemeProvider } from './providers/ThemeProvider';
 
-function App() {
-  return (
-    <ThemeProvider>
-      <Main />
-    </ThemeProvider>
-  );
-}
+const App = () => (
+  <ThemeProvider>
+    <Main />
+  </ThemeProvider>
+);
 
 export default App;

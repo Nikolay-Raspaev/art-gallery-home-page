@@ -1,11 +1,11 @@
-import axios from 'axios';
-import { host, limit } from '../Consts';
+import { limit } from '../Consts';
 import { IAxiosPainting } from './Interface';
+import { instance } from './Instance';
 
 export default class QueryService {
   // @ts-ignore
   static async getPaintings(incomingParams) {
-    const url = `${host}/paintings`;
+    const url = `/paintings`;
     const params = {
       _page: incomingParams.currentPage,
       _limit: limit,
@@ -25,14 +25,14 @@ export default class QueryService {
         created_lte: incomingParams.dateValue?.before
       })
     };
-    return axios.get<IAxiosPainting[]>(url, { params });
+    return instance.get<IAxiosPainting[]>(url, { params });
   }
 
   static async getLocations() {
-    return (await axios.get(`${host}/locations`)).data;
+    return (await instance.get(`/locations`)).data;
   }
 
   static async getAuthors() {
-    return (await axios.get(`${host}/authors`)).data;
+    return (await instance.get(`/authors`)).data;
   }
 }

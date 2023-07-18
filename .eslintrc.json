@@ -33,6 +33,7 @@
         "unnamedComponents": "arrow-function"
       }
     ],
-    "function-paren-newline": "off"
+    "function-paren-newline": "off",
+    "@typescript-eslint/quotes": "off"
   }
 }

@@ -14,7 +14,7 @@ interface IThemeProvider {
   children: ReactNode;
 }
 
-export function ThemeProvider({ children }: IThemeProvider) {
+export const ThemeProvider: React.FC<IThemeProvider> = ({ children }) => {
   const [isLightTheme, setIsThemeLight] = useState(
     localStorage.getItem('isLight') === 'true'
   );
@@ -34,4 +34,4 @@ export function ThemeProvider({ children }: IThemeProvider) {
   return (
     <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>
   );
-}
+};

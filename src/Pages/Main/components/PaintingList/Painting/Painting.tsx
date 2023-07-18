@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import s from './Painting.module.scss';
-import { host } from '../../../Consts';
 
 export interface IPainting {
   imageUrl: string;
@@ -19,7 +18,7 @@ const Painting: FC<IPaintingProps> = ({ painting }) => (
     <div
       className={s.catalog__painting__img}
       style={{
-        backgroundImage: `url(${host}${painting.imageUrl})`
+        backgroundImage: `url(${process.env.REACT_APP_BASE_URL}${painting.imageUrl})`
       }}
     />
     <div className={s.catalog__painting__overlay}>

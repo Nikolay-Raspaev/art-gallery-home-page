@@ -29,7 +29,6 @@ const Main = () => {
     authors,
     locations
   );
-  console.log(newPaintings);
 
   useEffect(() => {
     QueryService.getAuthors().then((axiosAuthors) => setAuthors(axiosAuthors));
@@ -43,7 +42,7 @@ const Main = () => {
       setPaintings(response.data);
       const headers = response.headers as AxiosHeaders;
       if (headers) {
-        const totalCount = headers.get('x-total-count');
+        const totalCount = Number(headers.get('x-total-count'));
         setTotalPages(getPageCount(totalCount));
       }
     },
