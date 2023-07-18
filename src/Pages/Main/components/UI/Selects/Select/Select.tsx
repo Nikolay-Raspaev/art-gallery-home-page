@@ -1,10 +1,10 @@
 import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Select.module.scss';
-import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
 import { IAuthor, ILocation } from '../../../../../Types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
+import SelectTriange from './SelectTriange/SelectTriange';
 
 const cx = cn.bind(styles);
 
@@ -25,8 +25,6 @@ const Select: FC<ISelectProps> = memo(
 
     const [selected, setSelected] = useState<string>('');
 
-    const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-
     const selectRef = useRef<HTMLDivElement>(null);
 
     const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
@@ -34,29 +32,6 @@ const Select: FC<ISelectProps> = memo(
     const toggleOpen = () => setIsActive(false);
 
     useOutsideClick(itemRef, toggleOpen);
-
-    const scrollUp = () => {
-      selectRef.current?.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    };
-
-    const scrollDown = () => {
-      selectRef.current?.scrollBy(0, 1);
-    };
-
-    const assignFunction = () => {
-      scrollTimeoutRef.current = setInterval(scrollDown, 2) as NodeJS.Timeout;
-    };
-
-    const handleMouseUp = () => {
-      clearInterval(scrollTimeoutRef.current as NodeJS.Timeout);
-    };
-
-    const handleMouseDown = () => {
-      isScrollerAtBottom ? scrollUp() : assignFunction();
-    };
 
     const scrollerAtBottom = () => {
       const scrollTop = selectRef.current?.scrollTop;
@@ -97,29 +72,12 @@ const Select: FC<ISelectProps> = memo(
             ) : (
               ''
             )}
-            {isActive ? (
-              <div
-                className={cx('button__open')}
-                onClick={(e) => e.stopPropagation()}
-                onMouseDown={handleMouseDown}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseUp}
-              >
-                {isScrollerAtBottom ? (
-                  <DownTriangle
-                    style={{
-                      transform: 'rotate(180deg)'
-                    }}
-                  />
-                ) : (
-                  <DownTriangle />
-                )}
-              </div>
-            ) : (
-              <div className={cx('button__open')}>
-                <DownTriangle />
-              </div>
-            )}
+            <SelectTriange
+              isActive={isActive}
+              className={styles.button__open}
+              selectRef={selectRef}
+              isScrollerAtBottom={isScrollerAtBottom}
+            />
           </div>
         </div>
         {isActive && (
