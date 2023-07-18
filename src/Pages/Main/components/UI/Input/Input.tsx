@@ -3,7 +3,7 @@ import s from './Input.module.scss';
 
 interface IInput {
   value: string;
-  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setValue: (value: string) => void;
   placeholder: string;
   maxLength: number;
   isLightTheme: boolean;

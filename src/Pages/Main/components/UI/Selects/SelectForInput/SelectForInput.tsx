@@ -2,17 +2,14 @@ import React, { FC, memo, useEffect, useRef, useState } from 'react';
 import s from './SelectForInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 
-interface DateValue {
+export type DateValue = {
   before: string;
   from: string;
-}
+};
 
 interface ISelectForInputProps {
-  value: {
-    before: string;
-    from: string;
-  };
-  setValue: React.Dispatch<React.SetStateAction<DateValue>>;
+  value: DateValue;
+  setValue: (DateValue: DateValue) => void;
   isLightTheme: boolean;
 }
 

@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { AxiosHeaders, AxiosResponse } from 'axios';
+import React, { useContext, useEffect, useState } from 'react';
+import { AxiosHeaders } from 'axios';
 import s from './Main.module.scss';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
@@ -10,6 +10,8 @@ import { getPageCount } from './components/utils/pages';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import Header from './components/Header/Header';
 import { IAuthor, IAxiosPainting, ILocation } from './API/Interface';
+import { useFetching } from './hooks/useFetching';
+import { FilterContext } from '../../providers/FilterProvider';
 
 const Main = () => {
   const { isLightTheme } = useContext(ThemeContext);
@@ -24,6 +26,9 @@ const Main = () => {
 
   const [totalPages, setTotalPages] = useState(0);
 
+  const { selectedAuthorID, selectedLocationId, paintingName, dateValue } =
+    useContext(FilterContext);
+
   const [newPaintings, isLoaded] = useReplaceFieldsIdInPaintings(
     paintings,
     authors,
@@ -37,33 +42,45 @@ const Main = () => {
     );
   }, []);
 
-  const afterFetch = useCallback(
-    (response: AxiosResponse<IAxiosPainting[], any>) => {
-      setPaintings(response.data);
-      const headers = response.headers as AxiosHeaders;
-      if (headers) {
-        const totalCount = Number(headers.get('x-total-count'));
-        setTotalPages(getPageCount(totalCount));
-      }
-    },
-    []
-  );
+  const [fetchPaintings, paintingError] = useFetching(async () => {
+    const response = await QueryService.getPaintings({
+      currentPage,
+      selectedAuthorID,
+      selectedLocationId,
+      paintingName,
+      dateValue
+    });
+    setPaintings(response.data);
+    const headers = response.headers as AxiosHeaders;
+    if (headers) {
+      const totalCount = Number(headers.get('x-total-count'));
+      setTotalPages(getPageCount(totalCount));
+    }
+  });
 
-  const changePage = useCallback((value: number) => {
-    setCurrentPage(value);
-  }, []);
+  useEffect(() => {
+    fetchPaintings();
+  }, [
+    currentPage,
+    selectedAuthorID,
+    selectedLocationId,
+    dateValue,
+    paintingName
+  ]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
 
   return (
     <div className={`${s.page} ${isLightTheme ? s.page__light : s.page__dark}`}>
       <Header />
-      <Filter
-        changePage={changePage}
-        afterFetch={afterFetch}
-        currentPage={currentPage}
-        authors={authors}
-        locations={locations}
-      />
-      <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
+      <Filter authors={authors} locations={locations} />
+      {paintingError ? (
+        <div>{paintingError}</div>
+      ) : (
+        <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
+      )}
       {newPaintings.length !== 0 && (
         <Pagination
           currentPage={currentPage}

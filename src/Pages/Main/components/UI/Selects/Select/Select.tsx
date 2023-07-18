@@ -7,7 +7,7 @@ import { IAuthor, ILocation } from '../../../../API/Interface';
 interface ISelectProps {
   defaultValue: string;
   value: number;
-  setValue: React.Dispatch<React.SetStateAction<number>>;
+  setValue: (value: number) => void;
   options: (IAuthor | ILocation)[];
   selectedName: string;
   isLightTheme: boolean;
