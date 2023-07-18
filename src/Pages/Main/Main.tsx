@@ -10,7 +10,7 @@ import QueryService from './API/QueryService';
 import { getPageCount } from './components/utils/pages';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import Header from './components/Header/Header';
-import { IAuthor, IAxiosPainting, ILocation } from './API/Interface';
+import { IAuthor, ILocation, IPainting } from '../Types/types';
 import { useFetching } from './hooks/useFetching';
 import { FilterContext } from '../../providers/FilterProvider';
 
@@ -19,7 +19,7 @@ const cx = cn.bind(styles);
 const Main = () => {
   const { isLightTheme } = useContext(ThemeContext);
 
-  const [paintings, setPaintings] = useState<IAxiosPainting[]>([]);
+  const [paintings, setPaintings] = useState<IPainting[]>([]);
 
   const [authors, setAuthors] = useState<IAuthor[]>([]);
 
@@ -39,10 +39,8 @@ const Main = () => {
   );
 
   useEffect(() => {
-    QueryService.getAuthors().then((axiosAuthors) => setAuthors(axiosAuthors));
-    QueryService.getLocations().then((axiosLocations) =>
-      setLocations(axiosLocations)
-    );
+    QueryService.getAuthors().then((res) => setAuthors(res));
+    QueryService.getLocations().then((res) => setLocations(res));
   }, []);
 
   const [fetchPaintings, paintingError] = useFetching(async () => {
@@ -55,10 +53,8 @@ const Main = () => {
     });
     setPaintings(response.data);
     const headers = response.headers as AxiosHeaders;
-    if (headers) {
-      const totalCount = Number(headers.get('x-total-count'));
-      setTotalPages(getPageCount(totalCount));
-    }
+    const totalCount = Number(headers.get('x-total-count'));
+    setTotalPages(getPageCount(totalCount));
   });
 
   useEffect(() => {

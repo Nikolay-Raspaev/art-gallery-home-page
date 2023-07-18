@@ -1,38 +1,46 @@
 import { limit } from '../Consts';
-import { IAxiosPainting } from './Interface';
+import { DateValue, IAuthor, ILocation, IPainting } from '../../Types/types';
 import { instance } from './Instance';
 
+interface incomingParamsForPaintings {
+  currentPage: number;
+  selectedAuthorID: number;
+  selectedLocationId: number;
+  paintingName: string;
+  dateValue: DateValue;
+}
+
 export default class QueryService {
-  // @ts-ignore
-  static async getPaintings(incomingParams) {
-    const url = `/paintings`;
+  static async getPaintings(
+    incomingParamsForPaintings: incomingParamsForPaintings
+  ) {
     const params = {
-      _page: incomingParams.currentPage,
+      _page: incomingParamsForPaintings.currentPage,
       _limit: limit,
-      ...(incomingParams.selectedAuthorID && {
-        authorId: incomingParams.selectedAuthorID
+      ...(incomingParamsForPaintings.selectedAuthorID && {
+        authorId: incomingParamsForPaintings.selectedAuthorID
       }),
-      ...(incomingParams.selectedLocationId && {
-        locationId: incomingParams.selectedLocationId
+      ...(incomingParamsForPaintings.selectedLocationId && {
+        locationId: incomingParamsForPaintings.selectedLocationId
       }),
-      ...(incomingParams.paintingName && {
-        name: incomingParams.paintingName
+      ...(incomingParamsForPaintings.paintingName && {
+        name: incomingParamsForPaintings.paintingName
       }),
-      ...(incomingParams.dateValue?.from && {
-        created_gte: incomingParams.dateValue?.from
+      ...(incomingParamsForPaintings.dateValue?.from && {
+        created_gte: incomingParamsForPaintings.dateValue?.from
       }),
-      ...(incomingParams.dateValue?.before && {
-        created_lte: incomingParams.dateValue?.before
+      ...(incomingParamsForPaintings.dateValue?.before && {
+        created_lte: incomingParamsForPaintings.dateValue?.before
       })
     };
-    return instance.get<IAxiosPainting[]>(url, { params });
+    return instance.get<IPainting[]>('/paintings', { params });
   }
 
   static async getLocations() {
-    return (await instance.get(`/locations`)).data;
+    return (await instance.get<ILocation[]>(`/locations`)).data;
   }
 
   static async getAuthors() {
-    return (await instance.get(`/authors`)).data;
+    return (await instance.get<IAuthor[]>(`/authors`)).data;
   }
 }

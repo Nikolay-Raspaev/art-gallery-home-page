@@ -1,13 +1,13 @@
 import React, { createContext, ReactNode, useMemo, useState } from 'react';
-import { DateValue } from '../Pages/Main/components/UI/Selects/SelectForInput/SelectForInput';
+import { DateValue } from '../Pages/Types/types';
 
 interface IFilterContext {
   selectedAuthorID: number;
-  setSelectedAuthorId: (id: number) => void;
+  setSelectedAuthorId: (authorId: number) => void;
   selectedLocationId: number;
-  setSelectedLocationId: (id: number) => void;
+  setSelectedLocationId: (locationId: number) => void;
   paintingName: string;
-  setPaintingName: (id: string) => void;
+  setPaintingName: (paintingName: string) => void;
   dateValue: DateValue;
   setDateValue: (dateValue: DateValue) => void;
 }
@@ -28,7 +28,7 @@ interface IFilterProvider {
 }
 
 export const FilterProvider: React.FC<IFilterProvider> = ({ children }) => {
-  const [selectedAuthorID, setSelectedAuthorId] = useState<number>(0);
+  const [selectedAuthorID, setSelectedAuthorId] = useState(0);
 
   const [selectedLocationId, setSelectedLocationId] = useState(0);
 

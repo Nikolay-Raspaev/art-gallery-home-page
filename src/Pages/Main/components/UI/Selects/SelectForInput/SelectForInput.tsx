@@ -1,14 +1,11 @@
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './SelectForInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
+import { DateValue } from '../../../../../Types/types';
+import useOutsideClick from '../../../../hooks/useOutsideClick';
 
 const cx = cn.bind(styles);
-
-export type DateValue = {
-  before: string;
-  from: string;
-};
 
 interface ISelectForInputProps {
   value: DateValue;
@@ -22,20 +19,9 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
 
     const [isActive, setIsActive] = useState(false);
 
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-        if (
-          itemRef.current &&
-          !itemRef.current.contains(event.target as Node)
-        ) {
-          setIsActive(false);
-        }
-      };
-      document.addEventListener('mousedown', handleClickOutside);
-      return function cleanup() {
-        document.removeEventListener('mousedown', handleClickOutside);
-      };
-    }, []);
+    const toggleOpen = () => setIsActive(false);
+
+    useOutsideClick(itemRef, toggleOpen);
 
     const changeValueFrom = (from: string) => {
       if ((Number(from) > 0 && String(from).length < 5) || !from) {
@@ -70,7 +56,15 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
         >
           <span>Created</span>
           <div className={cx('open')}>
-            <DownTriangle />
+            {isActive ? (
+              <DownTriangle
+                style={{
+                  transform: 'rotate(180deg)'
+                }}
+              />
+            ) : (
+              <DownTriangle />
+            )}
           </div>
         </div>
         {isActive ? (

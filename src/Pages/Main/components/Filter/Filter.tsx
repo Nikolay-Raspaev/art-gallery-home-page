@@ -4,7 +4,7 @@ import Input from '../UI/Input/Input';
 import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
 import Select from '../UI/Selects/Select/Select';
 import styles from './Filter.module.scss';
-import { IAuthor, ILocation } from '../../API/Interface';
+import { IAuthor, ILocation } from '../../../Types/types';
 import { ThemeContext } from '../../../../providers/ThemeProvider';
 import { FilterContext } from '../../../../providers/FilterProvider';
 

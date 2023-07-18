@@ -1,19 +1,12 @@
 import React, { FC } from 'react';
 import cn from 'classnames/bind';
 import styles from './Painting.module.scss';
+import { IViewPainting } from '../../../../Types/types';
 
 const cx = cn.bind(styles);
 
-export interface IPainting {
-  imageUrl: string;
-  name: string;
-  author: string;
-  created: string;
-  location: string;
-}
-
 interface IPaintingProps {
-  painting: IPainting;
+  painting: IViewPainting;
 }
 
 const Painting: FC<IPaintingProps> = ({ painting }) => (

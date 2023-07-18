@@ -1,17 +1,21 @@
 import { useMemo, useState } from 'react';
-import { IAuthor, IAxiosPainting, ILocation } from '../API/Interface';
-import { IPaintingProps } from '../components/PaintingList/PaintingList';
+import {
+  IAuthor,
+  ILocation,
+  IPainting,
+  IViewPainting
+} from '../../Types/types';
 
 export const useReplaceFieldsIdInPaintings = (
-  paintings: IAxiosPainting[],
+  paintings: IPainting[],
   authors: IAuthor[],
   locations: ILocation[]
 ) => {
   const [isLoaded, setIsLoaded] = useState(false);
 
-  return useMemo((): [IPaintingProps[], boolean] => {
+  return useMemo((): [IViewPainting[], boolean] => {
     setIsLoaded(false);
-    const newPaintings: IPaintingProps[] = paintings?.map((painting) => {
+    const newPaintings: IViewPainting[] = paintings?.map((painting) => {
       const currentAuthor = authors.find(
         (author) => author.id === painting.authorId
       );
@@ -20,14 +24,12 @@ export const useReplaceFieldsIdInPaintings = (
       );
       if (currentLocation && currentAuthor) {
         return {
-          imageUrl: painting.imgUrl,
           location: currentLocation.location,
           author: currentAuthor.name,
           ...painting
         };
       }
       return {
-        imageUrl: painting.imgUrl,
         author: '',
         location: '',
         ...painting

@@ -4,7 +4,7 @@ import styles from './Input.module.scss';
 
 const cx = cn.bind(styles);
 
-interface IInput {
+interface IInputProps {
   value: string;
   setValue: (value: string) => void;
   placeholder: string;
@@ -12,7 +12,7 @@ interface IInput {
   isLightTheme: boolean;
 }
 
-const Input: FC<IInput> = memo(
+const Input: FC<IInputProps> = memo(
   ({ value, setValue, placeholder, maxLength, isLightTheme }) => (
     <input
       className={cx('input__name', {

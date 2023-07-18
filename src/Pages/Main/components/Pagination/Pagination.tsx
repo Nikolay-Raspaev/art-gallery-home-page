@@ -8,13 +8,13 @@ import { usePagination } from '../../hooks/usePagination';
 
 const cx = cn.bind(styles);
 
-interface IPagination {
+interface IPaginationProps {
   totalPages: number;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
 }
 
-const Pagination: FC<IPagination> = memo(
+const Pagination: FC<IPaginationProps> = memo(
   ({ totalPages, currentPage, setCurrentPage }) => {
     const { isLightTheme } = useContext(ThemeContext);
 

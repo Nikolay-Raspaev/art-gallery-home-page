@@ -1,9 +1,10 @@
-import React, { FC, memo, useEffect, useRef, useState } from 'react';
+import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Select.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { IAuthor, ILocation } from '../../../../API/Interface';
+import { IAuthor, ILocation } from '../../../../../Types/types';
+import useOutsideClick from '../../../../hooks/useOutsideClick';
 
 const cx = cn.bind(styles);
 
@@ -24,20 +25,9 @@ const Select: FC<ISelectProps> = memo(
 
     const [selected, setSelected] = useState<string>('');
 
-    useEffect(() => {
-      const handleClickOutside = (event: MouseEvent | TouchEvent) => {
-        if (
-          itemRef.current &&
-          !itemRef.current.contains(event.target as Node)
-        ) {
-          setIsActive(false);
-        }
-      };
-      document.addEventListener('click', handleClickOutside);
-      return function cleanup() {
-        document.removeEventListener('click', handleClickOutside);
-      };
-    }, []);
+    const toggleOpen = () => setIsActive(false);
+
+    useOutsideClick(itemRef, toggleOpen);
 
     const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 

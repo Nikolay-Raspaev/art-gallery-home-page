@@ -8,7 +8,7 @@ import { ThemeContext } from '../../../../providers/ThemeProvider';
 const cx = cn.bind(styles);
 
 const Header = memo(() => {
-  const { setIsThemeLight } = useContext(ThemeContext);
+  const { isLightTheme, setIsThemeLight } = useContext(ThemeContext);
   return (
     <div className={cx('page__svg')}>
       <img
@@ -18,7 +18,7 @@ const Header = memo(() => {
       />
       <Sun
         className={cx('page__svg__switch', 'svg')}
-        onClick={() => setIsThemeLight((theme) => !theme)}
+        onClick={() => setIsThemeLight(!isLightTheme)}
       />
     </div>
   );

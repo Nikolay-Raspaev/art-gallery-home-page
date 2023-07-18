@@ -6,8 +6,14 @@ import React, {
   useState
 } from 'react';
 
-export const ThemeContext = createContext({
-  isLightTheme: true
+interface IThemeContext {
+  isLightTheme: boolean;
+  setIsThemeLight: (theme: boolean) => void;
+}
+
+export const ThemeContext = createContext<IThemeContext>({
+  isLightTheme: true,
+  setIsThemeLight: () => {}
 });
 
 interface IThemeProvider {
