@@ -2,7 +2,7 @@ import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './SelectForInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
-import { DateValue } from '../../../../../Types/types';
+import { DateValue } from '../../../../Types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 
 const cx = cn.bind(styles);

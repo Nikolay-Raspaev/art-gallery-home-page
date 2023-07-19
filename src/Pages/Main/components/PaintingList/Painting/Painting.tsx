@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import cn from 'classnames/bind';
 import styles from './Painting.module.scss';
-import { IViewPainting } from '../../../../Types/types';
+import { IViewPainting } from '../../../Types/types';
 
 const cx = cn.bind(styles);
 

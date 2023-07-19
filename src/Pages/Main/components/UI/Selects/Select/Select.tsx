@@ -2,7 +2,7 @@ import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Select.module.scss';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { IOption } from '../../../../../Types/types';
+import { IOption } from '../../../../Types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 import SelectTriange from './SelectTriange/SelectTriange';
 
