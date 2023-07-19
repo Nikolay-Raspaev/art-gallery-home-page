@@ -1,3 +1,4 @@
+import { AxiosResponse } from 'axios';
 import { LIMIT } from '../Consts';
 import { DateValue, ILocation, IOption, IPainting } from '../types/types';
 import { instance } from './Instance';
@@ -13,7 +14,7 @@ interface IIncomingParamsForPaintings {
 export default class QueryService {
   static async getPaintings(
     incomingParamsForPaintings: IIncomingParamsForPaintings
-  ) {
+  ): Promise<AxiosResponse<IPainting[], any>> {
     const params = {
       _page: incomingParamsForPaintings.currentPage,
       _limit: LIMIT,
@@ -36,7 +37,7 @@ export default class QueryService {
     return instance.get<IPainting[]>('/paintings', { params });
   }
 
-  static async getLocations() {
+  static async getLocations(): Promise<IOption[]> {
     return (await instance.get<ILocation[]>(`/locations`)).data?.map(
       (obj) =>
         <IOption>{
@@ -46,7 +47,7 @@ export default class QueryService {
     );
   }
 
-  static async getAuthors() {
+  static async getAuthors(): Promise<IOption[]> {
     return (await instance.get<IOption[]>(`/authors`)).data;
   }
 }
