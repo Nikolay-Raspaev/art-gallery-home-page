@@ -2,7 +2,7 @@ import React, { FC, memo } from 'react';
 import cn from 'classnames/bind';
 import styles from './PaintingList.module.scss';
 import Painting from './Painting/Painting';
-import { IViewPainting } from '../../Types/types';
+import { IViewPainting } from '../../types/types';
 
 const cx = cn.bind(styles);
 

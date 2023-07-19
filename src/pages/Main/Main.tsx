@@ -10,7 +10,7 @@ import QueryService from './API/QueryService';
 import { getPageCount } from './components/utils/pages';
 import { ThemeContext } from '../../providers/ThemeProvider';
 import Header from './components/Header/Header';
-import { IOption, IPainting } from './Types/types';
+import { IOption, IPainting } from './types/types';
 import { useFetching } from './hooks/useFetching';
 import { FilterContext } from '../../providers/FilterProvider';
 

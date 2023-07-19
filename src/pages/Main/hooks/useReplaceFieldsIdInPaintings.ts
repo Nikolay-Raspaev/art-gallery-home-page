@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { IOption, IPainting, IViewPainting } from '../Types/types';
+import { IOption, IPainting, IViewPainting } from '../types/types';
 
 export const useReplaceFieldsIdInPaintings = (
   paintings: IPainting[],

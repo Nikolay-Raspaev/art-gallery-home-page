@@ -1,5 +1,5 @@
 import { LIMIT } from '../Consts';
-import { DateValue, ILocation, IOption, IPainting } from '../Types/types';
+import { DateValue, ILocation, IOption, IPainting } from '../types/types';
 import { instance } from './Instance';
 
 interface IIncomingParamsForPaintings {

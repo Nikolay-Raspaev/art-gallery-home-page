@@ -1,5 +1,5 @@
 import React, { createContext, ReactNode, useMemo, useState } from 'react';
-import { DateValue } from '../Pages/Main/Types/types';
+import { DateValue } from '../pages/Main/types/types';
 
 interface IFilterContext {
   selectedAuthorID: number;
