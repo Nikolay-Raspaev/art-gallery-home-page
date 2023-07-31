@@ -13,6 +13,8 @@ import Header from './components/Header/Header';
 import { IOption, IPainting } from './types/types';
 import { useFetching } from './hooks/useFetching';
 import { FilterContext } from '../../providers/FilterProvider';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions.jsx';
 
 const cx = cn.bind(styles);
 
@@ -32,6 +34,9 @@ const Main = () => {
   const { selectedAuthorID, selectedLocationId, paintingName, dateValue } =
     useContext(FilterContext);
 
+  const reduxAuthors = useTypedSelector((state) => state.option);
+  const { fetchAuthors } = useActions();
+  console.log(reduxAuthors);
   const [newPaintings, isLoaded] = useReplaceFieldsIdInPaintings(
     paintings,
     authors,
@@ -39,6 +44,7 @@ const Main = () => {
   );
 
   useEffect(() => {
+    fetchAuthors();
     QueryService.getAuthors().then((res) => setAuthors(res));
     QueryService.getLocations().then((res) => setLocations(res));
   }, []);
@@ -59,13 +65,7 @@ const Main = () => {
 
   useEffect(() => {
     fetchPaintings();
-  }, [
-    currentPage,
-    selectedAuthorID,
-    selectedLocationId,
-    dateValue,
-    paintingName
-  ]);
+  }, [currentPage, selectedAuthorID, selectedLocationId, dateValue, paintingName]);
 
   useEffect(() => {
     setCurrentPage(1);

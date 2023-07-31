@@ -92,11 +92,7 @@ const Select: FC<ISelectProps> = memo(
                 dividing_line__dark: !isLightTheme
               })}
             />
-            <div
-              ref={selectRef}
-              onScroll={scrollerAtBottom}
-              className={cx('content')}
-            >
+            <div ref={selectRef} onScroll={scrollerAtBottom} className={cx('content')}>
               {options.map((option) => (
                 <div
                   key={option.id}
