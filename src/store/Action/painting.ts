@@ -24,12 +24,10 @@ export const fetchPaintings = (
       const headers = response.headers as AxiosHeaders;
       const totalCount = Number(headers.get('x-total-count'));
       setTotalPage(getPageCount(totalCount));
-      setTimeout(() => {
-        dispatch({
-          type: PaintingActionTypes.FETCH_PAINTINGS_SUCCESS,
-          payload: response.data
-        });
-      }, 300);
+      dispatch({
+        type: PaintingActionTypes.FETCH_PAINTINGS_SUCCESS,
+        payload: response.data
+      });
     } catch (e) {
       dispatch({
         type: PaintingActionTypes.FETCH_PAINTINGS_ERROR,
