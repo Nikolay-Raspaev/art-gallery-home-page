@@ -28,6 +28,7 @@ const Main = () => {
   useEffect(() => {
     fetchAuthors();
     fetchLocations();
+    hbgbgub;
   }, []);
 
   useEffect(() => {
