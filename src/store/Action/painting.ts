@@ -8,6 +8,7 @@ import {
   IIncomingParamsForPaintings,
   removeEmptyKeys
 } from '../../pages/Main/API/QueryService';
+import { getPageCount } from '../../pages/Main/components/utils/pages';
 
 export const fetchPaintings = (
   incomingParamsForPaintings: IIncomingParamsForPaintings,
@@ -22,11 +23,13 @@ export const fetchPaintings = (
       });
       const headers = response.headers as AxiosHeaders;
       const totalCount = Number(headers.get('x-total-count'));
-      setTotalPage(totalCount);
-      dispatch({
-        type: PaintingActionTypes.FETCH_PAINTINGS_SUCCESS,
-        payload: response.data
-      });
+      setTotalPage(getPageCount(totalCount));
+      setTimeout(() => {
+        dispatch({
+          type: PaintingActionTypes.FETCH_PAINTINGS_SUCCESS,
+          payload: response.data
+        });
+      }, 300);
     } catch (e) {
       dispatch({
         type: PaintingActionTypes.FETCH_PAINTINGS_ERROR,
