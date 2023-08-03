@@ -8,7 +8,7 @@ import {
   IIncomingParamsForPaintings,
   removeEmptyKeys
 } from '../../pages/Main/API/QueryService';
-import { getPageCount } from '../../pages/Main/components/utils/pages';
+import { getPageCount } from '../../pages/Main/utils/pages';
 
 export const fetchPaintings = (
   incomingParamsForPaintings: IIncomingParamsForPaintings,

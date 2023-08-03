@@ -1,6 +1,6 @@
 import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
-import styles from './SelectForInput.module.scss';
+import styles from './DropoutsInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 
@@ -14,7 +14,7 @@ interface ISelectForInputProps {
   isLightTheme: boolean;
 }
 
-const SelectForInput: FC<ISelectForInputProps> = memo(
+const DropoutsInput: FC<ISelectForInputProps> = memo(
   ({ dateTo, dateFrom, setDateTo, setDateFrom, isLightTheme }) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
@@ -37,20 +37,18 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
     };
 
     return (
-      <div className={cx('container')} ref={itemRef}>
+      <div className={cx('DropoutsInput')} ref={itemRef}>
         <div
-          role="button"
-          tabIndex={0}
-          className={cx('activation__button', {
-            button__is__activated: isActive,
-            activation__button__light: isLightTheme,
-            activation__button__dark: !isLightTheme
+          className={cx('DropoutsInput__button', {
+            'DropoutsInput__button--activated': isActive,
+            'DropoutsInput__button--light': isLightTheme,
+            'DropoutsInput__button--dark': !isLightTheme
           })}
           onClick={() => setIsActive(!isActive)}
           onKeyDown={() => setIsActive(!isActive)}
         >
           <span>Created</span>
-          <div className={cx('open')}>
+          <div className={cx('DropoutsInput__arrow')}>
             {isActive ? (
               <DownTriangle
                 style={{
@@ -64,14 +62,14 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
         </div>
         {isActive ? (
           <div
-            className={cx('content', {
-              content__light: isLightTheme,
-              content__dark: !isLightTheme
+            className={cx('DropoutsInput__content', {
+              'DropoutsInput__content--light': isLightTheme,
+              'DropoutsInput__content--dark': !isLightTheme
             })}
           >
             <input
-              className={cx('input', {
-                input__light: isLightTheme
+              className={cx('DropoutsInput__input', {
+                'DropoutsInput__input--light': isLightTheme
               })}
               placeholder="from"
               type="number"
@@ -85,11 +83,10 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
             />
             —
             <input
-              className={cx('input', {
-                input__light: isLightTheme,
-                input__dark: !isLightTheme
+              className={cx('DropoutsInput__input', {
+                'DropoutsInput__input--light': isLightTheme
               })}
-              placeholder="to"
+              placeholder="before"
               type="number"
               value={dateTo}
               onKeyDown={(e) => {
@@ -108,4 +105,4 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
   }
 );
 
-export default SelectForInput;
+export default DropoutsInput;

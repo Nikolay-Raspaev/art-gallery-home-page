@@ -1,15 +1,16 @@
 import React, { FC, memo } from 'react';
 import cn from 'classnames/bind';
 import Input from '../UI/Input/Input';
-import SelectForInput from '../UI/Selects/SelectForInput/SelectForInput';
 import Select from '../UI/Selects/Select/Select';
 import styles from './Filter.module.scss';
 import { IAuthor, ILocation } from '../../types/types';
 import { useTypedSelector } from '../../../../store/hooks/useTypedSelector';
+import DropoutsInput from '../UI/Selects/DropoutsInput/DropoutsInput';
 
 const cx = cn.bind(styles);
 
 interface IFilter {
+  className: string;
   authors: IAuthor[];
   locations: ILocation[];
   paintingName: string;
@@ -26,6 +27,7 @@ interface IFilter {
 
 const Filter: FC<IFilter> = memo(
   ({
+    className,
     authors,
     locations,
     paintingName,
@@ -47,7 +49,7 @@ const Filter: FC<IFilter> = memo(
     }));
 
     return (
-      <div className={cx('filter')}>
+      <div className={cx('Filter', className)}>
         <Input
           isLightTheme={isLightTheme}
           placeholder="Name"
@@ -69,7 +71,7 @@ const Filter: FC<IFilter> = memo(
           defaultValue="Location"
           options={locationsToOption}
         />
-        <SelectForInput
+        <DropoutsInput
           isLightTheme={isLightTheme}
           dateTo={dateTo}
           dateFrom={dateFrom}

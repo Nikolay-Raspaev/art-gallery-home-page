@@ -7,6 +7,7 @@ import { IAuthor, ILocation, IPainting } from '../../types/types';
 const cx = cn.bind(styles);
 
 interface IPaintingListProps {
+  className: string;
   paintings: IPainting[];
   authors: IAuthor[];
   locations: ILocation[];
@@ -14,10 +15,10 @@ interface IPaintingListProps {
 }
 
 const PaintingList: FC<IPaintingListProps> = memo(
-  ({ paintings, authors, locations, loading }) => (
+  ({ className, paintings, authors, locations, loading }) => (
     <div
-      className={cx('catalog', {
-        paintingsLoaded: !loading
+      className={cx('PaintingList', className, {
+        'PaintingList--loaded': !loading
       })}
     >
       {paintings?.map((painting) => {

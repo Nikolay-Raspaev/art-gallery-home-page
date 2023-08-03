@@ -11,7 +11,6 @@ import { useActions } from '../../store/hooks/useActions.jsx';
 const cx = cn.bind(styles);
 
 const Main = () => {
-  const { isLightTheme } = useTypedSelector((state) => state.theme);
   const { authors } = useTypedSelector((state) => state.author);
   const { locations } = useTypedSelector((state) => state.location);
 
@@ -49,14 +48,10 @@ const Main = () => {
   }, [authorId, locationId, paintingName, dateFrom, dateTo]);
 
   return (
-    <div
-      className={cx('page', {
-        page__light: isLightTheme,
-        page__dark: !isLightTheme
-      })}
-    >
-      <Header />
+    <div className={cx('Main')}>
+      <Header className={styles.Main__Header} />
       <Filter
+        className={styles.Main__Filter}
         authors={authors}
         locations={locations}
         paintingName={paintingName}
@@ -74,6 +69,7 @@ const Main = () => {
         <div>{error}</div>
       ) : (
         <PaintingList
+          className={styles.Main__PaintingList}
           paintings={paintings}
           authors={authors}
           locations={locations}
@@ -82,6 +78,7 @@ const Main = () => {
       )}
       {paintings.length !== 0 && (
         <Pagination
+          className={styles.Main__Pagination}
           currentPage={currentPage}
           totalPages={totalPages}
           setCurrentPage={setCurrentPage}
