@@ -2,19 +2,20 @@ import React, { FC, memo, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './SelectForInput.module.scss';
 import { ReactComponent as DownTriangle } from '../../../../../../svg/downTriangle.svg';
-import { DateValue } from '../../../../types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 
 const cx = cn.bind(styles);
 
 interface ISelectForInputProps {
-  value: DateValue;
-  setValue: (DateValue: DateValue) => void;
+  dateTo: string;
+  dateFrom: string;
+  setDateTo: (date: string) => void;
+  setDateFrom: (date: string) => void;
   isLightTheme: boolean;
 }
 
 const SelectForInput: FC<ISelectForInputProps> = memo(
-  ({ value, setValue, isLightTheme }) => {
+  ({ dateTo, dateFrom, setDateTo, setDateFrom, isLightTheme }) => {
     const itemRef = useRef<HTMLDivElement>(null);
 
     const [isActive, setIsActive] = useState(false);
@@ -25,19 +26,13 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
 
     const changeValueFrom = (from: string) => {
       if ((Number(from) > 0 && String(from).length < 5) || !from) {
-        setValue({
-          ...value,
-          from
-        });
+        setDateFrom(from);
       }
     };
 
-    const changeValueBefore = (before: string) => {
-      if ((Number(before) > 0 && String(before).length < 5) || !before) {
-        setValue({
-          ...value,
-          before
-        });
+    const changeValueTo = (to: string) => {
+      if ((Number(to) > 0 && String(to).length < 5) || !to) {
+        setDateTo(to);
       }
     };
 
@@ -80,7 +75,7 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
               })}
               placeholder="from"
               type="number"
-              value={value.from}
+              value={dateFrom}
               onKeyDown={(e) => {
                 if (e.key === '-' || e.key === 'e') {
                   e.preventDefault();
@@ -94,15 +89,15 @@ const SelectForInput: FC<ISelectForInputProps> = memo(
                 input__light: isLightTheme,
                 input__dark: !isLightTheme
               })}
-              placeholder="before"
+              placeholder="to"
               type="number"
-              value={value.before}
+              value={dateTo}
               onKeyDown={(e) => {
                 if (e.key === '-' || e.key === 'e') {
                   e.preventDefault();
                 }
               }}
-              onChange={(event) => changeValueBefore(event.target.value)}
+              onChange={(event) => changeValueTo(event.target.value)}
             />
           </div>
         ) : (

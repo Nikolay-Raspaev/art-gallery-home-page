@@ -1,22 +1,22 @@
-import React, { FC, memo, useContext } from 'react';
+import React, { FC, memo } from 'react';
 import cn from 'classnames/bind';
 import styles from './Pagination.module.scss';
 import { ReactComponent as AnglesLeft } from '../../../../svg/anglesLeft.svg';
 import { ReactComponent as AngleLeft } from '../../../../svg/angleLeft.svg';
-import { ThemeContext } from '../../../../providers/ThemeProvider';
 import { usePagination } from '../../hooks/usePagination';
+import { useTypedSelector } from '../../../../store/hooks/useTypedSelector';
 
 const cx = cn.bind(styles);
 
 interface IPaginationProps {
   totalPages: number;
   currentPage: number;
-  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setCurrentPage: (page: number) => void;
 }
 
 const Pagination: FC<IPaginationProps> = memo(
   ({ totalPages, currentPage, setCurrentPage }) => {
-    const { isLightTheme } = useContext(ThemeContext);
+    const { isLightTheme } = useTypedSelector((state) => state.theme);
 
     const paginationPages = usePagination(totalPages, currentPage);
 

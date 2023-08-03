@@ -1,12 +1,16 @@
-import React, { FC, memo, useRef, useState } from 'react';
+import React, { FC, memo, useCallback, useRef, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Select.module.scss';
 import { ReactComponent as Cross } from '../../../../../../svg/cross.svg';
-import { IOption } from '../../../../types/types';
 import useOutsideClick from '../../../../hooks/useOutsideClick';
 import SelectTriange from './SelectTriange/SelectTriange';
 
 const cx = cn.bind(styles);
+
+export interface IOption {
+  id: number;
+  name: string;
+}
 
 interface ISelectProps {
   defaultValue: string;
@@ -28,7 +32,9 @@ const Select: FC<ISelectProps> = memo(
 
     const [isScrollerAtBottom, setIsScrollerAtBottom] = useState(false);
 
-    const toggleOpen = () => setIsActive(false);
+    const toggleOpen = useCallback(() => {
+      setIsActive(false);
+    }, []);
 
     useOutsideClick(itemRef, toggleOpen);
 

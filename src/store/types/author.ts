@@ -1,7 +1,7 @@
-import { IOption } from '../pages/Main/types/types';
+import { IAuthor } from '../../pages/Main/types/types';
 
 export interface AuthorState {
-  options: IOption[];
+  authors: IAuthor[];
   loading: boolean;
   error: null | string;
 }
@@ -17,7 +17,7 @@ export interface FetchAuthorsAction {
 
 export interface FetchAuthorsSuccessAction {
   type: AuthorActionTypes.FETCH_AUTHORS_SUCCESS;
-  payload: IOption[];
+  payload: IAuthor[];
 }
 
 export interface FetchAuthorsErrorAction {

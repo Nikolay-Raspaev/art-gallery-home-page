@@ -1,7 +1,8 @@
 {
   "extends": [
     "airbnb",
-    "airbnb-typescript"
+    "airbnb-typescript",
+    "plugin:react-hooks/recommended"
   ],
   "parserOptions": {
     "project": "./tsconfig.json"
@@ -27,6 +28,8 @@
     "react/prop-types": "off",
     "@typescript-eslint/default-param-last": "off",
     "linebreak-style": 0,
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "@typescript-eslint/no-unused-vars": "warn",
+    "no-underscore-dangle": "off"
   }
 }

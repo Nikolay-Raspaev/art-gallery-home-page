@@ -1,53 +1,34 @@
 import { AxiosResponse } from 'axios';
 import { instance } from './Instance';
+import { IAuthor, ILocation, IPainting } from '../types/types';
 import { LIMIT } from '../Consts';
-import { DateValue, ILocation, IOption, IPainting } from '../types/types';
 
-interface IIncomingParamsForPaintings {
-  currentPage: number;
-  selectedAuthorID: number;
-  selectedLocationId: number;
-  paintingName: string;
-  dateValue: DateValue;
-}
-
+export type IIncomingParamsForPaintings = {
+  _page: number;
+  authorId: number;
+  locationId: number;
+  name: string;
+  created_gte: string;
+  created_lte: string;
+};
+export const removeEmptyKeys = (obj: object) => {
+  return Object.fromEntries(Object.entries(obj).filter(([_, value]) => value));
+};
 export default class QueryService {
   static async getPaintings(
     incomingParamsForPaintings: IIncomingParamsForPaintings
   ): Promise<AxiosResponse<IPainting[], any>> {
-    const params = {
-      _page: incomingParamsForPaintings.currentPage,
-      _limit: LIMIT,
-      ...(incomingParamsForPaintings.selectedAuthorID && {
-        authorId: incomingParamsForPaintings.selectedAuthorID
-      }),
-      ...(incomingParamsForPaintings.selectedLocationId && {
-        locationId: incomingParamsForPaintings.selectedLocationId
-      }),
-      ...(incomingParamsForPaintings.paintingName && {
-        name: incomingParamsForPaintings.paintingName
-      }),
-      ...(incomingParamsForPaintings.dateValue?.from && {
-        created_gte: incomingParamsForPaintings.dateValue?.from
-      }),
-      ...(incomingParamsForPaintings.dateValue?.before && {
-        created_lte: incomingParamsForPaintings.dateValue?.before
-      })
-    };
-    return instance.get<IPainting[]>('/paintings', { params });
+    const params = removeEmptyKeys(incomingParamsForPaintings);
+    return instance.get<IPainting[]>('/paintings', {
+      params: { ...params, LIMIT }
+    });
   }
 
-  static async getLocations(): Promise<IOption[]> {
-    return (await instance.get<ILocation[]>(`/locations`)).data?.map(
-      (obj) =>
-        <IOption>{
-          id: obj.id,
-          name: obj.location
-        }
-    );
+  static async getLocations(): Promise<ILocation[]> {
+    return (await instance.get<ILocation[]>(`/locations`)).data;
   }
 
-  static async getAuthors(): Promise<IOption[]> {
-    return (await instance.get<IOption[]>(`/authors`)).data;
+  static async getAuthors(): Promise<IAuthor[]> {
+    return (await instance.get<IAuthor[]>(`/authors`)).data;
   }
 }

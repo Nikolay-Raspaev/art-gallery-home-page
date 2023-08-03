@@ -1,15 +1,17 @@
 import React, { FC } from 'react';
 import cn from 'classnames/bind';
 import styles from './Painting.module.scss';
-import { IViewPainting } from '../../../types/types';
+import { IPainting } from '../../../types/types';
 
 const cx = cn.bind(styles);
 
 interface IPaintingProps {
-  painting: IViewPainting;
+  painting: IPainting;
+  authorName: string;
+  locationName: string;
 }
 
-const Painting: FC<IPaintingProps> = ({ painting }) => (
+const Painting: FC<IPaintingProps> = ({ painting, authorName, locationName }) => (
   <div className={cx('catalog__painting')}>
     <div
       className={cx('catalog__painting__img')}
@@ -21,7 +23,7 @@ const Painting: FC<IPaintingProps> = ({ painting }) => (
       <h1 className={cx('painting__name')}>{painting.name}</h1>
       <p>
         <span>Author:</span>
-        {painting.author}
+        {authorName}
       </p>
       <p>
         <span>Created:</span>
@@ -29,7 +31,7 @@ const Painting: FC<IPaintingProps> = ({ painting }) => (
       </p>
       <p>
         <span>Location:</span>
-        {painting.location}
+        {locationName}
       </p>
     </div>
   </div>

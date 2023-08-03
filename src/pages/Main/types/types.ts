@@ -15,7 +15,7 @@ export interface IViewPainting {
   location: string;
 }
 
-export interface IOption {
+export interface IAuthor {
   id: number;
   name: string;
 }
@@ -26,6 +26,6 @@ export interface ILocation {
 }
 
 export type DateValue = {
-  before: string;
+  to: string;
   from: string;
 };

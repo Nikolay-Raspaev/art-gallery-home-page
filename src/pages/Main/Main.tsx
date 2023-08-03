@@ -1,75 +1,52 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { AxiosHeaders } from 'axios';
+import React, { useEffect, useState } from 'react';
 import cn from 'classnames/bind';
 import styles from './Main.module.scss';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
 import Filter from './components/Filter/Filter';
-import { useReplaceFieldsIdInPaintings } from './hooks/useReplaceFieldsIdInPaintings';
-import QueryService from './API/QueryService';
-import { getPageCount } from './components/utils/pages';
-import { ThemeContext } from '../../providers/ThemeProvider';
 import Header from './components/Header/Header';
-import { IOption, IPainting } from './types/types';
-import { useFetching } from './hooks/useFetching';
-import { FilterContext } from '../../providers/FilterProvider';
-import { useTypedSelector } from '../../hooks/useTypedSelector';
-import { useActions } from '../../hooks/useActions.jsx';
+import { useTypedSelector } from '../../store/hooks/useTypedSelector';
+import { useActions } from '../../store/hooks/useActions.jsx';
 
 const cx = cn.bind(styles);
 
 const Main = () => {
-  const { isLightTheme } = useContext(ThemeContext);
-
-  const [paintings, setPaintings] = useState<IPainting[]>([]);
-
-  const [authors, setAuthors] = useState<IOption[]>([]);
-
-  const [locations, setLocations] = useState<IOption[]>([]);
-
-  const [currentPage, setCurrentPage] = useState(1);
+  const { isLightTheme } = useTypedSelector((state) => state.theme);
+  const { authors } = useTypedSelector((state) => state.author);
+  const { locations } = useTypedSelector((state) => state.location);
 
   const [totalPages, setTotalPages] = useState(0);
-
-  const { selectedAuthorID, selectedLocationId, paintingName, dateValue } =
-    useContext(FilterContext);
-
-  const reduxAuthors = useTypedSelector((state) => state.option);
-  const { fetchAuthors } = useActions();
-  console.log(reduxAuthors);
-  const [newPaintings, isLoaded] = useReplaceFieldsIdInPaintings(
-    paintings,
-    authors,
-    locations
-  );
+  const [currentPage, setCurrentPage] = useState(1);
+  const [paintingName, setPaintingName] = useState('');
+  const [dateTo, setDateTo] = useState('');
+  const [dateFrom, setDateFrom] = useState('');
+  const [locationId, setLocationId] = useState(0);
+  const [authorId, setAuthorId] = useState(0);
+  const { paintings, loading, error } = useTypedSelector((state) => state.painting);
+  const { fetchAuthors, fetchLocations, fetchPaintings } = useActions();
 
   useEffect(() => {
     fetchAuthors();
-    QueryService.getAuthors().then((res) => setAuthors(res));
-    QueryService.getLocations().then((res) => setLocations(res));
+    fetchLocations();
   }, []);
 
-  const [fetchPaintings, paintingError] = useFetching(async () => {
-    const response = await QueryService.getPaintings({
-      currentPage,
-      selectedAuthorID,
-      selectedLocationId,
-      paintingName,
-      dateValue
-    });
-    setPaintings(response.data);
-    const headers = response.headers as AxiosHeaders;
-    const totalCount = Number(headers.get('x-total-count'));
-    setTotalPages(getPageCount(totalCount));
-  });
-
   useEffect(() => {
-    fetchPaintings();
-  }, [currentPage, selectedAuthorID, selectedLocationId, dateValue, paintingName]);
+    fetchPaintings(
+      {
+        _page: currentPage,
+        authorId,
+        locationId,
+        created_gte: dateFrom,
+        created_lte: dateTo,
+        name: paintingName
+      },
+      setTotalPages
+    );
+  }, [currentPage, authorId, locationId, dateFrom, dateTo, paintingName]);
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [selectedAuthorID, selectedLocationId, paintingName, dateValue]);
+  }, [authorId, locationId, paintingName, dateFrom, dateTo]);
 
   return (
     <div
@@ -79,13 +56,31 @@ const Main = () => {
       })}
     >
       <Header />
-      <Filter authors={authors} locations={locations} />
-      {paintingError ? (
-        <div>{paintingError}</div>
+      <Filter
+        authors={authors}
+        locations={locations}
+        paintingName={paintingName}
+        dateTo={dateTo}
+        dateFrom={dateFrom}
+        selectedLocationId={locationId}
+        selectedAuthorID={authorId}
+        setPaintingName={setPaintingName}
+        setAuthorId={setAuthorId}
+        setLocationId={setLocationId}
+        setDateTo={setDateTo}
+        setDateFrom={setDateFrom}
+      />
+      {error ? (
+        <div>{error}</div>
       ) : (
-        <PaintingList paintings={newPaintings} isLoaded={isLoaded} />
+        <PaintingList
+          paintings={paintings}
+          authors={authors}
+          locations={locations}
+          loading={loading}
+        />
       )}
-      {newPaintings.length !== 0 && (
+      {paintings.length !== 0 && (
         <Pagination
           currentPage={currentPage}
           totalPages={totalPages}
