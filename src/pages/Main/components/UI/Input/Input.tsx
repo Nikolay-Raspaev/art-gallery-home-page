@@ -12,19 +12,23 @@ interface IInputProps {
   isLightTheme: boolean;
 }
 
-const Input: FC<IInputProps> = memo(
-  ({ value, setValue, placeholder, maxLength, isLightTheme }) => (
-    <input
-      className={cx('Input', {
-        'Input--light': isLightTheme,
-        'Input--dark': !isLightTheme
-      })}
-      value={value}
-      onChange={(event) => setValue(event.target.value)}
-      placeholder={placeholder}
-      maxLength={maxLength}
-    />
-  )
+const Input: FC<IInputProps> = ({
+  value,
+  setValue,
+  placeholder,
+  maxLength,
+  isLightTheme
+}) => (
+  <input
+    className={cx('Input', {
+      'Input--light': isLightTheme,
+      'Input--dark': !isLightTheme
+    })}
+    value={value}
+    onChange={(event) => setValue(event.target.value)}
+    placeholder={placeholder}
+    maxLength={maxLength}
+  />
 );
 
-export default Input;
+export default memo(Input);

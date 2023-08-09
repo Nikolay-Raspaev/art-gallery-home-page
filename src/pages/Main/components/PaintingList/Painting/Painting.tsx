@@ -1,7 +1,7 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import cn from 'classnames/bind';
 import styles from './Painting.module.scss';
-import { IPainting } from '../../../types/types';
+import { IPainting } from '../../../types/interfaces';
 
 const cx = cn.bind(styles);
 
@@ -37,4 +37,4 @@ const Painting: FC<IPaintingProps> = ({ painting, authorName, locationName }) =>
   </div>
 );
 
-export default Painting;
+export default memo(Painting);

@@ -1,4 +1,4 @@
-import { IAuthor } from '../../pages/Main/types/types';
+import { IAuthor } from '../../pages/Main/types/interfaces';
 
 export interface AuthorState {
   authors: IAuthor[];

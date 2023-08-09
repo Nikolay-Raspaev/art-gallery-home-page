@@ -1,4 +1,4 @@
-import { ILocation } from '../../pages/Main/types/types';
+import { ILocation } from '../../pages/Main/types/interfaces';
 
 export interface LocationState {
   locations: ILocation[];

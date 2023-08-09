@@ -4,7 +4,7 @@ import { useTypedSelector } from './store/hooks/useTypedSelector';
 import './App.scss';
 
 const App = () => {
-  const { isLightTheme } = useTypedSelector((state) => state.theme);
+  const { isLightTheme } = useTypedSelector((state) => state.themeReducer);
   const theme = isLightTheme ? 'light' : 'dark';
 
   useEffect(() => {

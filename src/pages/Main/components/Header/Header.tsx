@@ -4,26 +4,28 @@ import logo from '../../../../svg/logo.svg';
 import { ReactComponent as Sun } from '../../../../svg/sun.svg';
 import styles from './Header.module.scss';
 import { useTypedSelector } from '../../../../store/hooks/useTypedSelector';
-import { useActions } from '../../../../store/hooks/useActions.jsx';
+import { themeSlice } from '../../../../store/reducers/themeReducer';
+import { useAppDispatch } from '../../../../store/hooks/useAppDispatch';
 
 const cx = cn.bind(styles);
 
 interface IHeaderProps {
-  className: string;
+  className: string | undefined;
 }
 
-const Header: FC<IHeaderProps> = memo(({ className }) => {
-  const { isLightTheme } = useTypedSelector((state) => state.theme);
-  const { setIsThemeLight } = useActions();
+const Header: FC<IHeaderProps> = ({ className }) => {
+  const { changeTheme } = themeSlice.actions;
+  const { isLightTheme } = useTypedSelector((state) => state.themeReducer);
+  const dispatch = useAppDispatch();
   return (
     <div className={cx('Header', className)}>
       <img src={logo} className={cx('Header__logo')} alt="Framework Team Logo" />
       <Sun
         className={cx('Header__switch')}
-        onClick={() => setIsThemeLight(!isLightTheme)}
+        onClick={() => dispatch(changeTheme(!isLightTheme))}
       />
     </div>
   );
-});
+};
 
-export default Header;
+export default memo(Header);

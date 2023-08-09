@@ -1,4 +1,4 @@
-import React, { FC, RefObject, useRef } from 'react';
+import React, { FC, memo, RefObject, useRef } from 'react';
 import { ReactComponent as DownTriangle } from '../../../../../../../svg/downTriangle.svg';
 
 interface ISelectTriangeProps {
@@ -67,4 +67,4 @@ const SelectTriange: FC<ISelectTriangeProps> = ({
   );
 };
 
-export default SelectTriange;
+export default memo(SelectTriange);

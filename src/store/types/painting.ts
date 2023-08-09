@@ -1,4 +1,4 @@
-import { IPainting } from '../../pages/Main/types/types';
+import { IPainting } from '../../pages/Main/types/interfaces';
 
 export interface PaintingState {
   paintings: IPainting[];

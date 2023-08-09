@@ -33,6 +33,11 @@
     "no-underscore-dangle": "off",
     "import/extensions": "off",
     "import/export": 0,
-    "import/no-extraneous-dependencies": "off"
+    "import/no-extraneous-dependencies": "off",
+    "no-unused-vars": "off",
+    "no-param-reassign": "off",
+    "@typescript-eslint/indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-indent": "off"
   }
 }
