@@ -1,7 +1,7 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IPainting } from '../../types/interfaces';
 import { getPageCount } from '../../utils/getPageCount';
-import { removeEmptyKeys } from '../reducers/removeEmptyKeys';
+import { removeEmptyKeys } from '../../utils/removeEmptyKeys';
 import { IIncomingParamsForPaintings } from '../../types/types';
 
 export const paintingApi = createApi({
