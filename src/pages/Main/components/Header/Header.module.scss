@@ -1,12 +1,12 @@
 .Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  &__logo {
-    width: 64px;
-    height: 64px;
-  }
-  &__switch {
-    cursor: pointer;
-  }
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    &__logo {
+        width: 64px;
+        height: 64px;
+    }
+    &__switch {
+        cursor: pointer;
+    }
 }

@@ -38,6 +38,8 @@
     "no-param-reassign": "off",
     "@typescript-eslint/indent": "off",
     "react/jsx-indent-props": "off",
-    "react/jsx-indent": "off"
+    "react/jsx-indent": "off",
+    "no-spaced-func": "off",
+    "react/require-default-props": "warn"
   }
 }

@@ -1,21 +1,18 @@
 import { combineReducers } from 'redux';
 import { configureStore } from '@reduxjs/toolkit';
-import { paintingAPI } from './API/PaintingService';
-import themeReducer from './reducers/themeReducer';
+import { paintingApi } from './Api/paintingApi';
+import { themeReducer } from './reducers/themeSlice';
 
 const rootReducer = combineReducers({
-  themeReducer,
-  [paintingAPI.reducerPath]: paintingAPI.reducer
+    themeReducer,
+    [paintingApi.reducerPath]: paintingApi.reducer
 });
 
-export const setupStore = () => {
-  return configureStore({
+export const store = configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(paintingAPI.middleware)
-  });
-};
-// попробовать поменять
+        getDefaultMiddleware().concat(paintingApi.middleware)
+});
+
 export type RootState = ReturnType<typeof rootReducer>;
-export type AppStore = ReturnType<typeof setupStore>;
-export type AppDispatch = AppStore['dispatch'];
+export type AppDispatch = typeof store.dispatch;

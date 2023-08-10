@@ -3,9 +3,11 @@ import cn from 'classnames/bind';
 import styles from './Main.module.scss';
 import Filter from './components/Filter/Filter';
 import Header from './components/Header/Header';
-import { paintingAPI } from '../../store/API/PaintingService';
 import PaintingList from './components/PaintingList/PaintingList';
 import Pagination from './components/Pagination/Pagination';
+import { useGetAuthorsQuery } from '../../store/Api/author.paintingApi';
+import { useGetLocationsQuery } from '../../store/Api/location.paintingApi';
+import { useGetPaintingsQuery } from '../../store/Api/paintingApi';
 
 const cx = cn.bind(styles);
 
@@ -16,13 +18,13 @@ const Main = () => {
     const [dateFrom, setDateFrom] = useState('');
     const [locationId, setLocationId] = useState(0);
     const [authorId, setAuthorId] = useState(0);
-    const { data: authors } = paintingAPI.useGetAuthorsQuery(null);
-    const { data: locations } = paintingAPI.useGetLocationsQuery(null);
+    const { data: authors } = useGetAuthorsQuery(null);
+    const { data: locations } = useGetLocationsQuery(null);
     const {
         data: paintingsData,
         error,
-        isLoading
-    } = paintingAPI.useGetPaintingsQuery({
+        isFetching
+    } = useGetPaintingsQuery({
         _page: currentPage,
         authorId,
         locationId,
@@ -61,10 +63,10 @@ const Main = () => {
                     paintings={paintingsData?.paintings!}
                     authors={authors!}
                     locations={locations!}
-                    loading={isLoading}
+                    loading={isFetching}
                 />
             )}
-            {paintingsData?.paintings?.length !== 0 && (
+            {paintingsData?.paintings && (
                 <Pagination
                     className={styles.Main__Pagination}
                     currentPage={currentPage}
