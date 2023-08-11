@@ -9,7 +9,7 @@ import { useTypedSelector } from '../../../../hooks/useTypedSelector';
 const cx = cn.bind(styles);
 
 interface IPaginationProps {
-    className: string;
+    className?: string;
     totalPages: number;
     currentPage: number;
     setCurrentPage: (page: number) => void;

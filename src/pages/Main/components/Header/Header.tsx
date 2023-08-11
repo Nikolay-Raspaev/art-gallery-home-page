@@ -8,7 +8,7 @@ import { useActions } from '../../../../hooks/useActions';
 const cx = cn.bind(styles);
 
 interface IHeaderProps {
-    className: string | undefined;
+    className?: string | undefined;
 }
 
 const Header: FC<IHeaderProps> = ({ className }) => {

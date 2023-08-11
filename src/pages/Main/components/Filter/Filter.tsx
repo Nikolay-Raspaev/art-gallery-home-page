@@ -10,7 +10,7 @@ import DropoutsInput from '../UI/DropoutsInput/DropoutsInput';
 const cx = cn.bind(styles);
 
 interface IFilter {
-    className: string;
+    className?: string;
     authors: IAuthor[];
     locations: ILocation[];
     paintingName: string;

@@ -7,7 +7,7 @@ import { IAuthor, ILocation, IPainting } from '../../../../types/interfaces';
 const cx = cn.bind(styles);
 
 interface IPaintingListProps {
-    className: string;
+    className?: string;
     paintings: IPainting[];
     authors: IAuthor[];
     locations: ILocation[];

@@ -8,6 +8,7 @@ import Pagination from './components/Pagination/Pagination';
 import { useGetAuthorsQuery } from '../../store/Api/author.paintingApi';
 import { useGetLocationsQuery } from '../../store/Api/location.paintingApi';
 import { useGetPaintingsQuery } from '../../store/Api/paintingApi';
+import { LIMIT } from '../../constants';
 
 const cx = cn.bind(styles);
 
@@ -30,7 +31,8 @@ const Main = () => {
         locationId,
         created_gte: dateFrom,
         created_lte: dateTo,
-        name: paintingName
+        name: paintingName,
+        _limit: LIMIT
     });
 
     useEffect(() => {
@@ -66,7 +68,7 @@ const Main = () => {
                     loading={isFetching}
                 />
             )}
-            {paintingsData?.paintings && (
+            {paintingsData?.paintings && paintingsData?.paintings.length !== 0 && (
                 <Pagination
                     className={styles.Main__Pagination}
                     currentPage={currentPage}

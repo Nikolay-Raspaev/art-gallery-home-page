@@ -9,8 +9,8 @@ $button-pages-light-collor: rgba(237, 237, 237);
 .Pagination {
     display: flex;
     &__angle {
-        min-height: 40px;
-        min-width: 40px;
+        height: 40px;
+        width: 40px;
         &--double-left {
             border-bottom-left-radius: 8px;
             border-top-left-radius: 8px;
@@ -23,7 +23,7 @@ $button-pages-light-collor: rgba(237, 237, 237);
 
     &__page {
         height: 40px;
-        max-width: 40px;
+        width: 40px;
         font-size: 1.8rem;
         font-weight: 500;
         line-height: 20px;
