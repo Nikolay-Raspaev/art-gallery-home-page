@@ -2,7 +2,7 @@
     "name": "art-gallery-home-page",
     "version": "0.1.0",
     "private": true,
-    "homepage": "https://keyssen.github.io/art-gallery-home-page",
+    "homepage": "https://keyssen.github.io/art-gallery-home-page/",
     "dependencies": {
         "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
         "@reduxjs/toolkit": "^1.9.5",
