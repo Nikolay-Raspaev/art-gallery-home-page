@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/art-gallery-home-page/static/css/main.277979cb.css",
+    "main.js": "/art-gallery-home-page/static/js/main.70210db2.js",
+    "static/media/sun.svg": "/art-gallery-home-page/static/media/sun.8aee7d4748d0a6f80e3566011e157338.svg",
+    "static/media/logo.svg": "/art-gallery-home-page/static/media/logo.bf5aca1ce84c8583b9d5bad4f9ccb3a4.svg",
+    "static/media/anglesLeft.svg": "/art-gallery-home-page/static/media/anglesLeft.2edd2b2d75a512e01f0da253b57eae92.svg",
+    "static/media/cross.svg": "/art-gallery-home-page/static/media/cross.143734e4c0efd7d7922ccc362b0fdb8e.svg",
+    "static/media/angleLeft.svg": "/art-gallery-home-page/static/media/angleLeft.c14c67c5d9f6e308fd915e3e8418c83f.svg",
+    "static/media/downTriangle.svg": "/art-gallery-home-page/static/media/downTriangle.533a801ea44e6e4c2c916d9d70118f60.svg",
+    "index.html": "/art-gallery-home-page/index.html",
+    "main.277979cb.css.map": "/art-gallery-home-page/static/css/main.277979cb.css.map",
+    "main.70210db2.js.map": "/art-gallery-home-page/static/js/main.70210db2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.277979cb.css",
+    "static/js/main.70210db2.js"
+  ]
+}
