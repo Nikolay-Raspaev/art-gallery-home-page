@@ -1,6 +1,5 @@
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import { useMemo } from 'react';
 import { themeActions } from '../store/reducers/themeSlice';
 
 const rootAction = {
@@ -8,5 +7,5 @@ const rootAction = {
 };
 export function useActions() {
     const dispatch = useDispatch();
-    return useMemo(() => bindActionCreators(rootAction, dispatch), []);
+    return bindActionCreators(rootAction, dispatch);
 }
